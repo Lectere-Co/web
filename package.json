@@ -14,11 +14,11 @@
     "@types/bun": "latest",
     "typescript": "^5.9.2",
     "vite": "^7.1.4",
-    "@ripple-ts/vite-plugin": "latest",
-    "@ripple-ts/typescript-plugin": "latest"
+    "@ripple-ts/vite-plugin": "^0.2.184",
+    "@ripple-ts/typescript-plugin": "^0.2.184"
   },
   "dependencies": {
-    "ripple": "latest"
+    "ripple": "^0.2.184"
   },
   "packageManager": "bun@1.3.0"
 }

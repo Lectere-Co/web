@@ -1,15 +1,45 @@
-# tryagain
+# Lectere Website
 
-To install dependencies:
+Official website for Lectere - AI assistant that lives inside software.
+
+## Tech Stack
+
+- **Framework**: Ripple TS (TypeScript UI framework)
+- **Build Tool**: Vite
+- **Runtime**: Bun
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
 bun install
 ```
 
-To run:
+Run development server:
 
 ```bash
-bun run index.ts
+bun run dev
 ```
 
-This project was created using `bun init` in bun v1.3.4. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Build for Production
+
+```bash
+bun run build
+```
+
+## Preview Production Build
+
+```bash
+bun run preview
+```
+
+## Features
+
+- Dark theme with brand colors (Amaranth Purple #9B274C, Razzmatazz #EB336E)
+- Glassmorphism effects and smooth animations
+- Cursor-reactive lighting effects
+- Mobile-responsive design
+- All sections from the high-fidelity spec implemented

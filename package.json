@@ -1,0 +1,24 @@
+{
+  "name": "lectere-website",
+  "version": "1.0.0",
+  "description": "Lectere - AI assistant that lives inside software",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4",
+    "@ripple-ts/vite-plugin": "^0.2.184",
+    "@ripple-ts/typescript-plugin": "^0.2.184"
+  },
+  "dependencies": {
+    "ripple": "^0.2.184"
+  },
+  "packageManager": "bun@1.3.0"
+}

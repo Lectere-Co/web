@@ -1,7 +1,8 @@
-import { mount } from 'ripple';
-// @ts-expect-error: known issue with Ripple type imports
-import { App } from './App.ripple';
+import { mount } from 'svelte';
+import App from './App.svelte';
 
-mount(App, {
-	target: document.getElementById('root'),
+const app = mount(App, {
+	target: document.getElementById('root')!,
 });
+
+export default app;

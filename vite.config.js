@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
-import { ripple } from '@ripple-ts/vite-plugin';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
-	plugins: [ripple()],
+	plugins: [svelte()],
 	server: {
 		port: 3000,
 	},

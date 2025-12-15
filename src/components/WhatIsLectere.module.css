@@ -1,0 +1,77 @@
+.whatIs {
+  padding: var(--space-xl) var(--space-md);
+  background: linear-gradient(180deg, var(--smoke) 0%, var(--charcoal) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.brand {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--razzmatazz), var(--accent-coral), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.definition {
+  max-width: 800px;
+  margin: 0 auto var(--space-lg);
+  text-align: center;
+}
+
+.definition p {
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  line-height: 1.8;
+  color: var(--pearl);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.featureIcon {
+  font-size: 3.5rem;
+  margin-bottom: 1.25rem;
+  display: inline-block;
+}
+
+.featureCard h3 {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+
+.featureCard p {
+  color: var(--silver);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.bgAccent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155, 39, 76, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .whatIs {
+    padding: var(--space-lg) var(--space-sm);
+  }
+}

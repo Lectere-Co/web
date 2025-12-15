@@ -1,0 +1,149 @@
+.businessCases {
+  padding: var(--space-xl) var(--space-md);
+  background: linear-gradient(180deg, var(--smoke) 0%, var(--charcoal) 100%);
+}
+
+.italic {
+  font-style: italic;
+  color: var(--razzmatazz);
+}
+
+.casesGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto var(--space-lg);
+}
+
+.caseCard {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(155, 39, 76, 0.2);
+  border-left: 4px solid var(--razzmatazz);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.caseCard:hover {
+  border-color: rgba(235, 51, 110, 0.4);
+  box-shadow: 0 10px 40px rgba(235, 51, 110, 0.1);
+}
+
+.caseIcon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.caseContent {
+  flex: 1;
+}
+
+.caseHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.caseCard h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.metric {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--razzmatazz), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.caseCard p {
+  color: var(--silver);
+  line-height: 1.6;
+}
+
+.cardAccent {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  background: linear-gradient(90deg, transparent, rgba(155, 39, 76, 0.05));
+  pointer-events: none;
+}
+
+/* Stats Banner */
+.statsBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(155, 39, 76, 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md) var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statValue {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--razzmatazz), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.statLabel {
+  color: var(--silver);
+  font-size: 0.9rem;
+}
+
+.divider {
+  width: 1px;
+  height: 50px;
+  background: rgba(155, 39, 76, 0.3);
+}
+
+@media (max-width: 768px) {
+  .businessCases {
+    padding: var(--space-lg) var(--space-sm);
+  }
+  
+  .caseCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .caseHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .statsBanner {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .divider {
+    width: 50px;
+    height: 1px;
+  }
+}

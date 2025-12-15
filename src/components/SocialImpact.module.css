@@ -1,0 +1,114 @@
+.socialImpact {
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(155, 39, 76, 0.08) 0%, rgba(235, 51, 110, 0.08) 100%);
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--smoke) 0%, transparent 30%, transparent 70%, var(--charcoal) 100%);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 400;
+  margin-bottom: var(--space-md);
+  line-height: 1.1;
+}
+
+.highlight {
+  font-style: italic;
+  color: var(--razzmatazz);
+}
+
+.text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--pearl);
+  margin-bottom: 1.5rem;
+}
+
+.text strong {
+  color: var(--white);
+}
+
+.quote {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--razzmatazz);
+  position: relative;
+}
+
+.quoteIcon {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: var(--razzmatazz);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--white);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating Shapes */
+.floatingShape1,
+.floatingShape2 {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floatingShape1 {
+  top: 10%;
+  left: 5%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(155, 39, 76, 0.1) 0%, transparent 70%);
+}
+
+.floatingShape2 {
+  bottom: 10%;
+  right: 5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(235, 51, 110, 0.1) 0%, transparent 70%);
+}
+
+@media (max-width: 768px) {
+  .socialImpact {
+    padding: var(--space-lg) var(--space-sm);
+  }
+  
+  .text {
+    font-size: 1.1rem;
+  }
+  
+  .quote p {
+    font-size: 1.25rem;
+  }
+}

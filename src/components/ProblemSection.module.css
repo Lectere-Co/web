@@ -1,0 +1,133 @@
+.problem {
+  padding: var(--space-xl) var(--space-md);
+  background: linear-gradient(180deg, var(--charcoal) 0%, var(--smoke) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.strikethrough {
+  position: relative;
+  color: var(--razzmatazz);
+}
+
+.strikethrough::after {
+  content: '';
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  top: 50%;
+  height: 4px;
+  background: var(--razzmatazz);
+  transform: rotate(-2deg);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.statCard {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.statNumber {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--razzmatazz), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sublabel {
+  font-size: 0.4em;
+  color: var(--silver);
+  -webkit-text-fill-color: var(--silver);
+  font-family: var(--font-body);
+  margin-top: 0.25rem;
+}
+
+.statLabel {
+  font-size: 1.1rem;
+  color: var(--silver);
+  line-height: 1.4;
+}
+
+.frustrationFlow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: var(--space-md);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(155, 39, 76, 0.2);
+}
+
+.frustrationFlow > div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.flowStep {
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.flowStep.error {
+  background: rgba(155, 39, 76, 0.15);
+  border: 1px solid var(--amaranth-purple);
+  color: #ff8fa3;
+}
+
+.flowStep.highlight {
+  background: rgba(235, 51, 110, 0.25);
+  border: 2px solid var(--razzmatazz);
+  color: var(--razzmatazz);
+  font-weight: 700;
+  box-shadow: 0 0 30px rgba(235, 51, 110, 0.3);
+}
+
+.flowArrow {
+  color: var(--razzmatazz);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.decorLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amaranth-purple), transparent);
+}
+
+@media (max-width: 768px) {
+  .problem {
+    padding: var(--space-lg) var(--space-sm);
+  }
+  
+  .frustrationFlow {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .flowArrow {
+    transform: rotate(90deg);
+  }
+}

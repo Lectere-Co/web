@@ -1,0 +1,130 @@
+.howItWorks {
+  padding: var(--space-xl) var(--space-md);
+  background: linear-gradient(180deg, var(--charcoal) 0%, var(--smoke) 100%);
+  position: relative;
+}
+
+.italic {
+  font-style: italic;
+  color: var(--razzmatazz);
+}
+
+.processFlow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto var(--space-lg);
+}
+
+.stepWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 280px;
+  max-width: 380px;
+}
+
+.processStep {
+  flex: 1;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.stepNumber {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--razzmatazz), var(--accent-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.processStep h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+
+.processStep p {
+  color: var(--silver);
+  line-height: 1.6;
+}
+
+.connector {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--razzmatazz), var(--amaranth-purple));
+  transform-origin: left;
+  flex-shrink: 0;
+}
+
+/* Demo Preview */
+.demoPreview {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(155, 39, 76, 0.3);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.previewContent {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.pulseRing {
+  position: absolute;
+  inset: -20px;
+  border: 2px solid var(--razzmatazz);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+}
+
+.clickTarget {
+  background: linear-gradient(135deg, var(--razzmatazz), var(--amaranth-purple));
+  padding: 1rem 2.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 30px rgba(235, 51, 110, 0.4);
+}
+
+.previewLabel {
+  color: var(--silver);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .processFlow {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .stepWrapper {
+    flex-direction: column;
+    max-width: 100%;
+  }
+  
+  .connector {
+    width: 2px;
+    height: 40px;
+    transform-origin: top;
+  }
+}
+
+@media (max-width: 768px) {
+  .howItWorks {
+    padding: var(--space-lg) var(--space-sm);
+  }
+}

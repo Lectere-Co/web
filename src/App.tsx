@@ -1,18 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'motion/react';
-import HeroSection from './components/HeroSection';
-import ProblemSection from './components/ProblemSection';
-import WhatIsLectere from './components/WhatIsLectere';
-import HowItWorks from './components/HowItWorks';
-import ProductDemo from './components/ProductDemo';
-import WhoItsFor from './components/WhoItsFor';
-import BusinessUseCases from './components/BusinessUseCases';
-import CompetitiveComparison from './components/CompetitiveComparison';
-import SocialImpact from './components/SocialImpact';
-import PricingSection from './components/PricingSection';
-import Testimonials from './components/Testimonials';
-import FinalCTA from './components/FinalCTA';
-import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -38,24 +26,13 @@ function App() {
       
       {/* Cursor Glow */}
       <motion.div
-        className="cursor-glow"
-        animate={{ x: mousePos.x - 150, y: mousePos.y - 150 }}
+        className="cursor-glow hidden lg:block"
+        animate={{ x: mousePos.x - 200, y: mousePos.y - 200 }}
         transition={{ type: 'spring', damping: 30, stiffness: 200 }}
       />
 
-      <HeroSection mousePos={mousePos} />
-      <ProblemSection />
-      <WhatIsLectere />
-      <HowItWorks />
-      <ProductDemo />
-      <WhoItsFor />
-      <BusinessUseCases />
-      <CompetitiveComparison />
-      <SocialImpact />
-      <PricingSection />
-      <Testimonials />
-      <FinalCTA />
-      <Footer />
+      {/* Router Outlet */}
+      <Outlet />
     </div>
   );
 }

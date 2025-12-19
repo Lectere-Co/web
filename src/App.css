@@ -1,157 +1,17 @@
+@reference "./styles/globals.css";
+
+/* App Container */
 .app {
-  width: 100%;
-  min-height: 100vh;
-  background: var(--obsidian);
-  position: relative;
+  @apply w-full min-h-screen bg-background relative;
 }
 
+/* Progress Bar */
 .progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--razzmatazz), var(--accent-coral), var(--accent-gold));
-  transform-origin: 0%;
-  z-index: 10000;
+  @apply fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 origin-left z-[10000];
 }
 
+/* Cursor Glow Effect */
 .cursor-glow {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(235, 51, 110, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-  mix-blend-mode: screen;
-}
-
-/* Section Base Styles */
-section {
-  position: relative;
-  z-index: 2;
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7vw, 4.5rem);
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: var(--space-lg);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-/* Button Styles */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, var(--razzmatazz), var(--amaranth-purple));
-  color: var(--white);
-  padding: 1rem 2.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius-xl);
-  cursor: pointer;
-  transition: all 0.4s var(--ease-out-expo);
-  box-shadow: 
-    0 4px 20px rgba(235, 51, 110, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--accent-coral), var(--razzmatazz));
-  opacity: 0;
-  transition: opacity 0.4s var(--ease-out-expo);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 
-    0 8px 40px rgba(235, 51, 110, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.btn-primary:hover::before {
-  opacity: 1;
-}
-
-.btn-primary span {
-  position: relative;
-  z-index: 1;
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: transparent;
-  color: var(--white);
-  padding: 1rem 2.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: 2px solid var(--amaranth-purple);
-  border-radius: var(--radius-xl);
-  cursor: pointer;
-  transition: all 0.4s var(--ease-out-expo);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-secondary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(155, 39, 76, 0.2), rgba(235, 51, 110, 0.2));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease-out-expo);
-}
-
-.btn-secondary:hover {
-  border-color: var(--razzmatazz);
-  transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(155, 39, 76, 0.3);
-}
-
-.btn-secondary:hover::before {
-  transform: scaleX(1);
-}
-
-.btn-secondary span {
-  position: relative;
-  z-index: 1;
-}
-
-.btn-primary.large,
-.btn-secondary.large {
-  padding: 1.25rem 3.5rem;
-  font-size: 1.15rem;
-}
-
-/* Card Base */
-.card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(155, 39, 76, 0.25);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(10px);
-  transition: all 0.5s var(--ease-out-expo);
-}
-
-.card:hover {
-  border-color: rgba(235, 51, 110, 0.5);
-  box-shadow: 
-    0 20px 60px rgba(235, 51, 110, 0.15),
-    0 0 0 1px rgba(235, 51, 110, 0.1);
-  transform: translateY(-8px);
+  @apply fixed w-[400px] h-[400px] rounded-full pointer-events-none z-[1] mix-blend-screen;
+  background: radial-gradient(circle, var(--color-primary) / 0.1, transparent 70%);
 }

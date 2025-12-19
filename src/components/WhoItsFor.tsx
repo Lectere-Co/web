@@ -1,72 +1,75 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import styles from './WhoItsFor.module.css';
+import { Card, CardContent } from '@/components/ui/card';
+import { GraduationCap, Heart, Briefcase } from 'lucide-react';
 
 const personas = [
   { 
-    icon: '🎓', 
+    icon: GraduationCap, 
     title: 'Students', 
     desc: 'Learning complex software for coursework without getting stuck',
-    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    gradient: 'from-violet-500 to-purple-500'
   },
   { 
-    icon: '👵', 
+    icon: Heart, 
     title: 'Elderly users', 
     desc: 'Navigating technology with confidence and independence',
-    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+    gradient: 'from-rose-500 to-pink-500'
   },
   { 
-    icon: '💼', 
+    icon: Briefcase, 
     title: 'Small business owners', 
     desc: 'Managing tools without technical expertise or support',
-    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+    gradient: 'from-cyan-500 to-blue-500'
   },
 ];
 
-export default function WhoItsFor() {
+export function WhoItsFor() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className={styles.whoItsFor} ref={ref}>
-      <div className="container">
+    <section className="section-padding relative" ref={ref}>
+      {/* Background Pattern */}
+      <div className="absolute inset-0 grid-pattern opacity-30" />
+      
+      <div className="container px-6 relative">
         <motion.h2
-          className="section-title"
+          className="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           Built for the people{' '}
-          <span className={styles.highlight}>software forgot</span>.
+          <span className="text-gradient">software forgot</span>.
         </motion.h2>
 
-        <div className={styles.personasGrid}>
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
           {personas.map((persona, i) => (
             <motion.div
               key={persona.title}
-              className={`card ${styles.personaCard}`}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -10 }}
             >
-              <motion.div
-                className={styles.personaIcon}
-                whileHover={{ scale: 1.15, rotate: 10 }}
-                transition={{ type: 'spring', stiffness: 400 }}
-              >
-                {persona.icon}
-              </motion.div>
-              <h3>{persona.title}</h3>
-              <p>{persona.desc}</p>
-              <div className={styles.cardGlow} style={{ background: persona.gradient }} />
+              <Card className="glass-card h-full hover:border-primary/30 hover:-translate-y-3 transition-all duration-500 group relative overflow-hidden">
+                <CardContent className="p-8 text-center relative z-10">
+                  <motion.div
+                    className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${persona.gradient} flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
+                  >
+                    <persona.icon className="w-10 h-10 text-white" />
+                  </motion.div>
+                  <h3 className="text-2xl font-semibold mb-3">{persona.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{persona.desc}</p>
+                </CardContent>
+                
+                {/* Hover Glow Effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${persona.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+              </Card>
             </motion.div>
           ))}
         </div>
       </div>
-
-      {/* Decorative Background */}
-      <div className={styles.bgPattern} />
     </section>
   );
 }

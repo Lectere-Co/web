@@ -1,6 +1,6 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import styles from './CompetitiveComparison.module.css';
+import { Check, X } from 'lucide-react';
 
 const features = [
   'Real-time guidance',
@@ -11,74 +11,77 @@ const features = [
 ];
 
 const competitors = [
-  { name: 'Docs', scores: [false, false, false, false, false] },
-  { name: 'Tours', scores: [false, false, false, false, false] },
-  { name: 'Videos', scores: [false, false, false, false, false] },
+  { name: 'Docs' },
+  { name: 'Tours' },
+  { name: 'Videos' },
 ];
 
-export default function CompetitiveComparison() {
+export function CompetitiveComparison() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className={styles.comparison} ref={ref}>
-      <div className="container">
+    <section className="section-padding relative" ref={ref}>
+      <div className="container px-6">
         <motion.h2
-          className="section-title"
+          className="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          Why Lectere <span className={styles.italic}>wins</span>.
+          Why Lectere <span className="italic text-gradient">wins</span>.
         </motion.h2>
 
         <motion.div
-          className={styles.comparisonTable}
+          className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Header */}
-          <div className={`${styles.row} ${styles.header}`}>
-            <div className={styles.cell}>Feature</div>
-            {competitors.map((c) => (
-              <div key={c.name} className={styles.cell}>{c.name}</div>
-            ))}
-            <div className={`${styles.cell} ${styles.lectere}`}>Lectere</div>
-          </div>
-
-          {/* Features */}
-          {features.map((feature, i) => (
-            <motion.div
-              key={feature}
-              className={styles.row}
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
-            >
-              <div className={styles.cell}>{feature}</div>
-              {competitors.map((c, j) => (
-                <div key={`${c.name}-${i}`} className={styles.cell}>
-                  <span className={styles.no}>✕</span>
-                </div>
+          <div className="glass-card rounded-2xl overflow-hidden">
+            {/* Header */}
+            <div className="grid grid-cols-5 gap-4 p-4 md:p-6 bg-white/5 border-b border-white/10 text-sm md:text-base font-medium">
+              <div className="col-span-1">Feature</div>
+              {competitors.map((c) => (
+                <div key={c.name} className="text-center text-muted-foreground">{c.name}</div>
               ))}
-              <div className={`${styles.cell} ${styles.lectere}`}>
-                <motion.span
-                  className={styles.yes}
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : {}}
-                  transition={{ delay: 0.5 + i * 0.1, type: 'spring', stiffness: 400 }}
-                >
-                  ✓
-                </motion.span>
-              </div>
-            </motion.div>
-          ))}
+              <div className="text-center text-gradient">Lectere</div>
+            </div>
+
+            {/* Features */}
+            {features.map((feature, i) => (
+              <motion.div
+                key={feature}
+                className="grid grid-cols-5 gap-4 p-4 md:p-6 border-b border-white/5 last:border-0 items-center"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+              >
+                <div className="col-span-1 text-sm md:text-base">{feature}</div>
+                {competitors.map((c) => (
+                  <div key={`${c.name}-${i}`} className="flex justify-center">
+                    <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center">
+                      <X className="w-4 h-4 text-red-400" />
+                    </div>
+                  </div>
+                ))}
+                <div className="flex justify-center">
+                  <motion.div
+                    className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center"
+                    initial={{ scale: 0 }}
+                    animate={isInView ? { scale: 1 } : {}}
+                    transition={{ delay: 0.5 + i * 0.1, type: 'spring', stiffness: 400 }}
+                  >
+                    <Check className="w-4 h-4 text-emerald-400" />
+                  </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Bottom CTA */}
         <motion.p
-          className={styles.bottomText}
+          className="text-center text-muted-foreground mt-8 max-w-xl mx-auto"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}

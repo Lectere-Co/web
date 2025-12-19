@@ -1,8 +1,10 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useState } from 'react';
-import styles from './ProductDemo.module.css';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Play, Check } from 'lucide-react';
 
-export default function ProductDemo() {
+export function ProductDemo() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [cursorPos, setCursorPos] = useState({ x: 120, y: 150 });
@@ -21,115 +23,126 @@ export default function ProductDemo() {
   };
 
   return (
-    <section className={styles.productDemo} ref={ref}>
-      <div className="container">
+    <section className="section-padding relative" ref={ref}>
+      <div className="container px-6">
         <motion.h2
-          className="section-title"
+          className="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          See it <span className={styles.italic}>in action</span>.
+          See it <span className="italic text-gradient">in action</span>.
         </motion.h2>
 
         <motion.div
-          className={styles.demoFrame}
+          className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          onClick={handleDemoClick}
         >
-          {/* Window Header */}
-          <div className={styles.demoHeader}>
-            <div className={styles.demoDots}>
-              <span className={styles.dotRed} />
-              <span className={styles.dotYellow} />
-              <span className={styles.dotGreen} />
-            </div>
-            <div className={styles.demoTitle}>Example Application</div>
-            <div className={styles.demoActions}>
-              <span>⌘</span>
-            </div>
-          </div>
-
-          {/* Demo Content */}
-          <div className={styles.demoContent}>
-            {/* Fake UI Elements */}
-            <div className={styles.sidebar}>
-              <div className={styles.sidebarItem} />
-              <div className={styles.sidebarItem} />
-              <div className={styles.sidebarItem} />
+          {/* Demo Frame */}
+          <div 
+            className="glass-card rounded-2xl overflow-hidden cursor-pointer"
+            onClick={handleDemoClick}
+          >
+            {/* Window Header */}
+            <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              </div>
+              <span className="text-sm text-muted-foreground">Example Application</span>
+              <div className="w-16" />
             </div>
 
-            <div className={styles.mainArea}>
-              {/* Highlight Target */}
-              <motion.div
-                className={styles.highlightTarget}
-                animate={{
-                  x: demoSteps[step].target.x,
-                  y: demoSteps[step].target.y,
-                }}
-                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-              >
+            {/* Demo Content */}
+            <div className="relative h-[400px] md:h-[450px] bg-gradient-to-br from-zinc-900 to-zinc-950 flex">
+              {/* Sidebar */}
+              <div className="w-16 md:w-20 border-r border-white/5 p-3 space-y-3">
+                <div className="w-full h-8 rounded bg-white/5" />
+                <div className="w-full h-8 rounded bg-white/5" />
+                <div className="w-full h-8 rounded bg-white/5" />
+              </div>
+
+              {/* Main Area */}
+              <div className="flex-1 relative p-6">
+                {/* Highlight Target */}
                 <motion.div
-                  className={styles.highlightRing}
-                  animate={{ scale: [1, 1.3, 1], opacity: [1, 0.5, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
-              </motion.div>
+                  className="absolute"
+                  animate={{
+                    x: demoSteps[step].target.x,
+                    y: demoSteps[step].target.y,
+                  }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                >
+                  <motion.div
+                    className="w-12 h-12 rounded-full border-2 border-primary"
+                    animate={{ scale: [1, 1.3, 1], opacity: [1, 0.5, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" />
+                </motion.div>
 
-              {/* Cursor */}
-              <motion.div
-                className={styles.demoCursor}
-                animate={{ x: cursorPos.x, y: cursorPos.y }}
-                transition={{ type: 'spring', stiffness: 150, damping: 15 }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                  <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
-                </svg>
-              </motion.div>
+                {/* Cursor */}
+                <motion.div
+                  className="absolute z-20 pointer-events-none"
+                  animate={{ x: cursorPos.x, y: cursorPos.y }}
+                  transition={{ type: 'spring', stiffness: 150, damping: 15 }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="white" className="drop-shadow-lg">
+                    <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
+                  </svg>
+                </motion.div>
 
-              {/* Tooltip */}
-              <motion.div
-                className={styles.demoTooltip}
-                animate={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: -10 }}
-                key={step}
-              >
-                <div className={styles.tooltipArrow} />
-                <p>{demoSteps[step].text}</p>
-                <div className={styles.stepIndicator}>
-                  Step {step + 1} of {demoSteps.length}
-                </div>
-              </motion.div>
+                {/* Tooltip */}
+                <motion.div
+                  className="absolute bottom-6 left-6 right-6 glass-card rounded-xl p-4"
+                  key={step}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <p className="text-sm mb-2">{demoSteps[step].text}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">
+                      Step {step + 1} of {demoSteps.length}
+                    </span>
+                    <div className="flex gap-1">
+                      {demoSteps.map((_, i) => (
+                        <div 
+                          key={i}
+                          className={`w-1.5 h-1.5 rounded-full ${i === step ? 'bg-primary' : 'bg-white/20'}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
 
-              {/* Completion Badge */}
-              <motion.div
-                className={styles.completionBadge}
-                animate={{ scale: [0.9, 1, 0.9] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                ✓ Interactive Demo
-              </motion.div>
+                {/* Badge */}
+                <Badge variant="success" className="absolute top-4 right-4">
+                  <Check className="w-3 h-3 mr-1" />
+                  Interactive Demo
+                </Badge>
+              </div>
+            </div>
+
+            {/* Click Prompt */}
+            <div className="text-center py-3 text-sm text-muted-foreground bg-white/5">
+              Click anywhere to see next step
             </div>
           </div>
-
-          <div className={styles.clickPrompt}>Click anywhere to see next step</div>
         </motion.div>
 
         <motion.div
-          className={styles.demoCta}
+          className="text-center mt-10"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <motion.button
-            className="btn-primary"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <span>Try Full Demo</span>
-          </motion.button>
+          <Button variant="gradient" size="lg">
+            <Play className="w-4 h-4 fill-current" />
+            Try Full Demo
+          </Button>
         </motion.div>
       </div>
     </section>

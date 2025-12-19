@@ -4,9 +4,12 @@ Official website for Lectere - AI assistant that lives inside software.
 
 ## Tech Stack
 
-- **Framework**: Ripple TS (TypeScript UI framework)
+- **Framework**: React 19 with TypeScript
+- **Styling**: Tailwind CSS v4 + shadcn/ui components
+- **Animations**: Motion (framer-motion v12+)
+- **Routing**: React Router v7
 - **Build Tool**: Vite
-- **Runtime**: Bun
+- **Runtime/Package Manager**: Bun
 
 ## Getting Started
 
@@ -38,8 +41,11 @@ bun run preview
 
 ## Features
 
-- Dark theme with brand colors (Amaranth Purple #9B274C, Razzmatazz #EB336E)
-- Glassmorphism effects and smooth animations
-- Cursor-reactive lighting effects
-- Mobile-responsive design
-- All sections from the high-fidelity spec implemented
+- **Multi-page Application**: Home, Product, Solutions, Pricing, and About pages
+- **Modern Design System**: Dark theme with custom brand colors (primary: hsl(346 77% 50%))
+- **Component Library**: shadcn/ui components with custom theming
+- **Typography**: Custom fonts (Fraunces for display, Outfit for body text)
+- **Animations**: Smooth Motion animations with scroll-based progress bar
+- **Interactive Effects**: Cursor-reactive lighting effects and glassmorphism
+- **Fully Responsive**: Mobile-first design optimized for all screen sizes
+- **Type-safe**: Full TypeScript coverage with strict mode enabled

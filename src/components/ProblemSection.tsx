@@ -4,17 +4,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import { TrendingDown, DollarSign } from 'lucide-react';
 
 const stats = [
-  { 
-    value: '76%', 
-    label: 'of users give up when stuck',
+  {
+    value: '76%',
+    label: 'of users give up when stuck in software',
     icon: TrendingDown,
-    gradient: 'from-rose-500 to-pink-500'
+    gradient: 'from-[#eb336e] to-[#9b274c]'
   },
-  { 
-    value: '$8.5T', 
-    label: 'lost globally by 2030',
+  {
+    value: 'Millions',
+    label: 'excluded as services move online',
     icon: DollarSign,
-    gradient: 'from-amber-500 to-orange-500'
+    gradient: 'from-[#9b274c] to-[#eb336e]'
   },
 ];
 
@@ -42,11 +42,10 @@ export function ProblemSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          Software shouldn't be{' '}
-          <span className="relative">
-            <span className="line-through decoration-primary/50 decoration-2">this hard</span>
+          The world is going digital.{' '}
+          <span className="text-gradient">
+            Not everyone can keep up.
           </span>
-          .
         </motion.h2>
 
         {/* Stats Grid */}

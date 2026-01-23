@@ -7,34 +7,35 @@ import { Check, Shield } from 'lucide-react';
 
 const plans = [
   {
-    name: 'Essential',
+    name: 'Essential Access',
     price: '$12',
     period: '/month',
-    altPrice: 'or $99/year',
+    altPrice: 'Perfect for personal use',
     features: [
-      'Up to 100 guided workflows',
-      'Basic analytics dashboard',
+      'Guidance for up to 5 applications',
+      'Real-time visual overlays',
+      'Step-by-step instructions',
+      'Progress tracking',
       'Email support',
-      'Standard integrations',
     ],
-    cta: 'Get Started',
+    cta: 'Join Waitlist',
     featured: false,
   },
   {
-    name: 'Professional',
-    price: '$39',
-    period: '/user/mo',
-    altPrice: 'Billed annually',
-    badge: 'MOST POPULAR',
+    name: 'Lectere Plus',
+    price: '$29',
+    period: '/month',
+    altPrice: 'Best value for power users',
+    badge: 'RECOMMENDED',
     features: [
-      'Unlimited workflows',
-      'Advanced analytics & insights',
-      'Priority support (24/7)',
-      'Custom integrations',
-      'Team management',
-      'API access',
+      'Unlimited applications',
+      'All Essential features',
+      'Team sharing & collaboration',
+      'Priority support',
+      'Early access to new features',
+      'Custom workflow creation',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Join Waitlist',
     featured: true,
   },
 ];
@@ -119,8 +120,8 @@ export function PricingSection() {
                 {/* Hover Glow */}
                 {plan.featured && (
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-fuchsia-500/10 pointer-events-none"
-                    animate={{ 
+                    className="absolute inset-0 bg-gradient-to-br from-[#eb336e]/10 to-[#9b274c]/10 pointer-events-none"
+                    animate={{
                       opacity: hoveredPlan === i ? 0.3 : 0.1,
                     }}
                   />
@@ -137,7 +138,7 @@ export function PricingSection() {
           transition={{ delay: 0.6 }}
         >
           <Shield className="w-4 h-4 text-primary" />
-          14-day money-back guarantee • No credit card required for trial
+          Join the waitlist for early access • Founding member discounts available
         </motion.p>
       </div>
     </section>

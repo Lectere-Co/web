@@ -17,9 +17,9 @@ export function HeroSection() {
       <div className="absolute inset-0 mesh-gradient" />
       <div className="absolute inset-0 grid-pattern opacity-40" />
       
-      {/* Floating Orbs */}
+      {/* Floating Orbs - Lectere Brand Colors */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-rose-500/20 to-fuchsia-500/20 blur-[100px]"
+        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-[#eb336e]/20 to-[#9b274c]/20 blur-[100px]"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -27,7 +27,7 @@ export function HeroSection() {
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 blur-[80px]"
+        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-[#9b274c]/20 to-[#eb336e]/20 blur-[80px]"
         animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.2, 0.4, 0.2],
@@ -45,10 +45,10 @@ export function HeroSection() {
           >
             <Badge variant="glow" className="mb-8 py-1.5 px-4 text-sm gap-2">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#eb336e] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#9b274c]" />
               </span>
-              Now in Private Beta
+              Coming Soon for macOS
             </Badge>
           </motion.div>
 
@@ -59,10 +59,8 @@ export function HeroSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Software that{' '}
-            <span className="italic text-gradient">teaches you</span>
-            <br />
-            while you use it.
+            Don't get left behind by{' '}
+            <span className="italic text-gradient">digital displacement</span>.
           </motion.h1>
 
           {/* Subtext */}
@@ -72,8 +70,9 @@ export function HeroSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            Lectere is an AI assistant that lives inside software and shows you 
-            exactly what to click, step by step, in real time.
+            Lectere is an AI-powered learning assistant that provides real-time,
+            contextual guidance through visual overlays—showing you exactly what
+            to click, step by step.
           </motion.p>
 
           {/* CTAs */}
@@ -85,10 +84,10 @@ export function HeroSection() {
           >
             <Button variant="gradient" size="xl" className="group">
               <Play className="w-5 h-5 fill-current" />
-              Watch Live Demo
+              See How It Works
             </Button>
             <Button variant="outline" size="xl" className="border-white/20 hover:bg-white/5">
-              Get Early Access
+              Join the Waitlist
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
@@ -101,10 +100,10 @@ export function HeroSection() {
               animate={isInView ? { opacity: 1, x: 0, rotate: -3 } : {}}
               transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
                 <MousePointer2 className="w-5 h-5 text-white" />
               </div>
-              <span className="text-sm font-medium">Click here to proceed</span>
+              <span className="text-sm font-medium">Click "File" to continue</span>
             </motion.div>
 
             <motion.div
@@ -116,7 +115,7 @@ export function HeroSection() {
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
                 <CheckCircle2 className="w-5 h-5 text-white" />
               </div>
-              <span className="text-sm font-medium">Step completed!</span>
+              <span className="text-sm font-medium">Great job! Next step...</span>
             </motion.div>
           </div>
         </div>

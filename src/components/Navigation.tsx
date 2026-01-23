@@ -48,11 +48,11 @@ export function Navigation() {
               <motion.div
                 whileHover={{ rotate: 180 }}
                 transition={{ duration: 0.5 }}
-                className="w-8 h-8 rounded-lg bg-gradient-to-br from-rose-500 via-pink-500 to-fuchsia-500 flex items-center justify-center"
+                className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center"
               >
                 <Sparkles className="w-4 h-4 text-white" />
               </motion.div>
-              <span className="font-display text-xl font-semibold text-white group-hover:text-rose-400 transition-colors">
+              <span className="font-display text-xl font-semibold text-white group-hover:text-[#eb336e] transition-colors">
                 Lectere
               </span>
             </Link>
@@ -95,7 +95,7 @@ export function Navigation() {
             {/* CTA Button */}
             <div className="hidden md:block">
               <Button variant="gradient" size="sm">
-                Get Early Access
+                Join Waitlist
               </Button>
             </div>
 
@@ -155,7 +155,7 @@ export function Navigation() {
                 className="mt-4"
               >
                 <Button variant="gradient" size="lg" className="w-full">
-                  Get Early Access
+                  Join Waitlist
                 </Button>
               </motion.div>
             </nav>

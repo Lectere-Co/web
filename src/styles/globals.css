@@ -4,27 +4,29 @@
 @theme {
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Outfit", system-ui, sans-serif;
-  
+
   --color-background: hsl(0 0% 3.9%);
   --color-foreground: hsl(0 0% 98%);
   --color-card: hsl(0 0% 6%);
   --color-card-foreground: hsl(0 0% 98%);
   --color-popover: hsl(0 0% 6%);
   --color-popover-foreground: hsl(0 0% 98%);
-  --color-primary: hsl(346 77% 50%);
+  /* Lectere Brand: Razzmatazz #eb336e */
+  --color-primary: hsl(341 82% 56%);
   --color-primary-foreground: hsl(0 0% 100%);
   --color-secondary: hsl(0 0% 14.9%);
   --color-secondary-foreground: hsl(0 0% 98%);
   --color-muted: hsl(0 0% 14.9%);
   --color-muted-foreground: hsl(0 0% 63.9%);
-  --color-accent: hsl(346 77% 50%);
+  /* Lectere Brand: Amaranth Purple #9b274c */
+  --color-accent: hsl(341 60% 38%);
   --color-accent-foreground: hsl(0 0% 98%);
   --color-destructive: hsl(0 62.8% 30.6%);
   --color-destructive-foreground: hsl(0 0% 98%);
   --color-border: hsl(0 0% 14.9%);
   --color-input: hsl(0 0% 14.9%);
-  --color-ring: hsl(346 77% 50%);
-  
+  --color-ring: hsl(341 82% 56%);
+
   --radius-lg: 0.75rem;
   --radius-md: calc(0.75rem - 2px);
   --radius-sm: calc(0.75rem - 4px);
@@ -94,7 +96,8 @@
 /* Gradient Text Utility */
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-rose-400 via-pink-400 to-fuchsia-400 bg-clip-text text-transparent;
+    /* Lectere Brand: Razzmatazz to Amaranth Purple */
+    @apply bg-gradient-to-r from-[#eb336e] via-[#d12a5e] to-[#9b274c] bg-clip-text text-transparent;
   }
 
   .text-gradient-subtle {
@@ -145,12 +148,12 @@
   background-size: 60px 60px;
 }
 
-/* Mesh Gradient Background */
+/* Mesh Gradient Background - Lectere Brand Colors */
 .mesh-gradient {
-  background: 
-    radial-gradient(at 40% 20%, hsl(346, 77%, 50%, 0.15) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, hsl(320, 77%, 50%, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, hsl(280, 77%, 50%, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, hsl(346, 77%, 50%, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, hsl(320, 77%, 50%, 0.1) 0px, transparent 50%);
+  background:
+    radial-gradient(at 40% 20%, hsl(341, 82%, 56%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsl(341, 60%, 38%, 0.12) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsl(320, 70%, 45%, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsl(341, 82%, 56%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsl(341, 60%, 38%, 0.1) 0px, transparent 50%);
 }

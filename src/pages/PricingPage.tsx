@@ -1,39 +1,39 @@
 import { PricingSection } from "@/components/PricingSection";
 import { Testimonials } from "@/components/Testimonials";
 import { motion } from "motion/react";
-import { CreditCard, Sparkles, Check, HelpCircle } from "lucide-react";
+import { CreditCard, Sparkles, HelpCircle } from "lucide-react";
 import { useState } from "react";
 
 const faqs = [
   {
-    question: "Can I try Lectere before committing?",
+    question: "When will Lectere be available?",
     answer:
-      "Absolutely! Our Essential plan includes a 14-day free trial with full access to all features. No credit card required to start.",
+      "We're currently in active development with a focus on macOS first. Join our waitlist to be notified when we launch and get early access.",
   },
   {
-    question: "How does per-seat pricing work?",
+    question: "Why macOS first?",
     answer:
-      "For Professional plans, you're charged per active user per month. You can add or remove seats at any time, and we'll prorate the charges.",
+      "We're building with native technologies (Rust + Swift/SwiftUI) for the best possible performance and user experience. Starting with macOS allows us to perfect the experience before expanding to Windows.",
   },
   {
-    question: "What's included in priority support?",
+    question: "What's the difference between Essential and Plus?",
     answer:
-      "Professional plan users get dedicated support channels, faster response times (under 4 hours), and direct access to our product team for feature requests.",
+      "Essential Access ($12/month) supports up to 5 applications—perfect for personal use. Lectere Plus ($29/month) offers unlimited apps and team collaboration features for power users and small businesses.",
   },
   {
-    question: "Can I switch plans later?",
+    question: "Will there be a free tier?",
     answer:
-      "Yes! You can upgrade or downgrade at any time. When upgrading, you'll get immediate access to new features. Downgrades take effect at the next billing cycle.",
+      "We're exploring options for a limited free tier to help those who need it most. Join our waitlist to stay updated on pricing and availability.",
   },
   {
-    question: "Do you offer discounts for nonprofits or education?",
+    question: "Do you offer discounts for students and nonprofits?",
     answer:
-      "Yes, we offer 50% off for verified nonprofit organizations and educational institutions. Contact our sales team to learn more.",
+      "Yes! We plan to offer significant discounts for verified students, educators, and nonprofit organizations. Our mission is fighting digital displacement, and we want Lectere to be accessible to those who need it.",
   },
   {
-    question: "What payment methods do you accept?",
+    question: "How does AI guidance work?",
     answer:
-      "We accept all major credit cards (Visa, Mastercard, Amex), PayPal, and wire transfers for annual enterprise contracts.",
+      "Lectere uses advanced AI vision (UI-TARS model) to understand what's on your screen and generate personalized, step-by-step instructions. Just tell it what you want to accomplish, and it shows you how.",
   },
 ];
 
@@ -46,7 +46,7 @@ export function PricingPage() {
       <section className="relative py-24 md:py-32 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-fuchsia-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#eb336e]/10 via-transparent to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6">
           <motion.div
@@ -55,24 +55,24 @@ export function PricingPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 mb-8">
-              <CreditCard className="w-4 h-4 text-fuchsia-400" />
-              <span className="text-sm font-medium text-fuchsia-300">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eb336e]/10 border border-[#eb336e]/20 mb-8">
+              <CreditCard className="w-4 h-4 text-[#eb336e]" />
+              <span className="text-sm font-medium text-[#eb336e]">
                 Pricing
               </span>
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
               Simple,{" "}
-              <span className="bg-gradient-to-r from-fuchsia-400 via-purple-400 to-violet-400 bg-clip-text text-transparent">
-                transparent
+              <span className="text-gradient">
+                accessible
               </span>{" "}
               pricing
             </h1>
 
             <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed">
-              Start free, scale as you grow. No hidden fees, no surprises.
-              Choose the plan that fits your needs.
+              Designed to be affordable for everyone. No hidden fees, no
+              complicated tiers—just straightforward pricing.
             </p>
           </motion.div>
         </div>
@@ -101,7 +101,7 @@ export function PricingPage() {
               Questions? Answered.
             </h2>
             <p className="text-lg text-zinc-400">
-              Everything you need to know about pricing and billing.
+              Everything you need to know about Lectere.
             </p>
           </motion.div>
 
@@ -147,49 +147,30 @@ export function PricingPage() {
         </div>
       </section>
 
-      {/* Enterprise CTA */}
+      {/* CTA */}
       <section className="py-24 bg-zinc-900/50">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-12 rounded-3xl bg-gradient-to-br from-fuchsia-500/10 via-purple-500/10 to-violet-500/10 border border-white/10 text-center"
+            className="relative p-12 rounded-3xl bg-gradient-to-br from-[#eb336e]/10 via-[#9b274c]/10 to-transparent border border-white/10 text-center"
           >
-            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-purple-500 flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
               <Sparkles className="w-8 h-8 text-white" />
             </div>
 
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              Need a custom solution?
+              Ready to fight digital displacement?
             </h2>
 
             <p className="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
-              Enterprise plans include custom integrations, dedicated support,
-              SLA guarantees, and volume discounts. Let's build something
-              perfect for your organization.
+              Join our waitlist to get early access and be among the first to
+              experience Lectere when we launch.
             </p>
 
-            <div className="flex flex-wrap gap-4 justify-center mb-8">
-              {[
-                "Dedicated CSM",
-                "Custom SLAs",
-                "SSO/SAML",
-                "API Access",
-                "On-premise option",
-              ].map((feature) => (
-                <div
-                  key={feature}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10"
-                >
-                  <Check className="w-4 h-4 text-fuchsia-400" />
-                  <span className="text-sm text-zinc-300">{feature}</span>
-                </div>
-              ))}
-            </div>
-
-            <button className="px-8 py-4 rounded-xl bg-white text-zinc-900 font-semibold hover:bg-zinc-100 transition-colors">
-              Contact Sales
+            <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
+              Join the Waitlist
             </button>
           </motion.div>
         </div>

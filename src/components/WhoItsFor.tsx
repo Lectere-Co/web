@@ -1,25 +1,31 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { GraduationCap, Heart, Briefcase } from 'lucide-react';
+import { GraduationCap, Heart, Briefcase, RefreshCw } from 'lucide-react';
 
 const personas = [
-  { 
-    icon: GraduationCap, 
-    title: 'Students', 
-    desc: 'Learning complex software for coursework without getting stuck',
+  {
+    icon: Briefcase,
+    title: 'Small Business Owners',
+    desc: 'Navigate essential business software without expensive training or IT support',
+    gradient: 'from-[#eb336e] to-[#9b274c]'
+  },
+  {
+    icon: Heart,
+    title: 'Older Adults',
+    desc: 'Access essential digital services—banking, healthcare, government—with confidence',
+    gradient: 'from-[#9b274c] to-[#eb336e]'
+  },
+  {
+    icon: RefreshCw,
+    title: 'Career Changers',
+    desc: 'Learn new industry software quickly when transitioning to a new field',
     gradient: 'from-violet-500 to-purple-500'
   },
-  { 
-    icon: Heart, 
-    title: 'Elderly users', 
-    desc: 'Navigating technology with confidence and independence',
-    gradient: 'from-rose-500 to-pink-500'
-  },
-  { 
-    icon: Briefcase, 
-    title: 'Small business owners', 
-    desc: 'Managing tools without technical expertise or support',
+  {
+    icon: GraduationCap,
+    title: 'Students',
+    desc: 'Master professional software at under-resourced schools without expert guidance',
     gradient: 'from-cyan-500 to-blue-500'
   },
 ];
@@ -40,11 +46,11 @@ export function WhoItsFor() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          Built for the people{' '}
-          <span className="text-gradient">software forgot</span>.
+          Fighting{' '}
+          <span className="text-gradient">digital displacement</span>.
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {personas.map((persona, i) => (
             <motion.div
               key={persona.title}

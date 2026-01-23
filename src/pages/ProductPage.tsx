@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Zap, MousePointer2, RefreshCw, Sparkles, CheckCircle2, Layers, Bot } from "lucide-react";
+import { Zap, MousePointer2, RefreshCw, Sparkles, CheckCircle2, Layers, Bot, Monitor, Cpu, Eye } from "lucide-react";
 import { HowItWorks } from "@/components/HowItWorks";
 import { ProductDemo } from "@/components/ProductDemo";
 import { CompetitiveComparison } from "@/components/CompetitiveComparison";
@@ -7,45 +7,45 @@ import { CompetitiveComparison } from "@/components/CompetitiveComparison";
 const features = [
   {
     icon: MousePointer2,
-    title: "Real-Time Guidance",
+    title: "Visual Overlays",
     description:
-      "Interactive overlays that show you exactly where to click, what to type, and when—no more hunting through menus or watching tutorials.",
-    gradient: "from-rose-500 to-pink-500",
+      "Transparent overlays appear right on your screen, highlighting exactly where to click and what to type—step by step.",
+    gradient: "from-[#eb336e] to-[#9b274c]",
   },
   {
-    icon: Layers,
-    title: "Works Everywhere",
+    icon: Eye,
+    title: "Screen Understanding",
     description:
-      "One assistant that works across all your software. Whether it's Excel, Salesforce, or your custom internal tools—Lectere adapts.",
-    gradient: "from-pink-500 to-fuchsia-500",
-  },
-  {
-    icon: RefreshCw,
-    title: "Always Up-to-Date",
-    description:
-      "Software changes? Lectere automatically updates its guidance. No more outdated documentation or broken tutorials.",
-    gradient: "from-fuchsia-500 to-purple-500",
+      "Powered by AI vision, Lectere sees what you see and understands the context of any application you're using.",
+    gradient: "from-[#9b274c] to-[#eb336e]",
   },
   {
     icon: Bot,
-    title: "AI-Powered Intelligence",
+    title: "AI-Powered Guidance",
     description:
-      "Understands context and intent. Ask questions naturally and get step-by-step guidance tailored to your specific task.",
-    gradient: "from-purple-500 to-violet-500",
+      "Just tell Lectere what you want to accomplish. It generates personalized, step-by-step instructions tailored to your task.",
+    gradient: "from-violet-500 to-purple-500",
   },
   {
     icon: Zap,
-    title: "Instant Productivity",
+    title: "Lightning Fast",
     description:
-      "No learning curve, no training sessions. Users become productive immediately with contextual help right where they need it.",
-    gradient: "from-violet-500 to-indigo-500",
+      "Built with native macOS technologies for instant response times. AI guidance in under 3 seconds, hotkey activation in under 200ms.",
+    gradient: "from-amber-500 to-orange-500",
   },
   {
-    icon: CheckCircle2,
-    title: "Verified Workflows",
+    icon: Cpu,
+    title: "Lightweight & Efficient",
     description:
-      "Every guidance path is tested and verified. Confidence that users are following best practices every time.",
-    gradient: "from-indigo-500 to-blue-500",
+      "Uses less than 150MB of memory. Runs quietly in the background without impacting the applications you're learning.",
+    gradient: "from-cyan-500 to-blue-500",
+  },
+  {
+    icon: Monitor,
+    title: "macOS Native",
+    description:
+      "Built specifically for Mac with native Swift/SwiftUI interface and deep system integration for the best possible experience.",
+    gradient: "from-emerald-500 to-teal-500",
   },
 ];
 
@@ -56,7 +56,7 @@ export function ProductPage() {
       <section className="relative py-24 md:py-32 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rose-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#eb336e]/10 via-transparent to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6">
           <motion.div
@@ -65,24 +65,24 @@ export function ProductPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-500/10 border border-rose-500/20 mb-8">
-              <Sparkles className="w-4 h-4 text-rose-400" />
-              <span className="text-sm font-medium text-rose-300">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eb336e]/10 border border-[#eb336e]/20 mb-8">
+              <Sparkles className="w-4 h-4 text-[#eb336e]" />
+              <span className="text-sm font-medium text-[#eb336e]">
                 The Product
               </span>
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-              Software that{" "}
-              <span className="bg-gradient-to-r from-rose-400 via-pink-400 to-fuchsia-400 bg-clip-text text-transparent">
-                teaches itself
+              AI guidance that{" "}
+              <span className="text-gradient">
+                lives on your screen
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed">
-              Lectere transforms any application into an intelligent learning
-              environment. Real-time guidance, contextual help, and adaptive
-              tutorials—all without leaving your workflow.
+              Lectere is a native macOS application that provides real-time,
+              contextual guidance through visual overlays. Tell it what you want
+              to do, and it shows you exactly how—step by step.
             </p>
           </motion.div>
         </div>
@@ -98,10 +98,11 @@ export function ProductPage() {
             className="text-center mb-16"
           >
             <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
-              Everything you need
+              Built for performance
             </h2>
             <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              A complete solution for software adoption and training
+              Native macOS app with Rust core and Swift interface—designed to run
+              continuously without impacting your workflow
             </p>
           </motion.div>
 

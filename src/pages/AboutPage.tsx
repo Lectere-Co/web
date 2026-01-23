@@ -8,6 +8,7 @@ import {
   Target,
   Lightbulb,
   Award,
+  GraduationCap,
 } from "lucide-react";
 
 const values = [
@@ -37,30 +38,47 @@ const values = [
   },
 ];
 
-const stats = [
-  { value: "2.3B", label: "People struggle with digital skills globally" },
-  { value: "76%", label: "Give up when stuck in software" },
-  { value: "$8.5T", label: "Lost to productivity barriers annually" },
+const teamMembers = [
+  {
+    name: "Eric Xu",
+    role: "Co-Founder",
+    gradient: "from-[#eb336e] to-[#9b274c]",
+  },
+  {
+    name: "Rishabh Thosani",
+    role: "Co-Founder & Tech Lead",
+    gradient: "from-[#9b274c] to-[#eb336e]",
+  },
+  {
+    name: "Grayson Yen-Asprec",
+    role: "Co-Founder",
+    gradient: "from-violet-500 to-purple-500",
+  },
+  {
+    name: "Mike Weng",
+    role: "Co-Founder",
+    gradient: "from-cyan-500 to-blue-500",
+  },
 ];
 
-const team = [
+const missionCards = [
+  {
+    name: "The Problem",
+    role: "Digital Displacement",
+    description:
+      "When essential services and business operations move online, millions are left struggling without accessible learning support. We call this Digital Displacement—the mandatory software barrier that excludes people from participating in modern society.",
+  },
   {
     name: "The Mission",
     role: "Why We Exist",
     description:
-      "We started Lectere because we saw a world where brilliant software goes unused, where people feel left behind by technology, where the gap between digital haves and have-nots grows wider every day. We believe this is fixable.",
+      "We're building Lectere to ensure no one gets left behind by digital transformation. Our AI-powered learning assistant provides real-time, contextual guidance through visual overlays—making any software accessible to everyone.",
   },
   {
     name: "The Vision",
     role: "Where We're Going",
     description:
       "A future where learning any software takes minutes, not months. Where age and background don't determine digital capability. Where technology truly serves everyone equally.",
-  },
-  {
-    name: "The Approach",
-    role: "How We Work",
-    description:
-      "We combine AI, behavioral science, and thoughtful design to create guidance that feels less like training and more like having a helpful friend who knows exactly what you need.",
   },
 ];
 
@@ -71,7 +89,7 @@ export function AboutPage() {
       <section className="relative py-24 md:py-32 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#eb336e]/10 via-transparent to-transparent" />
 
         <div className="relative max-w-7xl mx-auto px-6">
           <motion.div
@@ -80,29 +98,60 @@ export function AboutPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-8">
-              <Heart className="w-4 h-4 text-purple-400" />
-              <span className="text-sm font-medium text-purple-300">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#eb336e]/10 border border-[#eb336e]/20 mb-8">
+              <Heart className="w-4 h-4 text-[#eb336e]" />
+              <span className="text-sm font-medium text-[#eb336e]">
                 About Us
               </span>
             </div>
 
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-              Technology should{" "}
-              <span className="bg-gradient-to-r from-purple-400 via-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                adapt to humans
+              Fighting{" "}
+              <span className="text-gradient">
+                digital displacement
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed">
-              We're on a mission to make software accessible to everyone. No
-              more frustration, no more feeling left behind.
+              We're a team of high school students on a mission to make software
+              accessible to everyone—one step at a time.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* The Problem We're Solving */}
+      {/* JA Social Innovation Challenge */}
+      <section className="py-16 bg-zinc-900/50">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#eb336e]/10 via-[#9b274c]/10 to-transparent border border-white/10"
+          >
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center shrink-0">
+                <GraduationCap className="w-10 h-10 text-white" />
+              </div>
+              <div className="text-center md:text-left">
+                <div className="text-sm font-medium text-[#eb336e] mb-2">
+                  Junior Achievement Social Innovation Challenge
+                </div>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
+                  Building the future of accessible technology
+                </h2>
+                <p className="text-zinc-400 leading-relaxed max-w-2xl">
+                  Lectere is being developed for the JA Social Innovation Challenge,
+                  where we're competing to create real solutions for social problems.
+                  Our goal: help the millions affected by digital displacement.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* The Problem & Mission */}
       <section className="py-24 bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -114,33 +163,38 @@ export function AboutPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
               <Globe className="w-4 h-4 text-zinc-400" />
               <span className="text-sm font-medium text-zinc-400">
-                The Challenge
+                Our Purpose
               </span>
             </div>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
-              A global digital accessibility crisis
+              The mandatory software barrier
             </h2>
             <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
-              The world is becoming more digital, but billions are being left
-              behind. Software complexity creates barriers that exclude the very
-              people who could benefit most.
+              As essential services move online, millions of people are being
+              excluded—not because they lack access, but because they struggle
+              to use complex software without support.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {stats.map((stat, index) => (
+          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+            {missionCards.map((item, index) => (
               <motion.div
-                key={stat.label}
+                key={item.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-8 rounded-2xl bg-zinc-900/50 border border-white/5"
+                className="p-8 rounded-2xl bg-zinc-900/50 border border-white/5"
               >
-                <div className="font-display text-5xl md:text-6xl font-bold bg-gradient-to-r from-rose-400 via-pink-400 to-fuchsia-400 bg-clip-text text-transparent mb-4">
-                  {stat.value}
+                <div className="text-sm font-medium text-[#eb336e] mb-2">
+                  {item.role}
                 </div>
-                <p className="text-zinc-400">{stat.label}</p>
+                <h3 className="font-display text-2xl font-bold text-white mb-4">
+                  {item.name}
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  {item.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -149,7 +203,7 @@ export function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-purple-500/10 via-violet-500/10 to-indigo-500/10 border border-white/10"
+            className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#eb336e]/10 via-[#9b274c]/10 to-transparent border border-white/10"
           >
             <div className="max-w-3xl mx-auto text-center">
               <blockquote className="font-display text-2xl md:text-3xl text-white mb-6 leading-relaxed">
@@ -163,28 +217,51 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Mission, Vision, Approach */}
+      {/* Meet the Team */}
       <section className="py-24 bg-zinc-900/50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {team.map((item, index) => (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <Users className="w-4 h-4 text-zinc-400" />
+              <span className="text-sm font-medium text-zinc-400">
+                The Team
+              </span>
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
+              Meet the founders
+            </h2>
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+              We're students at Bellaire High School in Houston, Texas, united by
+              a shared vision of making technology accessible to everyone.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {teamMembers.map((member, index) => (
               <motion.div
-                key={item.name}
+                key={member.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-8 rounded-2xl bg-zinc-900/50 border border-white/5"
+                className="group relative p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-white/10 transition-all duration-300 text-center"
               >
-                <div className="text-sm font-medium text-purple-400 mb-2">
-                  {item.role}
+                <div
+                  className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <span className="text-2xl font-bold text-white">
+                    {member.name.split(" ").map(n => n[0]).join("")}
+                  </span>
                 </div>
-                <h3 className="font-display text-2xl font-bold text-white mb-4">
-                  {item.name}
+                <h3 className="font-display text-xl font-semibold text-white mb-2">
+                  {member.name}
                 </h3>
-                <p className="text-zinc-400 leading-relaxed">
-                  {item.description}
-                </p>
+                <p className="text-zinc-400 text-sm">{member.role}</p>
               </motion.div>
             ))}
           </div>
@@ -224,7 +301,7 @@ export function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="group relative p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-white/10 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-violet-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <value.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="font-display text-xl font-semibold text-white mb-3">
@@ -249,10 +326,10 @@ export function AboutPage() {
             className="relative p-12 rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 border border-white/10 text-center overflow-hidden"
           >
             {/* Background decoration */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#eb336e]/5 via-transparent to-transparent" />
 
             <div className="relative">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-500 flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
 
@@ -261,16 +338,17 @@ export function AboutPage() {
               </h2>
 
               <p className="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
-                Whether you're a user, a partner, or someone who wants to help
-                make technology more accessible—we'd love to connect.
+                Whether you're someone affected by digital displacement, a
+                potential partner, or just want to support our mission—we'd love
+                to connect.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-500 to-violet-500 text-white font-semibold hover:opacity-90 transition-opacity">
-                  Get Early Access
+                <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
+                  Join the Waitlist
                 </button>
                 <button className="px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-colors">
-                  Partner With Us
+                  Learn More
                 </button>
               </div>
             </div>

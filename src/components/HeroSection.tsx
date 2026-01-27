@@ -9,31 +9,13 @@ export function HeroSection() {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section 
+    <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white"
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 mesh-gradient" />
-      <div className="absolute inset-0 grid-pattern opacity-40" />
-      
-      {/* Floating Orbs - Lectere Brand Colors */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-[#eb336e]/20 to-[#9b274c]/20 blur-[100px]"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-[#9b274c]/20 to-[#eb336e]/20 blur-[80px]"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      {/* Subtle accent blob */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#eb336e]/5 blur-[120px] -translate-y-1/2 translate-x-1/4" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-[#9b274c]/5 blur-[100px] translate-y-1/3 -translate-x-1/4" />
 
       <div className="container relative z-10 px-6 py-32 md:py-40">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
@@ -52,9 +34,19 @@ export function HeroSection() {
             </Badge>
           </motion.div>
 
+          {/* Logo */}
+          <motion.img
+            src="/lecterelogonotext.svg"
+            alt=""
+            className="h-16 mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          />
+
           {/* Headline */}
           <motion.h1
-            className="text-5xl md:text-6xl lg:text-7xl font-display font-medium leading-[1.1] tracking-tight mb-8"
+            className="text-5xl md:text-6xl lg:text-7xl font-display font-medium leading-[1.1] tracking-tight mb-8 text-foreground"
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -86,7 +78,7 @@ export function HeroSection() {
               <Play className="w-5 h-5 fill-current" />
               See How It Works
             </Button>
-            <Button variant="outline" size="xl" className="border-white/20 hover:bg-white/5">
+            <Button variant="outline" size="xl">
               Join the Waitlist
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -95,7 +87,7 @@ export function HeroSection() {
           {/* Floating Cards */}
           <div className="relative w-full max-w-3xl mt-20">
             <motion.div
-              className="absolute -left-4 md:left-0 top-0 glass-card rounded-xl p-4 flex items-center gap-3 shadow-xl"
+              className="absolute -left-4 md:left-0 top-0 bg-white rounded-xl p-4 flex items-center gap-3 shadow-lg border border-border"
               initial={{ opacity: 0, x: -50, rotate: -5 }}
               animate={isInView ? { opacity: 1, x: 0, rotate: -3 } : {}}
               transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -103,11 +95,11 @@ export function HeroSection() {
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
                 <MousePointer2 className="w-5 h-5 text-white" />
               </div>
-              <span className="text-sm font-medium">Click "File" to continue</span>
+              <span className="text-sm font-medium text-foreground">Click "File" to continue</span>
             </motion.div>
 
             <motion.div
-              className="absolute -right-4 md:right-0 top-12 glass-card rounded-xl p-4 flex items-center gap-3 shadow-xl"
+              className="absolute -right-4 md:right-0 top-12 bg-white rounded-xl p-4 flex items-center gap-3 shadow-lg border border-border"
               initial={{ opacity: 0, x: 50, rotate: 5 }}
               animate={isInView ? { opacity: 1, x: 0, rotate: 3 } : {}}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -115,7 +107,7 @@ export function HeroSection() {
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
                 <CheckCircle2 className="w-5 h-5 text-white" />
               </div>
-              <span className="text-sm font-medium">Great job! Next step...</span>
+              <span className="text-sm font-medium text-foreground">Great job! Next step...</span>
             </motion.div>
           </div>
         </div>
@@ -128,12 +120,12 @@ export function HeroSection() {
           transition={{ delay: 1.5, duration: 1 }}
         >
           <motion.div
-            className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2"
+            className="w-6 h-10 rounded-full border-2 border-border flex justify-center pt-2"
             animate={{ y: [0, 5, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
           >
             <motion.div
-              className="w-1.5 h-1.5 rounded-full bg-white/60"
+              className="w-1.5 h-1.5 rounded-full bg-muted-foreground"
               animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
             />

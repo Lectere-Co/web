@@ -57,7 +57,7 @@ export function ProblemSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Card className="glass-card hover:border-primary/30 hover:-translate-y-1 transition-all duration-300">
+              <Card className="hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 shadow-sm hover:shadow-md">
                 <CardContent className="p-8 flex items-start gap-5">
                   <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center shrink-0`}>
                     <stat.icon className="w-7 h-7 text-white" />
@@ -93,7 +93,7 @@ export function ProblemSection() {
                 className={`px-4 py-2 rounded-full text-sm md:text-base font-medium ${
                   i === frustrationFlow.length - 1 
                     ? 'bg-primary/20 text-primary border border-primary/30' 
-                    : 'bg-destructive/10 text-red-400 border border-red-500/20'
+                    : 'bg-red-50 text-red-500 border border-red-200'
                 }`}
               >
                 {step}

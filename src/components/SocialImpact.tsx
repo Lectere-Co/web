@@ -7,28 +7,7 @@ export function SocialImpact() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="section-padding relative overflow-hidden" ref={ref}>
-      {/* Background Effects */}
-      <div className="absolute inset-0 mesh-gradient opacity-50" />
-      
-      {/* Floating Shapes */}
-      <motion.div
-        className="absolute top-1/4 -left-20 w-60 h-60 rounded-full bg-gradient-to-r from-rose-500/10 to-transparent blur-3xl"
-        animate={{ 
-          y: [0, -20, 0],
-          rotate: [0, 5, 0]
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 -right-20 w-80 h-80 rounded-full bg-gradient-to-l from-fuchsia-500/10 to-transparent blur-3xl"
-        animate={{ 
-          y: [0, 20, 0],
-          rotate: [0, -5, 0]
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      
+    <section className="section-padding relative overflow-hidden bg-secondary/50" ref={ref}>
       <div className="container px-6 relative">
         <motion.div
           className="max-w-3xl mx-auto text-center"
@@ -63,20 +42,20 @@ export function SocialImpact() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <strong className="text-white">Lectere exists to make software accessible to everyone</strong> — 
+            <strong className="text-foreground">Lectere exists to make software accessible to everyone</strong> — 
             regardless of age, technical skill, or learning style.
           </motion.p>
 
           <motion.div
-            className="glass-card rounded-2xl p-8 md:p-10 relative"
+            className="bg-white rounded-2xl p-8 md:p-10 relative border border-border shadow-sm"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
               <Quote className="w-5 h-5 text-white" />
             </div>
-            <p className="text-2xl md:text-3xl font-display italic leading-relaxed text-white/90">
+            <p className="text-2xl md:text-3xl font-display italic leading-relaxed text-foreground">
               Technology should adapt to humans, not the other way around.
             </p>
           </motion.div>

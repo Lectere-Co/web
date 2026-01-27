@@ -7,11 +7,5 @@
 
 /* Progress Bar */
 .progress-bar {
-  @apply fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-500 origin-left z-[10000];
-}
-
-/* Cursor Glow Effect */
-.cursor-glow {
-  @apply fixed w-[400px] h-[400px] rounded-full pointer-events-none z-[1] mix-blend-screen;
-  background: radial-gradient(circle, var(--color-primary) / 0.1, transparent 70%);
+  @apply fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#eb336e] to-[#9b274c] origin-left z-[10000];
 }

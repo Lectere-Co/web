@@ -54,9 +54,7 @@ export function ProductPage() {
     <>
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#eb336e]/10 via-transparent to-transparent" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#eb336e]/5 blur-[120px] -translate-y-1/2" />
 
         <div className="relative max-w-7xl mx-auto px-6">
           <motion.div
@@ -72,14 +70,14 @@ export function ProductPage() {
               </span>
             </div>
 
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
               AI guidance that{" "}
               <span className="text-gradient">
                 lives on your screen
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
               Lectere is a native macOS application that provides real-time,
               contextual guidance through visual overlays. Tell it what you want
               to do, and it shows you exactly how—step by step.
@@ -89,7 +87,7 @@ export function ProductPage() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-24 bg-zinc-950">
+      <section className="py-24 bg-secondary/50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -97,10 +95,10 @@ export function ProductPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
               Built for performance
             </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Native macOS app with Rust core and Swift interface—designed to run
               continuously without impacting your workflow
             </p>
@@ -114,17 +112,17 @@ export function ProductPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-white/10 transition-all duration-300"
+                className="group relative p-8 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <div
                   className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
                 >
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-white mb-3">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-zinc-400 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>

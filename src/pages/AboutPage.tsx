@@ -41,23 +41,13 @@ const values = [
 const teamMembers = [
   {
     name: "Eric Xu",
-    role: "Co-Founder",
+    role: "CEO",
     gradient: "from-[#eb336e] to-[#9b274c]",
   },
   {
     name: "Rishabh Thosani",
-    role: "Co-Founder & Tech Lead",
+    role: "CTO",
     gradient: "from-[#9b274c] to-[#eb336e]",
-  },
-  {
-    name: "Grayson Yen-Asprec",
-    role: "Co-Founder",
-    gradient: "from-violet-500 to-purple-500",
-  },
-  {
-    name: "Mike Weng",
-    role: "Co-Founder",
-    gradient: "from-cyan-500 to-blue-500",
   },
 ];
 
@@ -87,9 +77,7 @@ export function AboutPage() {
     <>
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#eb336e]/10 via-transparent to-transparent" />
+        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] rounded-full bg-[#eb336e]/5 blur-[120px] -translate-y-1/2" />
 
         <div className="relative max-w-7xl mx-auto px-6">
           <motion.div
@@ -105,14 +93,14 @@ export function AboutPage() {
               </span>
             </div>
 
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
               Fighting{" "}
               <span className="text-gradient">
                 digital displacement
               </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
               We're a team of high school students on a mission to make software
               accessible to everyone—one step at a time.
             </p>
@@ -121,13 +109,13 @@ export function AboutPage() {
       </section>
 
       {/* JA Social Innovation Challenge */}
-      <section className="py-16 bg-zinc-900/50">
+      <section className="py-16 bg-secondary/50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#eb336e]/10 via-[#9b274c]/10 to-transparent border border-white/10"
+            className="relative p-8 md:p-12 rounded-3xl bg-white border border-border shadow-sm"
           >
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center shrink-0">
@@ -137,10 +125,10 @@ export function AboutPage() {
                 <div className="text-sm font-medium text-[#eb336e] mb-2">
                   Junior Achievement Social Innovation Challenge
                 </div>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
                   Building the future of accessible technology
                 </h2>
-                <p className="text-zinc-400 leading-relaxed max-w-2xl">
+                <p className="text-muted-foreground leading-relaxed max-w-2xl">
                   Lectere is being developed for the JA Social Innovation Challenge,
                   where we're competing to create real solutions for social problems.
                   Our goal: help the millions affected by digital displacement.
@@ -152,7 +140,7 @@ export function AboutPage() {
       </section>
 
       {/* The Problem & Mission */}
-      <section className="py-24 bg-zinc-950">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -160,16 +148,16 @@ export function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Globe className="w-4 h-4 text-zinc-400" />
-              <span className="text-sm font-medium text-zinc-400">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
+              <Globe className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">
                 Our Purpose
               </span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
               The mandatory software barrier
             </h2>
-            <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               As essential services move online, millions of people are being
               excluded—not because they lack access, but because they struggle
               to use complex software without support.
@@ -184,15 +172,15 @@ export function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-8 rounded-2xl bg-zinc-900/50 border border-white/5"
+                className="p-8 rounded-2xl bg-white border border-border shadow-sm"
               >
                 <div className="text-sm font-medium text-[#eb336e] mb-2">
                   {item.role}
                 </div>
-                <h3 className="font-display text-2xl font-bold text-white mb-4">
+                <h3 className="font-display text-2xl font-bold text-foreground mb-4">
                   {item.name}
                 </h3>
-                <p className="text-zinc-400 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
               </motion.div>
@@ -203,22 +191,22 @@ export function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#eb336e]/10 via-[#9b274c]/10 to-transparent border border-white/10"
+            className="relative p-8 md:p-12 rounded-3xl bg-[#eb336e]/5 border border-[#eb336e]/10"
           >
             <div className="max-w-3xl mx-auto text-center">
-              <blockquote className="font-display text-2xl md:text-3xl text-white mb-6 leading-relaxed">
+              <blockquote className="font-display text-2xl md:text-3xl text-foreground mb-6 leading-relaxed">
                 "We don't believe in a world divided between the tech-savvy and
                 the tech-frustrated. Everyone deserves to harness the power of
                 software."
               </blockquote>
-              <p className="text-zinc-400">— The Lectere Team</p>
+              <p className="text-muted-foreground">&mdash; The Lectere Team</p>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Meet the Team */}
-      <section className="py-24 bg-zinc-900/50">
+      <section className="py-24 bg-secondary/50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -226,22 +214,22 @@ export function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Users className="w-4 h-4 text-zinc-400" />
-              <span className="text-sm font-medium text-zinc-400">
-                The Team
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
+              <Users className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">
+                Leadership
               </span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
-              Meet the founders
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
+              Meet the team
             </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-              We're students at Bellaire High School in Houston, Texas, united by
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Students at Bellaire High School in Houston, Texas, united by
               a shared vision of making technology accessible to everyone.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={member.name}
@@ -249,7 +237,7 @@ export function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-white/10 transition-all duration-300 text-center"
+                className="group relative p-8 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300 text-center"
               >
                 <div
                   className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
@@ -258,10 +246,10 @@ export function AboutPage() {
                     {member.name.split(" ").map(n => n[0]).join("")}
                   </span>
                 </div>
-                <h3 className="font-display text-xl font-semibold text-white mb-2">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
                   {member.name}
                 </h3>
-                <p className="text-zinc-400 text-sm">{member.role}</p>
+                <p className="text-muted-foreground text-sm">{member.role}</p>
               </motion.div>
             ))}
           </div>
@@ -269,7 +257,7 @@ export function AboutPage() {
       </section>
 
       {/* Our Values */}
-      <section className="py-24 bg-zinc-950">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -277,16 +265,16 @@ export function AboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Award className="w-4 h-4 text-zinc-400" />
-              <span className="text-sm font-medium text-zinc-400">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
+              <Award className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">
                 Our Values
               </span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
               What drives us
             </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               The principles that guide every decision we make
             </p>
           </motion.div>
@@ -299,15 +287,15 @@ export function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-white/10 transition-all duration-300"
+                className="group relative p-8 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <value.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-white mb-3">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
                   {value.title}
                 </h3>
-                <p className="text-zinc-400 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {value.description}
                 </p>
               </motion.div>
@@ -317,27 +305,24 @@ export function AboutPage() {
       </section>
 
       {/* Join Us CTA */}
-      <section className="py-24 bg-zinc-900/50">
+      <section className="py-24 bg-secondary/50">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-12 rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 border border-white/10 text-center overflow-hidden"
+            className="relative p-12 rounded-3xl bg-white border border-border text-center overflow-hidden shadow-sm"
           >
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#eb336e]/5 via-transparent to-transparent" />
-
             <div className="relative">
               <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
 
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Join us on this mission
               </h2>
 
-              <p className="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Whether you're someone affected by digital displacement, a
                 potential partner, or just want to support our mission—we'd love
                 to connect.
@@ -347,7 +332,7 @@ export function AboutPage() {
                 <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
                   Join the Waitlist
                 </button>
-                <button className="px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 transition-colors">
+                <button className="px-8 py-4 rounded-xl bg-secondary border border-border text-foreground font-semibold hover:bg-secondary/80 transition-colors">
                   Learn More
                 </button>
               </div>

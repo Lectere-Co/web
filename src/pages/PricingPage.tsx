@@ -44,9 +44,7 @@ export function PricingPage() {
     <>
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#eb336e]/10 via-transparent to-transparent" />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[#eb336e]/5 blur-[120px] -translate-y-1/2" />
 
         <div className="relative max-w-7xl mx-auto px-6">
           <motion.div
@@ -62,7 +60,7 @@ export function PricingPage() {
               </span>
             </div>
 
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
               Simple,{" "}
               <span className="text-gradient">
                 accessible
@@ -70,7 +68,7 @@ export function PricingPage() {
               pricing
             </h1>
 
-            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed">
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
               Designed to be affordable for everyone. No hidden fees, no
               complicated tiers—just straightforward pricing.
             </p>
@@ -85,7 +83,7 @@ export function PricingPage() {
       <Testimonials />
 
       {/* FAQ Section */}
-      <section className="py-24 bg-zinc-950">
+      <section className="py-24">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -93,14 +91,14 @@ export function PricingPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <HelpCircle className="w-4 h-4 text-zinc-400" />
-              <span className="text-sm font-medium text-zinc-400">FAQ</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
+              <HelpCircle className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">FAQ</span>
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
               Questions? Answered.
             </h2>
-            <p className="text-lg text-zinc-400">
+            <p className="text-lg text-muted-foreground">
               Everything you need to know about Lectere.
             </p>
           </motion.div>
@@ -113,19 +111,19 @@ export function PricingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="rounded-2xl bg-zinc-900/50 border border-white/5 overflow-hidden"
+                className="rounded-2xl bg-white border border-border overflow-hidden shadow-sm"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-secondary/50 transition-colors"
                 >
-                  <span className="font-medium text-white">{faq.question}</span>
+                  <span className="font-medium text-foreground">{faq.question}</span>
                   <motion.div
                     animate={{ rotate: openFaq === index ? 45 : 0 }}
                     transition={{ duration: 0.2 }}
-                    className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 ml-4"
+                    className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 ml-4"
                   >
-                    <span className="text-zinc-400 text-lg leading-none">+</span>
+                    <span className="text-muted-foreground text-lg leading-none">+</span>
                   </motion.div>
                 </button>
                 <motion.div
@@ -137,7 +135,7 @@ export function PricingPage() {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <p className="px-6 pb-5 text-zinc-400 leading-relaxed">
+                  <p className="px-6 pb-5 text-muted-foreground leading-relaxed">
                     {faq.answer}
                   </p>
                 </motion.div>
@@ -148,23 +146,23 @@ export function PricingPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-zinc-900/50">
+      <section className="py-24 bg-secondary/50">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-12 rounded-3xl bg-gradient-to-br from-[#eb336e]/10 via-[#9b274c]/10 to-transparent border border-white/10 text-center"
+            className="relative p-12 rounded-3xl bg-white border border-border text-center shadow-sm"
           >
             <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
               <Sparkles className="w-8 h-8 text-white" />
             </div>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
               Ready to fight digital displacement?
             </h2>
 
-            <p className="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join our waitlist to get early access and be among the first to
               experience Lectere when we launch.
             </p>

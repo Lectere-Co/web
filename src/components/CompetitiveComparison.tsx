@@ -38,9 +38,9 @@ export function CompetitiveComparison() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="glass-card rounded-2xl overflow-hidden">
+          <div className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm">
             {/* Header */}
-            <div className="grid grid-cols-5 gap-4 p-4 md:p-6 bg-white/5 border-b border-white/10 text-sm md:text-base font-medium">
+            <div className="grid grid-cols-5 gap-4 p-4 md:p-6 bg-secondary border-b border-border text-sm md:text-base font-medium">
               <div className="col-span-1">Feature</div>
               {competitors.map((c) => (
                 <div key={c.name} className="text-center text-muted-foreground">{c.name}</div>
@@ -52,7 +52,7 @@ export function CompetitiveComparison() {
             {features.map((feature, i) => (
               <motion.div
                 key={feature}
-                className="grid grid-cols-5 gap-4 p-4 md:p-6 border-b border-white/5 last:border-0 items-center"
+                className="grid grid-cols-5 gap-4 p-4 md:p-6 border-b border-border last:border-0 items-center"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
@@ -60,14 +60,14 @@ export function CompetitiveComparison() {
                 <div className="col-span-1 text-sm md:text-base">{feature}</div>
                 {competitors.map((c) => (
                   <div key={`${c.name}-${i}`} className="flex justify-center">
-                    <div className="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center">
                       <X className="w-4 h-4 text-red-400" />
                     </div>
                   </div>
                 ))}
                 <div className="flex justify-center">
                   <motion.div
-                    className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center"
+                    className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center"
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
                     transition={{ delay: 0.5 + i * 0.1, type: 'spring', stiffness: 400 }}

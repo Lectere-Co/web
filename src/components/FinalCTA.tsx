@@ -8,28 +8,9 @@ export function FinalCTA() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="section-padding relative overflow-hidden" ref={ref}>
-      {/* Background */}
-      <div className="absolute inset-0 mesh-gradient" />
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-      
-      {/* Animated Orbs */}
-      <motion.div
-        className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-rose-500/20 to-fuchsia-500/20 blur-[100px]"
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3]
-        }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-l from-pink-500/20 to-purple-500/20 blur-[80px]"
-        animate={{ 
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2]
-        }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-      />
+    <section className="section-padding relative overflow-hidden bg-secondary/50" ref={ref}>
+      {/* Subtle accent */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-[#eb336e]/5 blur-[100px]" />
 
       <div className="container px-6 relative">
         <motion.div
@@ -67,7 +48,7 @@ export function FinalCTA() {
               Request a Demo
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="xl" className="border-white/20 hover:bg-white/5">
+            <Button variant="outline" size="xl">
               <Sparkles className="w-5 h-5" />
               Start Free Trial
             </Button>

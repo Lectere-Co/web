@@ -55,14 +55,14 @@ export function Testimonials() {
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ rotate: 0, scale: 1.02 }}
             >
-              <Card className="glass-card h-full hover:border-primary/30 transition-all duration-300">
+              <Card className="h-full hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md bg-white">
                 <CardContent className="p-8 relative">
                   {/* Quote Icon */}
                   <div className="absolute -top-3 -left-1 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                     <Quote className="w-4 h-4 text-primary" />
                   </div>
 
-                  <p className="text-lg leading-relaxed mb-6 text-white/90 italic">
+                  <p className="text-lg leading-relaxed mb-6 text-foreground/80 italic">
                     "{voice.quote}"
                   </p>
 

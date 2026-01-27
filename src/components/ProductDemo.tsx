@@ -42,11 +42,11 @@ export function ProductDemo() {
         >
           {/* Demo Frame */}
           <div 
-            className="glass-card rounded-2xl overflow-hidden cursor-pointer"
+            className="bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-sm"
             onClick={handleDemoClick}
           >
             {/* Window Header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10">
+            <div className="flex items-center justify-between px-4 py-3 bg-secondary border-b border-border">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
@@ -57,12 +57,12 @@ export function ProductDemo() {
             </div>
 
             {/* Demo Content */}
-            <div className="relative h-[400px] md:h-[450px] bg-gradient-to-br from-zinc-900 to-zinc-950 flex">
+            <div className="relative h-[400px] md:h-[450px] bg-gradient-to-br from-gray-50 to-gray-100 flex">
               {/* Sidebar */}
-              <div className="w-16 md:w-20 border-r border-white/5 p-3 space-y-3">
-                <div className="w-full h-8 rounded bg-white/5" />
-                <div className="w-full h-8 rounded bg-white/5" />
-                <div className="w-full h-8 rounded bg-white/5" />
+              <div className="w-16 md:w-20 border-r border-border p-3 space-y-3">
+                <div className="w-full h-8 rounded bg-gray-200" />
+                <div className="w-full h-8 rounded bg-gray-200" />
+                <div className="w-full h-8 rounded bg-gray-200" />
               </div>
 
               {/* Main Area */}
@@ -90,14 +90,14 @@ export function ProductDemo() {
                   animate={{ x: cursorPos.x, y: cursorPos.y }}
                   transition={{ type: 'spring', stiffness: 150, damping: 15 }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="white" className="drop-shadow-lg">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a1a1a" className="drop-shadow-lg">
                     <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
                   </svg>
                 </motion.div>
 
                 {/* Tooltip */}
                 <motion.div
-                  className="absolute bottom-6 left-6 right-6 glass-card rounded-xl p-4"
+                  className="absolute bottom-6 left-6 right-6 bg-white rounded-xl p-4 border border-border shadow-md"
                   key={step}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -109,9 +109,9 @@ export function ProductDemo() {
                     </span>
                     <div className="flex gap-1">
                       {demoSteps.map((_, i) => (
-                        <div 
+                        <div
                           key={i}
-                          className={`w-1.5 h-1.5 rounded-full ${i === step ? 'bg-primary' : 'bg-white/20'}`}
+                          className={`w-1.5 h-1.5 rounded-full ${i === step ? 'bg-primary' : 'bg-gray-300'}`}
                         />
                       ))}
                     </div>
@@ -127,7 +127,7 @@ export function ProductDemo() {
             </div>
 
             {/* Click Prompt */}
-            <div className="text-center py-3 text-sm text-muted-foreground bg-white/5">
+            <div className="text-center py-3 text-sm text-muted-foreground bg-secondary">
               Click anywhere to see next step
             </div>
           </div>

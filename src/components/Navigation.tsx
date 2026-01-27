@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -24,7 +24,6 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
@@ -37,7 +36,7 @@ export function Navigation() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-zinc-950/80 backdrop-blur-xl border-b border-white/5"
+            ? "bg-white/80 backdrop-blur-xl border-b border-border shadow-sm"
             : "bg-transparent"
         }`}
       >
@@ -45,16 +44,11 @@ export function Navigation() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="group flex items-center gap-2">
-              <motion.div
-                whileHover={{ rotate: 180 }}
-                transition={{ duration: 0.5 }}
-                className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center"
-              >
-                <Sparkles className="w-4 h-4 text-white" />
-              </motion.div>
-              <span className="font-display text-xl font-semibold text-white group-hover:text-[#eb336e] transition-colors">
-                Lectere
-              </span>
+              <img
+                src="/lecterelogo.svg"
+                alt="Lectere"
+                className="h-8"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -70,8 +64,8 @@ export function Navigation() {
                     <span
                       className={
                         isActive
-                          ? "text-white"
-                          : "text-zinc-400 hover:text-white"
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
                       }
                     >
                       {link.name}
@@ -79,7 +73,7 @@ export function Navigation() {
                     {isActive && (
                       <motion.div
                         layoutId="nav-indicator"
-                        className="absolute inset-0 bg-white/5 rounded-lg -z-10"
+                        className="absolute inset-0 bg-secondary rounded-lg -z-10"
                         transition={{
                           type: "spring",
                           stiffness: 500,
@@ -102,7 +96,7 @@ export function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
+              className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -123,7 +117,7 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[72px] z-40 bg-zinc-950/95 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 top-[72px] z-40 bg-white/95 backdrop-blur-xl md:hidden"
           >
             <nav className="flex flex-col p-6 gap-2">
               {navLinks.map((link, index) => {
@@ -139,8 +133,8 @@ export function Navigation() {
                       to={link.path}
                       className={`block px-4 py-3 text-lg font-medium rounded-lg transition-all ${
                         isActive
-                          ? "text-white bg-white/5"
-                          : "text-zinc-400 hover:text-white hover:bg-white/5"
+                          ? "text-foreground bg-secondary"
+                          : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                       }`}
                     >
                       {link.name}

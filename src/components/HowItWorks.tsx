@@ -50,7 +50,7 @@ export function HowItWorks() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Card className="glass-card h-full hover:border-primary/30 transition-all duration-300 group">
+              <Card className="h-full hover:border-primary/30 transition-all duration-300 group shadow-sm hover:shadow-md bg-white">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-4 mb-4">
                     <span className="text-5xl font-display text-primary/20 font-medium">{step.number}</span>
@@ -84,12 +84,12 @@ export function HowItWorks() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="glass-card rounded-2xl p-8 flex flex-col items-center">
+          <div className="bg-white rounded-2xl p-8 flex flex-col items-center border border-border shadow-sm">
             <div className="relative mb-6">
               <motion.div
-                className="absolute inset-0 rounded-full bg-primary/30 animate-pulse-ring"
+                className="absolute inset-0 rounded-full bg-primary/20 animate-pulse-ring"
               />
-              <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center glow-primary">
+              <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center glow-primary">
                 <span className="text-white font-semibold">Click Here</span>
               </div>
             </div>

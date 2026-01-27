@@ -29,10 +29,7 @@ export function WhatIsLectere() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="section-padding relative" ref={ref}>
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
-      
+    <section className="section-padding relative bg-secondary/50" ref={ref}>
       <div className="container px-6 relative">
         <motion.h2
           className="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-8"
@@ -64,7 +61,7 @@ export function WhatIsLectere() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Card className="glass-card h-full hover:border-primary/30 hover:-translate-y-2 transition-all duration-300 group">
+              <Card className="h-full hover:border-primary/30 hover:-translate-y-2 transition-all duration-300 group shadow-sm hover:shadow-md bg-white">
                 <CardContent className="p-8 text-center">
                   <motion.div
                     className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}

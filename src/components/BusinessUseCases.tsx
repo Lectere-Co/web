@@ -42,8 +42,6 @@ export function BusinessUseCases() {
 
   return (
     <section className="section-padding relative overflow-hidden" ref={ref}>
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
 
       <div className="container px-6 relative">
         <motion.h2
@@ -74,7 +72,7 @@ export function BusinessUseCases() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Card className="glass-card h-full hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group">
+              <Card className="h-full hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 group shadow-sm hover:shadow-md bg-white">
                 <CardContent className="p-6 flex items-start gap-5">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                     <item.icon className="w-6 h-6 text-white" />
@@ -91,7 +89,7 @@ export function BusinessUseCases() {
 
         {/* Performance Stats */}
         <motion.div
-          className="glass-card rounded-2xl p-8 max-w-3xl mx-auto"
+          className="bg-white rounded-2xl p-8 max-w-3xl mx-auto border border-border shadow-sm"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -99,7 +97,7 @@ export function BusinessUseCases() {
           <h3 className="text-center text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
             Performance Targets
           </h3>
-          <div className="grid grid-cols-3 divide-x divide-white/10">
+          <div className="grid grid-cols-3 divide-x divide-border">
             {features.map((stat) => (
               <div key={stat.label} className="text-center px-4">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">

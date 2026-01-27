@@ -18,7 +18,7 @@ const badgeVariants = cva(
         success:
           "border-transparent bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
         glow:
-          "border-transparent bg-gradient-to-r from-rose-500/10 to-fuchsia-500/10 text-rose-400 border-rose-500/20 shadow-sm shadow-rose-500/10",
+          "border-transparent bg-[#eb336e]/10 text-[#eb336e] border-[#eb336e]/20 shadow-sm shadow-[#eb336e]/10",
       },
     },
     defaultVariants: {

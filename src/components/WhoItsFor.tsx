@@ -35,10 +35,7 @@ export function WhoItsFor() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="section-padding relative" ref={ref}>
-      {/* Background Pattern */}
-      <div className="absolute inset-0 grid-pattern opacity-30" />
-      
+    <section className="section-padding relative bg-secondary/50" ref={ref}>
       <div className="container px-6 relative">
         <motion.h2
           className="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16"
@@ -58,7 +55,7 @@ export function WhoItsFor() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Card className="glass-card h-full hover:border-primary/30 hover:-translate-y-3 transition-all duration-500 group relative overflow-hidden">
+              <Card className="h-full hover:border-primary/30 hover:-translate-y-3 transition-all duration-500 group relative overflow-hidden shadow-sm hover:shadow-md bg-white">
                 <CardContent className="p-8 text-center relative z-10">
                   <motion.div
                     className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${persona.gradient} flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}

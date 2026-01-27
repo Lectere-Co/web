@@ -68,9 +68,9 @@ export function PricingSection() {
               onMouseLeave={() => setHoveredPlan(null)}
             >
               <Card className={`h-full relative overflow-hidden transition-all duration-300 ${
-                plan.featured 
-                  ? 'glass-card border-primary/30 glow-sm' 
-                  : 'glass-card hover:border-primary/20'
+                plan.featured
+                  ? 'border-primary/30 glow-sm shadow-md bg-white'
+                  : 'hover:border-primary/20 shadow-sm hover:shadow-md bg-white'
               }`}>
                 {plan.badge && (
                   <Badge className="absolute top-4 right-4" variant="glow">
@@ -100,8 +100,8 @@ export function PricingSection() {
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ delay: 0.4 + j * 0.05 }}
                       >
-                        <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
-                          <Check className="w-3 h-3 text-emerald-400" />
+                        <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
+                          <Check className="w-3 h-3 text-emerald-500" />
                         </div>
                         <span className="text-muted-foreground">{feature}</span>
                       </motion.li>

@@ -31,7 +31,7 @@ export default function SolutionsCTA() {
               </button>
               <a
                 href="/product"
-                className="px-8 py-4 rounded-xl bg-white border border-border text-foreground font-semibold hover:bg-secondary transition-colors"
+                className="inline-block px-8 py-4 rounded-xl bg-white border border-border text-foreground font-semibold hover:bg-secondary transition-colors"
               >
                 Learn More
               </a>

@@ -1,0 +1,44 @@
+---
+import ScrollProgress from '../components/ScrollProgress';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import '../styles/globals.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  showNewsletter?: boolean;
+}
+
+const {
+  title = 'Lectere - Software that teaches you while you use it',
+  description = 'Lectere - AI assistant that lives inside software and guides users visually on their real screen',
+  showNewsletter = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#9B274C" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <div class="w-full min-h-screen bg-background relative">
+      <ScrollProgress client:load />
+      <Navigation client:load currentPath={Astro.url.pathname} />
+      <main class="pt-[72px]">
+        <slot />
+      </main>
+      {showNewsletter && <Newsletter />}
+      <Footer />
+    </div>
+  </body>
+</html>

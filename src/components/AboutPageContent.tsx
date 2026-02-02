@@ -72,7 +72,7 @@ const missionCards = [
   },
 ];
 
-export function AboutPage() {
+export default function AboutPageContent() {
   return (
     <>
       {/* Hero Section */}
@@ -332,9 +332,12 @@ export function AboutPage() {
                 <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
                   Join the Waitlist
                 </button>
-                <button className="px-8 py-4 rounded-xl bg-secondary border border-border text-foreground font-semibold hover:bg-secondary/80 transition-colors">
+                <a
+                  href="/product"
+                  className="inline-block px-8 py-4 rounded-xl bg-secondary border border-border text-foreground font-semibold hover:bg-secondary/80 transition-colors"
+                >
                   Learn More
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>

@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductHero from '../components/ProductHero';
+import ProductFeatures from '../components/ProductFeatures';
+import { HowItWorks } from '../components/HowItWorks';
+import { ProductDemo } from '../components/ProductDemo';
+import { CompetitiveComparison } from '../components/CompetitiveComparison';
+---
+
+<Layout title="Product - Lectere">
+  <ProductHero client:load />
+  <ProductFeatures client:visible />
+  <HowItWorks client:visible />
+  <ProductDemo client:visible />
+  <CompetitiveComparison client:visible />
+</Layout>

@@ -1,3 +1,6 @@
+# Astro generated files
+.astro/
+
 # dependencies (bun install)
 node_modules
 package-lock.json

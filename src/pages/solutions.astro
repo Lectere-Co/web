@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SolutionsHero from '../components/SolutionsHero';
+import { WhoItsFor } from '../components/WhoItsFor';
+import { BusinessUseCases } from '../components/BusinessUseCases';
+import SolutionsCTA from '../components/SolutionsCTA';
+---
+
+<Layout title="Solutions - Lectere">
+  <SolutionsHero client:load />
+  <WhoItsFor client:visible />
+  <BusinessUseCases client:visible />
+  <SolutionsCTA client:visible />
+</Layout>

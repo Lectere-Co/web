@@ -1,37 +1,31 @@
 {
   "name": "lectere-website",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Lectere - AI assistant that lives inside software",
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
-    "@tailwindcss/postcss": "^4.1.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.562.0",
     "motion": "^12.18.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.11.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19",
-    "@types/bun": "latest",
+    "@astrojs/react": "^4.2.0",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.5.2",
-    "autoprefixer": "^10.4.23",
-    "postcss": "^8.5.6",
+    "astro": "^5.8.0",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.8.3",
-    "vite": "^7.0.4"
-  },
-  "packageManager": "bun@1.3.0"
+    "typescript": "^5.8.3"
+  }
 }

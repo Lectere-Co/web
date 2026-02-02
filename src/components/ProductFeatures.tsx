@@ -21,28 +21,28 @@ const features = [
     title: "AI-Powered Guidance",
     description:
       "Just tell Lectere what you want to accomplish. It generates personalized, step-by-step instructions tailored to your task.",
-    gradient: "from-violet-500 to-purple-500",
+    gradient: "from-[#c43278] to-[#832558]",
   },
   {
     icon: Zap,
     title: "Lightning Fast",
     description:
       "Built with native macOS technologies for instant response times. AI guidance in under 3 seconds, hotkey activation in under 200ms.",
-    gradient: "from-amber-500 to-orange-500",
+    gradient: "from-[#e8556b] to-[#c43278]",
   },
   {
     icon: Cpu,
     title: "Lightweight & Efficient",
     description:
       "Uses less than 150MB of memory. Runs quietly in the background without impacting the applications you're learning.",
-    gradient: "from-cyan-500 to-blue-500",
+    gradient: "from-[#832558] to-[#6e1f3d]",
   },
   {
     icon: Monitor,
     title: "macOS Native",
     description:
       "Built specifically for Mac with native Swift/SwiftUI interface and deep system integration for the best possible experience.",
-    gradient: "from-emerald-500 to-teal-500",
+    gradient: "from-[#eb336e] to-[#c43278]",
   },
 ];
 

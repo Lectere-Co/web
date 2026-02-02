@@ -100,8 +100,8 @@ export function PricingSection() {
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ delay: 0.4 + j * 0.05 }}
                       >
-                        <div className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
-                          <Check className="w-3 h-3 text-emerald-500" />
+                        <div className="w-5 h-5 rounded-full bg-[#eb336e]/10 flex items-center justify-center shrink-0">
+                          <Check className="w-3 h-3 text-[#eb336e]" />
                         </div>
                         <span className="text-muted-foreground">{feature}</span>
                       </motion.li>

@@ -8,19 +8,19 @@ const features = [
     icon: Target, 
     title: 'Real-time on-screen guidance', 
     desc: 'Visual highlights show exactly where to click',
-    gradient: 'from-rose-500 to-pink-500'
+    gradient: 'from-[#eb336e] to-[#9b274c]'
   },
   { 
     icon: RefreshCw, 
     title: 'Cross-software intelligence', 
     desc: 'Works across any application',
-    gradient: 'from-violet-500 to-purple-500'
+    gradient: 'from-[#c43278] to-[#832558]'
   },
   { 
     icon: Sparkles, 
     title: 'Always-up-to-date workflows', 
     desc: 'Automatically adapts to UI changes',
-    gradient: 'from-amber-500 to-orange-500'
+    gradient: 'from-[#e8556b] to-[#c43278]'
   },
 ];
 

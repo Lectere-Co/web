@@ -20,13 +20,13 @@ const impacts = [
     title: 'Career Changers',
     desc: 'Learn industry-specific software quickly when entering a new field',
     icon: RefreshCw,
-    gradient: 'from-violet-500 to-purple-500'
+    gradient: 'from-[#c43278] to-[#832558]'
   },
   {
     title: 'Students',
     desc: 'Master professional tools without access to formal training or tutors',
     icon: GraduationCap,
-    gradient: 'from-cyan-500 to-blue-500'
+    gradient: 'from-[#832558] to-[#6e1f3d]'
   },
 ];
 
@@ -97,9 +97,9 @@ export function BusinessUseCases() {
           <h3 className="text-center text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
             Performance Targets
           </h3>
-          <div className="grid grid-cols-3 divide-x divide-border">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-0 sm:divide-x divide-border">
             {features.map((stat) => (
-              <div key={stat.label} className="text-center px-4">
+              <div key={stat.label} className="text-center px-4 flex flex-col items-center">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
                   <stat.icon className="w-5 h-5 text-primary" />
                 </div>

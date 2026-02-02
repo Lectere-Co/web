@@ -104,7 +104,7 @@ export function HeroSection() {
               animate={isInView ? { opacity: 1, x: 0, rotate: 3 } : {}}
               transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#c43278] to-[#832558] flex items-center justify-center">
                 <CheckCircle2 className="w-5 h-5 text-white" />
               </div>
               <span className="text-sm font-medium text-foreground">Great job! Next step...</span>

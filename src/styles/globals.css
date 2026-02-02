@@ -52,6 +52,20 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight text-foreground;
   }
+
+  /* Ensure container is always centered with consistent max-width */
+  .container {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem; /* 1280px */
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-inline: 2rem;
+    }
+  }
 }
 
 /* Custom Scrollbar */

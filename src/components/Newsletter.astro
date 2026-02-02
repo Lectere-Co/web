@@ -1,0 +1,42 @@
+---
+// Newsletter signup component powered by Buttondown
+// To use: Create a free account at https://buttondown.com
+// Then replace "lectere" below with your Buttondown username
+---
+
+<section class="py-16 bg-gradient-to-br from-[#eb336e]/5 to-[#9b274c]/5 border-t border-border">
+  <div class="max-w-2xl mx-auto px-6 text-center">
+    <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+      Stay in the loop
+    </h2>
+    <p class="text-lg text-muted-foreground mb-8">
+      Sign up for our newsletter to get updates on Lectere's development,
+      early access opportunities, and insights on digital accessibility.
+    </p>
+
+    <form
+      action="https://buttondown.com/api/emails/embed-subscribe/lectere"
+      method="post"
+      target="popupwindow"
+      class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+    >
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter your email"
+        required
+        class="flex-1 h-12 px-4 rounded-xl border border-border bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+      />
+      <button
+        type="submit"
+        class="h-12 px-8 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-lg shadow-[#eb336e]/20"
+      >
+        Subscribe
+      </button>
+    </form>
+
+    <p class="text-xs text-muted-foreground mt-4">
+      No spam, ever. Unsubscribe anytime.
+    </p>
+  </div>
+</section>

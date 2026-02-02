@@ -20,13 +20,23 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
   const [pathname, setPathname] = useState(currentPath);
 
   useEffect(() => {
-    setPathname(window.location.pathname);
+    const updatePathname = () => {
+      setPathname(window.location.pathname);
+    };
+
+    updatePathname();
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("popstate", updatePathname);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("popstate", updatePathname);
+    };
   }, []);
 
   return (

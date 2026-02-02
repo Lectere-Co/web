@@ -20,7 +20,7 @@ const voices = [
     quote: "Everyone in my new job already knows how to use Salesforce. I feel like I'm always two steps behind.",
     persona: 'Career Changer',
     context: 'Catching up in a new field',
-    gradient: 'from-violet-500 to-purple-500',
+    gradient: 'from-[#c43278] to-[#832558]',
   },
 ];
 

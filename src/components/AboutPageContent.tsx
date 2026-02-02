@@ -164,7 +164,7 @@ export default function AboutPageContent() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid lg:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
             {missionCards.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -279,7 +279,7 @@ export default function AboutPageContent() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {values.map((value, index) => (
               <motion.div
                 key={value.title}

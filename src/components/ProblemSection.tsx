@@ -93,7 +93,7 @@ export function ProblemSection() {
                 className={`px-4 py-2 rounded-full text-sm md:text-base font-medium ${
                   i === frustrationFlow.length - 1 
                     ? 'bg-primary/20 text-primary border border-primary/30' 
-                    : 'bg-red-50 text-red-500 border border-red-200'
+                    : 'bg-[#eb336e]/10 text-[#9b274c] border border-[#eb336e]/20'
                 }`}
               >
                 {step}

@@ -20,13 +20,13 @@ const personas = [
     icon: RefreshCw,
     title: 'Career Changers',
     desc: 'Learn new industry software quickly when transitioning to a new field',
-    gradient: 'from-violet-500 to-purple-500'
+    gradient: 'from-[#c43278] to-[#832558]'
   },
   {
     icon: GraduationCap,
     title: 'Students',
     desc: 'Master professional software at under-resourced schools without expert guidance',
-    gradient: 'from-cyan-500 to-blue-500'
+    gradient: 'from-[#832558] to-[#6e1f3d]'
   },
 ];
 

@@ -249,7 +249,7 @@ Components install to `src/components/ui/`. The project uses the `new-york` styl
 - **Do NOT nest components** in deep subdirectories — keep them flat in `src/components/`.
 - **Do NOT use `client:load`** on every component — prefer `client:visible` for below-the-fold sections.
 - **Do NOT commit `node_modules/`, `dist/`, `.astro/`, or `.env` files.**
-- **Do NOT modify the README.md** tech stack section (it references legacy info from the React SPA era and is kept for historical context).
+- **Keep the `README.md` tech stack section accurate** — ensure it reflects the current Astro + React islands architecture and update both `README.md` and this `CLAUDE.md` when the stack changes.
 
 ---
 

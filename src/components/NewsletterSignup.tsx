@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import { Mail, ArrowRight, Check, Loader2, X } from 'lucide-react';
+import { isValidEmail } from '@/lib/validation';
 
 type FormState = 'idle' | 'input' | 'loading' | 'success' | 'error';
 
@@ -15,6 +16,8 @@ export function NewsletterSignup() {
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   // Check if user has already subscribed
+  // Note: This uses localStorage which can be bypassed by clearing browser data
+  // or using different browsers/devices. ConvertKit handles duplicate emails on the backend.
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hasSubscribed = localStorage.getItem(SUBSCRIPTION_KEY);
@@ -27,13 +30,10 @@ export function NewsletterSignup() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate email with proper regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
+    // Validate email with shared validation utility
+    if (!email || !isValidEmail(email)) {
       setErrorMessage('Please enter a valid email address.');
       setState('error');
-      // Focus back on input for accessibility
-      setTimeout(() => emailInputRef.current?.focus(), 100);
       return;
     }
 
@@ -59,24 +59,18 @@ export function NewsletterSignup() {
       } else {
         setErrorMessage(data.message || 'Something went wrong. Please try again.');
         setState('error');
-        // Focus back on input for accessibility
-        setTimeout(() => emailInputRef.current?.focus(), 100);
       }
     } catch {
       setErrorMessage(
         'Network error. Please check your connection and try again.'
       );
       setState('error');
-      // Focus back on input for accessibility
-      setTimeout(() => emailInputRef.current?.focus(), 100);
     }
   };
 
   const reset = () => {
     setState('input');
     setErrorMessage('');
-    // Focus on input for better accessibility
-    setTimeout(() => emailInputRef.current?.focus(), 100);
   };
 
   return (
@@ -125,6 +119,12 @@ export function NewsletterSignup() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 onSubmit={handleSubmit}
+                onAnimationComplete={() => {
+                  // Focus input after animation completes for better UX
+                  if (state === 'input') {
+                    emailInputRef.current?.focus();
+                  }
+                }}
                 className="flex flex-col sm:flex-row gap-3"
               >
                 <input
@@ -135,7 +135,6 @@ export function NewsletterSignup() {
                   placeholder="Enter your email"
                   aria-label="Email address"
                   required
-                  autoFocus
                   disabled={state === 'loading'}
                   className="flex-1 h-12 px-4 rounded-xl border border-border bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:opacity-50"
                 />

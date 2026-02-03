@@ -1,13 +1,13 @@
 import type { APIRoute } from 'astro';
+import { isValidEmail } from '@/lib/validation';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     const { email } = body;
 
-    // Validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
+    // Validate email using shared validation utility
+    if (!email || !isValidEmail(email)) {
       return new Response(
         JSON.stringify({ message: 'Please enter a valid email address.' }),
         {

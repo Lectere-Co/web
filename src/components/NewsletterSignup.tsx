@@ -5,7 +5,8 @@ import { isValidEmail } from '@/lib/validation';
 
 type FormState = 'idle' | 'input' | 'loading' | 'success' | 'error';
 
-const SUBSCRIPTION_KEY = 'lectere_newsletter_subscribed';
+const SUBSCRIPTION_KEY = 'lectere_newsletter_status';
+const PENDING_EXPIRY_DAYS = 7; // Allow retry after 7 days if confirmation wasn't completed
 
 export function NewsletterSignup() {
   const [state, setState] = useState<FormState>('idle');
@@ -15,14 +16,31 @@ export function NewsletterSignup() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
-  // Check if user has already subscribed
+  // Check if user has already subscribed or has a pending confirmation
   // Note: This uses localStorage which can be bypassed by clearing browser data
-  // or using different browsers/devices. ConvertKit handles duplicate emails on the backend.
+  // or using different browsers/devices. Kit handles duplicate emails on the backend.
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const hasSubscribed = localStorage.getItem(SUBSCRIPTION_KEY);
-      if (hasSubscribed === 'true') {
-        setState('success');
+      const statusJson = localStorage.getItem(SUBSCRIPTION_KEY);
+      if (statusJson) {
+        try {
+          const status = JSON.parse(statusJson) as { state: 'pending' | 'confirmed'; timestamp: number };
+          const now = Date.now();
+          const daysSince = (now - status.timestamp) / (1000 * 60 * 60 * 24);
+          
+          // If pending and less than expiry days, show success state (user can retry if needed)
+          // If confirmed, always show success state
+          if (status.state === 'confirmed' || (status.state === 'pending' && daysSince < PENDING_EXPIRY_DAYS)) {
+            setState('success');
+          }
+          // If pending and expired, clear it and allow resubmit
+          else if (status.state === 'pending' && daysSince >= PENDING_EXPIRY_DAYS) {
+            localStorage.removeItem(SUBSCRIPTION_KEY);
+          }
+        } catch {
+          // Invalid JSON, clear it
+          localStorage.removeItem(SUBSCRIPTION_KEY);
+        }
       }
     }
   }, []);
@@ -52,9 +70,13 @@ export function NewsletterSignup() {
       if (response.ok) {
         setState('success');
         setEmail('');
-        // Persist subscription status to prevent duplicate signups
+        // Store pending confirmation status with timestamp
+        // This allows users to retry after expiry period if they missed the email
         if (typeof window !== 'undefined') {
-          localStorage.setItem(SUBSCRIPTION_KEY, 'true');
+          localStorage.setItem(SUBSCRIPTION_KEY, JSON.stringify({
+            state: 'pending',
+            timestamp: Date.now()
+          }));
         }
       } else {
         setErrorMessage(data.message || 'Something went wrong. Please try again.');
@@ -69,6 +91,15 @@ export function NewsletterSignup() {
   };
 
   const reset = () => {
+    setState('input');
+    setErrorMessage('');
+  };
+
+  const retrySubscription = () => {
+    // Clear the pending status and allow resubmit
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(SUBSCRIPTION_KEY);
+    }
     setState('input');
     setErrorMessage('');
   };
@@ -176,6 +207,13 @@ export function NewsletterSignup() {
                   We've sent a confirmation email. Click the link inside to
                   complete your signup and start receiving updates.
                 </p>
+                <button
+                  type="button"
+                  onClick={retrySubscription}
+                  className="text-sm text-primary hover:underline cursor-pointer mt-2"
+                >
+                  Didn't get the email? Try again
+                </button>
               </motion.div>
             )}
 

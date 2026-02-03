@@ -1,8 +1,11 @@
 ---
-// Newsletter signup component powered by ConvertKit (Kit)
+// Newsletter signup component powered by Kit (formerly ConvertKit) — API v4
 // Set these environment variables in your Cloudflare Pages dashboard:
-//   PUBLIC_CONVERTKIT_FORM_ID - Your ConvertKit form ID
-//   PUBLIC_CONVERTKIT_API_KEY - Your ConvertKit public API key
+//   KIT_FORM_ID  - Your Kit form ID (found in the Kit dashboard under Forms)
+//   KIT_API_KEY  - Your Kit v4 API key (Settings → Advanced → API)
+// The API is handled server-side by the Cloudflare Pages Function at functions/api/newsletter.ts.
+// Note: During local development, `astro dev` / `bun run dev` will not serve `/api/newsletter`;
+// run `wrangler pages dev` (Pages Functions local mode) to test the newsletter flow locally.
 import { NewsletterSignup } from './NewsletterSignup';
 ---
 

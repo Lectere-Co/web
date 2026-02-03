@@ -210,7 +210,8 @@ export function NewsletterSignup() {
                 <button
                   type="button"
                   onClick={retrySubscription}
-                  className="text-sm text-primary hover:underline cursor-pointer mt-2"
+                  aria-label="Resend confirmation email by re-entering your email address"
+                  className="text-sm text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm cursor-pointer mt-2"
                 >
                   Didn't get the email? Try again
                 </button>

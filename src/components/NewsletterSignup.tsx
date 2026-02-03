@@ -1,20 +1,37 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import { Mail, ArrowRight, Check, Loader2, X } from 'lucide-react';
+import { isValidEmail } from '@/lib/validation';
 
 type FormState = 'idle' | 'input' | 'loading' | 'success' | 'error';
+
+const SUBSCRIPTION_KEY = 'lectere_newsletter_subscribed';
 
 export function NewsletterSignup() {
   const [state, setState] = useState<FormState>('idle');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const sectionRef = useRef(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  // Check if user has already subscribed
+  // Note: This uses localStorage which can be bypassed by clearing browser data
+  // or using different browsers/devices. ConvertKit handles duplicate emails on the backend.
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hasSubscribed = localStorage.getItem(SUBSCRIPTION_KEY);
+      if (hasSubscribed === 'true') {
+        setState('success');
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email || !email.includes('@')) {
+    // Validate email with shared validation utility
+    if (!email || !isValidEmail(email)) {
       setErrorMessage('Please enter a valid email address.');
       setState('error');
       return;
@@ -22,55 +39,25 @@ export function NewsletterSignup() {
 
     setState('loading');
 
-    const formId = import.meta.env.PUBLIC_CONVERTKIT_FORM_ID;
-    const apiKey = import.meta.env.PUBLIC_CONVERTKIT_API_KEY;
-
-    if (!formId || !apiKey) {
-      setErrorMessage(
-        'Newsletter is not configured yet. Please try again later.'
-      );
-      setState('error');
-      return;
-    }
-
     try {
-      const response = await fetch(
-        `https://api.convertkit.com/v3/forms/${formId}/subscribe`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ api_key: apiKey, email }),
-        }
-      );
+      // Use server-side API endpoint instead of direct ConvertKit call
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
 
       if (response.ok) {
         setState('success');
         setEmail('');
-      } else {
-        const contentType = response.headers.get('content-type') || '';
-
-        let message = 'Something went wrong. Please try again.';
-
-        try {
-          if (contentType.includes('application/json')) {
-            const data = await response.json();
-            if (data && typeof data === 'object' && 'message' in data) {
-              const maybeMessage = (data as { message?: string }).message;
-              if (maybeMessage && typeof maybeMessage === 'string') {
-                message = maybeMessage;
-              }
-            }
-          } else {
-            const text = await response.text();
-            if (text && text.trim().length > 0) {
-              message = text.trim();
-            }
-          }
-        } catch {
-          // Ignore parsing errors and fall back to the default message.
+        // Persist subscription status to prevent duplicate signups
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(SUBSCRIPTION_KEY, 'true');
         }
-
-        setErrorMessage(message);
+      } else {
+        setErrorMessage(data.message || 'Something went wrong. Please try again.');
         setState('error');
       }
     } catch {
@@ -105,11 +92,12 @@ export function NewsletterSignup() {
           early access opportunities, and insights on digital accessibility.
         </p>
 
-        <div className="max-w-md mx-auto min-h-[48px]">
+        <div className="max-w-md mx-auto">
           <AnimatePresence mode="wait">
             {state === 'idle' && (
               <motion.button
                 key="cta"
+                type="button"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -131,15 +119,22 @@ export function NewsletterSignup() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 onSubmit={handleSubmit}
+                onAnimationComplete={() => {
+                  // Focus input after animation completes for better UX
+                  if (state === 'input') {
+                    emailInputRef.current?.focus();
+                  }
+                }}
                 className="flex flex-col sm:flex-row gap-3"
               >
                 <input
+                  ref={emailInputRef}
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
+                  aria-label="Email address"
                   required
-                  autoFocus
                   disabled={state === 'loading'}
                   className="flex-1 h-12 px-4 rounded-xl border border-border bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all disabled:opacity-50"
                 />
@@ -167,6 +162,8 @@ export function NewsletterSignup() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
+                role="status"
+                aria-live="polite"
                 className="flex flex-col items-center gap-3"
               >
                 <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
@@ -189,6 +186,8 @@ export function NewsletterSignup() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
+                role="alert"
+                aria-live="assertive"
                 className="flex flex-col items-center gap-3"
               >
                 <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
@@ -197,6 +196,7 @@ export function NewsletterSignup() {
                 <p className="text-foreground font-semibold">Oops!</p>
                 <p className="text-sm text-muted-foreground">{errorMessage}</p>
                 <button
+                  type="button"
                   onClick={reset}
                   className="text-sm text-primary hover:underline cursor-pointer"
                 >

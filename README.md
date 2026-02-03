@@ -19,6 +19,18 @@ Install dependencies:
 bun install
 ```
 
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# ConvertKit Newsletter Integration
+PUBLIC_CONVERTKIT_FORM_ID=your_form_id_here
+CONVERTKIT_API_KEY=your_api_key_here
+```
+
+**Note**: `PUBLIC_CONVERTKIT_FORM_ID` is exposed to the client (for display purposes only), while `CONVERTKIT_API_KEY` is kept server-side for security.
+
 Run development server:
 
 ```bash

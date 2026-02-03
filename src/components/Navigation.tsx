@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { scrollToNewsletter } from "@/lib/utils";
 
 const navLinks = [
   { name: "Product", path: "/product" },
@@ -99,7 +100,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <Button variant="gradient" size="sm">
+              <Button variant="gradient" size="sm" onClick={scrollToNewsletter}>
                 Join Waitlist
               </Button>
             </div>
@@ -159,7 +160,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
                 transition={{ delay: navLinks.length * 0.1 }}
                 className="mt-4"
               >
-                <Button variant="gradient" size="lg" className="w-full">
+                <Button variant="gradient" size="lg" className="w-full" onClick={() => { setIsMobileMenuOpen(false); scrollToNewsletter(); }}>
                   Join Waitlist
                 </Button>
               </motion.div>

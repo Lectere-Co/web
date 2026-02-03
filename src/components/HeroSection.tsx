@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Play, ArrowRight, MousePointer2, CheckCircle2 } from 'lucide-react';
+import { scrollToNewsletter } from '@/lib/utils';
 
 export function HeroSection() {
   const ref = useRef(null);
@@ -78,7 +79,7 @@ export function HeroSection() {
               <Play className="w-5 h-5 fill-current" />
               See How It Works
             </Button>
-            <Button variant="outline" size="xl">
+            <Button variant="outline" size="xl" onClick={scrollToNewsletter}>
               Join the Waitlist
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>

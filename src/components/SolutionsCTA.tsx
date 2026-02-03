@@ -1,5 +1,7 @@
 import { motion } from "motion/react";
 import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { scrollToNewsletter } from "@/lib/utils";
 
 export default function SolutionsCTA() {
   return (
@@ -26,15 +28,14 @@ export default function SolutionsCTA() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
+              <Button variant="gradient" size="lg" onClick={scrollToNewsletter}>
                 Join the Waitlist
-              </button>
-              <a
-                href="/product"
-                className="inline-block px-8 py-4 rounded-xl bg-white border border-border text-foreground font-semibold hover:bg-secondary transition-colors"
-              >
-                Learn More
-              </a>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <a href="/product">
+                  Learn More
+                </a>
+              </Button>
             </div>
           </div>
         </motion.div>

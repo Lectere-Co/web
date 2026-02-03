@@ -47,10 +47,30 @@ export function NewsletterSignup() {
         setState('success');
         setEmail('');
       } else {
-        const data = await response.json().catch(() => null);
-        setErrorMessage(
-          data?.message || 'Something went wrong. Please try again.'
-        );
+        const contentType = response.headers.get('content-type') || '';
+
+        let message = 'Something went wrong. Please try again.';
+
+        try {
+          if (contentType.includes('application/json')) {
+            const data = await response.json();
+            if (data && typeof data === 'object' && 'message' in data) {
+              const maybeMessage = (data as { message?: string }).message;
+              if (maybeMessage && typeof maybeMessage === 'string') {
+                message = maybeMessage;
+              }
+            }
+          } else {
+            const text = await response.text();
+            if (text && text.trim().length > 0) {
+              message = text.trim();
+            }
+          }
+        } catch {
+          // Ignore parsing errors and fall back to the default message.
+        }
+
+        setErrorMessage(message);
         setState('error');
       }
     } catch {

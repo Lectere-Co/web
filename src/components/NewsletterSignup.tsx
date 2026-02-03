@@ -62,8 +62,7 @@ export function NewsletterSignup() {
   };
 
   const reset = () => {
-    setState('idle');
-    setEmail('');
+    setState('input');
     setErrorMessage('');
   };
 

@@ -232,7 +232,7 @@ Components install to `src/components/ui/`. The project uses the `new-york` styl
 | File | Purpose |
 |------|---------|
 | `astro.config.mjs` | Astro config: React integration + Tailwind Vite plugin |
-| `tailwind.config.js` | Extended theme: colors, fonts, animations, container |
+| `tailwind.config.js` | Tailwind config: extended theme (colors, fonts, animations, container) and plugins (e.g. `@tailwindcss/typography` — ensure installed in `package.json`) |
 | `src/styles/globals.css` | Theme variables (`@theme`), base styles, custom utilities |
 | `src/layouts/Layout.astro` | Root HTML layout shared by all pages |
 | `src/lib/utils.ts` | `cn()` utility for merging Tailwind classes |

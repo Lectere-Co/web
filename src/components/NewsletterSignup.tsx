@@ -170,11 +170,11 @@ export function NewsletterSignup() {
                   <Check className="w-6 h-6 text-green-600" />
                 </div>
                 <p className="text-foreground font-semibold">
-                  You're subscribed!
+                  Check your inbox!
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Thanks for signing up. We'll keep you posted on Lectere's
-                  progress.
+                  We've sent a confirmation email. Click the link inside to
+                  complete your signup and start receiving updates.
                 </p>
               </motion.div>
             )}

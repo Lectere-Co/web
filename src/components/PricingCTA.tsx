@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { scrollToNewsletter } from "@/lib/utils";
 
 export default function PricingCTA() {
@@ -25,9 +26,9 @@ export default function PricingCTA() {
             experience Lectere when we launch.
           </p>
 
-          <button onClick={scrollToNewsletter} className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
+          <Button variant="gradient" size="lg" onClick={scrollToNewsletter}>
             Join the Waitlist
-          </button>
+          </Button>
         </motion.div>
       </div>
     </section>

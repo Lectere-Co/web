@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Shield } from 'lucide-react';
+import { scrollToNewsletter } from '@/lib/utils';
 
 const plans = [
   {
@@ -108,10 +109,11 @@ export function PricingSection() {
                     ))}
                   </ul>
                   
-                  <Button 
-                    className="w-full" 
+                  <Button
+                    className="w-full"
                     variant={plan.featured ? 'gradient' : 'outline'}
                     size="lg"
+                    onClick={scrollToNewsletter}
                   >
                     {plan.cta}
                   </Button>

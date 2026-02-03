@@ -10,6 +10,7 @@ import {
   Award,
   GraduationCap,
 } from "lucide-react";
+import { scrollToNewsletter } from "@/lib/utils";
 
 const values = [
   {
@@ -329,7 +330,7 @@ export default function AboutPageContent() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
+                <button onClick={scrollToNewsletter} className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white font-semibold hover:opacity-90 transition-opacity">
                   Join the Waitlist
                 </button>
                 <a

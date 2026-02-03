@@ -4,3 +4,10 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export function scrollToNewsletter() {
+  const el = document.getElementById('newsletter-signup');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+}

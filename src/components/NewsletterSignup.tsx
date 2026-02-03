@@ -106,6 +106,7 @@ export function NewsletterSignup() {
 
   return (
     <section
+      id="newsletter-signup"
       ref={sectionRef}
       className="py-16 bg-gradient-to-br from-[#eb336e]/5 to-[#9b274c]/5 border-t border-border"
     >

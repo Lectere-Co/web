@@ -20,9 +20,17 @@ export function scrollToNewsletter() {
     const elementPosition = el.getBoundingClientRect().top + window.scrollY;
     const offsetPosition = elementPosition - getHeaderHeight();
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
+    const prefersReducedMotion = window.matchMedia
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false;
+
+    if (prefersReducedMotion) {
+      window.scrollTo(0, offsetPosition);
+    } else {
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
   }
 }

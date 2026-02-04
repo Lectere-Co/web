@@ -12,6 +12,7 @@ export function NewsletterSignup() {
   const [state, setState] = useState<FormState>('idle');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [needsConfirmation, setNeedsConfirmation] = useState(true);
   const sectionRef = useRef(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
@@ -27,10 +28,14 @@ export function NewsletterSignup() {
           const status = JSON.parse(statusJson) as { state: 'pending' | 'confirmed'; timestamp: number };
           const now = Date.now();
           const daysSince = (now - status.timestamp) / (1000 * 60 * 60 * 24);
-          
-          // If pending and less than expiry days, show success state (user can retry if needed)
-          // If confirmed, always show success state
-          if (status.state === 'confirmed' || (status.state === 'pending' && daysSince < PENDING_EXPIRY_DAYS)) {
+
+          // If confirmed (auto-admitted), show success without confirmation message
+          // If pending and less than expiry days, show success with confirmation message
+          if (status.state === 'confirmed') {
+            setNeedsConfirmation(false);
+            setState('success');
+          } else if (status.state === 'pending' && daysSince < PENDING_EXPIRY_DAYS) {
+            setNeedsConfirmation(true);
             setState('success');
           }
           // If pending and expired, clear it and allow resubmit
@@ -68,13 +73,16 @@ export function NewsletterSignup() {
       const data = await response.json();
 
       if (response.ok) {
+        const isConfirmed = data.confirmed === true;
+        setNeedsConfirmation(!isConfirmed);
         setState('success');
         setEmail('');
-        // Store pending confirmation status with timestamp
-        // This allows users to retry after expiry period if they missed the email
+        // Store subscription status with timestamp
+        // If auto-confirmed, store as 'confirmed' so we never show the "check email" message
+        // If pending, allow retry after expiry period if they missed the confirmation email
         if (typeof window !== 'undefined') {
           localStorage.setItem(SUBSCRIPTION_KEY, JSON.stringify({
-            state: 'pending',
+            state: isConfirmed ? 'confirmed' : 'pending',
             timestamp: Date.now()
           }));
         }
@@ -201,21 +209,36 @@ export function NewsletterSignup() {
                 <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
                   <Check className="w-6 h-6 text-green-600" />
                 </div>
-                <p className="text-foreground font-semibold">
-                  Check your inbox!
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  We've sent a confirmation email. Click the link inside to
-                  complete your signup and start receiving updates.
-                </p>
-                <button
-                  type="button"
-                  onClick={retrySubscription}
-                  aria-label="Resend confirmation email by re-entering your email address"
-                  className="text-sm text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm cursor-pointer mt-2"
-                >
-                  Didn't get the email? Try again
-                </button>
+                {needsConfirmation ? (
+                  <>
+                    <p className="text-foreground font-semibold">
+                      Check your inbox!
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      We've sent a confirmation email. Click the link inside to
+                      complete your signup and start receiving updates.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={retrySubscription}
+                      aria-label="Resend confirmation email by re-entering your email address"
+                      className="text-sm text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm cursor-pointer mt-2"
+                    >
+                      Didn't get the email? Try again
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-foreground font-semibold">
+                      You're subscribed!
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      You've been added to our mailing list and will receive
+                      updates on Lectere's development and early access
+                      opportunities.
+                    </p>
+                  </>
+                )}
               </motion.div>
             )}
 

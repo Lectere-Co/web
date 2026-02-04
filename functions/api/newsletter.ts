@@ -77,8 +77,30 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     // Check subscriber state to determine if double opt-in confirmation is needed.
     // If the form has auto-confirm enabled, the subscriber will be "active" immediately.
     // If double opt-in is enabled, the subscriber will be "inactive" until they confirm.
-    const formData = await formRes.json<{ subscriber?: { state?: string } }>().catch(() => null);
-    const subscriberState = formData?.subscriber?.state;
+    let formData: { subscriber?: { state?: string } } | null;
+    try {
+      formData = await formRes.json<{ subscriber?: { state?: string } }>();
+    } catch {
+      return jsonResponse(
+        {
+          message:
+            'Subscription status could not be verified due to an unexpected response. Please try again.',
+        },
+        502,
+      );
+    }
+
+    if (!formData || !formData.subscriber) {
+      return jsonResponse(
+        {
+          message:
+            'Subscription status is currently unavailable. Please try again.',
+        },
+        502,
+      );
+    }
+
+    const subscriberState = formData.subscriber.state;
     const confirmed = subscriberState === 'active';
 
     return jsonResponse({ success: true, confirmed }, 200);

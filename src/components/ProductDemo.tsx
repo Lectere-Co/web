@@ -44,6 +44,14 @@ export function ProductDemo() {
           <div
             className="bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-lg relative"
             onClick={handleDemoClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleDemoClick();
+              }
+            }}
           >
             {/* Cursor - positioned at frame level to move across all sections */}
             <motion.div
@@ -58,9 +66,9 @@ export function ProductDemo() {
             {/* Window Header (macOS style) */}
             <div className="flex items-center justify-between px-4 py-3 bg-[#f9fbfd] border-b border-gray-200">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                <div className="w-3 h-3 rounded-full bg-[#28ca41]" />
+                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" aria-hidden="true" />
+                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" aria-hidden="true" />
+                <div className="w-3 h-3 rounded-full bg-[#28ca41]" aria-hidden="true" />
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#4285f4]" fill="currentColor">
@@ -69,10 +77,10 @@ export function ProductDemo() {
                 <span className="font-medium text-gray-700">Untitled document</span>
               </div>
               <div className="flex items-center gap-2">
-                <button className="p-1.5 hover:bg-gray-100 rounded">
+                <button className="p-1.5 hover:bg-gray-100 rounded" aria-label="Comments">
                   <MessageSquare className="w-4 h-4 text-gray-500" />
                 </button>
-                <button className="px-4 py-1.5 bg-[#1a73e8] text-white text-sm font-medium rounded-md flex items-center gap-2">
+                <button className="px-4 py-1.5 bg-[#1a73e8] text-white text-sm font-medium rounded-md flex items-center gap-2" aria-label="Share document">
                   <Share className="w-4 h-4" />
                   Share
                 </button>
@@ -81,14 +89,14 @@ export function ProductDemo() {
 
             {/* Menu Bar */}
             <div className="flex items-center gap-1 px-3 py-1.5 bg-[#f9fbfd] border-b border-gray-200 text-sm relative">
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">File</button>
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">Edit</button>
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">View</button>
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">Insert</button>
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">Format</button>
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">Tools</button>
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">Extensions</button>
-              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700">Help</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="File menu">File</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="Edit menu">Edit</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="View menu">View</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="Insert menu">Insert</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="Format menu">Format</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="Tools menu">Tools</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="Extensions menu">Extensions</button>
+              <button className="px-3 py-1 hover:bg-gray-100 rounded text-gray-700" aria-label="Help menu">Help</button>
 
               {/* Highlight Target for menu */}
               {step === 0 && (
@@ -108,63 +116,63 @@ export function ProductDemo() {
 
             {/* Toolbar */}
             <div className="flex items-center gap-1 px-3 py-2 bg-[#edf2fa] border-b border-gray-200 relative overflow-x-auto">
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Undo">
                 <Undo className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Redo">
                 <Redo className="w-4 h-4 text-gray-600" />
               </button>
               <div className="w-px h-5 bg-gray-300 mx-1" />
-              <button className="flex items-center gap-1 px-2 py-1 hover:bg-gray-200 rounded text-sm text-gray-700">
+              <button className="flex items-center gap-1 px-2 py-1 hover:bg-gray-200 rounded text-sm text-gray-700" aria-label="Text style">
                 <Type className="w-4 h-4" />
                 <span>Normal text</span>
                 <ChevronDown className="w-3 h-3" />
               </button>
               <div className="w-px h-5 bg-gray-300 mx-1" />
-              <button className="flex items-center gap-1 px-2 py-1 hover:bg-gray-200 rounded text-sm text-gray-700">
+              <button className="flex items-center gap-1 px-2 py-1 hover:bg-gray-200 rounded text-sm text-gray-700" aria-label="Font family">
                 <span>Arial</span>
                 <ChevronDown className="w-3 h-3" />
               </button>
               <div className="w-px h-5 bg-gray-300 mx-1" />
-              <button className="flex items-center gap-1 px-2 py-1 hover:bg-gray-200 rounded text-sm text-gray-700">
+              <button className="flex items-center gap-1 px-2 py-1 hover:bg-gray-200 rounded text-sm text-gray-700" aria-label="Font size">
                 <span>11</span>
                 <ChevronDown className="w-3 h-3" />
               </button>
               <div className="w-px h-5 bg-gray-300 mx-1" />
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Bold">
                 <Bold className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Italic">
                 <Italic className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Underline">
                 <Underline className="w-4 h-4 text-gray-600" />
               </button>
               <div className="w-px h-5 bg-gray-300 mx-1" />
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Align text left">
                 <AlignLeft className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Align text center">
                 <AlignCenter className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Align text right">
                 <AlignRight className="w-4 h-4 text-gray-600" />
               </button>
               <div className="w-px h-5 bg-gray-300 mx-1" />
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Toggle bulleted list">
                 <List className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Toggle numbered list">
                 <ListOrdered className="w-4 h-4 text-gray-600" />
               </button>
               <div className="w-px h-5 bg-gray-300 mx-1" />
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Insert link">
                 <Link className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="Insert image">
                 <Image className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="p-1.5 hover:bg-gray-200 rounded">
+              <button className="p-1.5 hover:bg-gray-200 rounded" aria-label="More formatting options">
                 <MoreHorizontal className="w-4 h-4 text-gray-600" />
               </button>
 

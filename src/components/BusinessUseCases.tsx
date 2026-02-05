@@ -30,7 +30,6 @@ const impacts = [
   },
 ];
 
-
 export function BusinessUseCases() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });

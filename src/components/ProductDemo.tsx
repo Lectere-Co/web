@@ -7,13 +7,13 @@ import { Play, Check, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRigh
 export function ProductDemo() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [cursorPos, setCursorPos] = useState({ x: 95, y: 8 });
+  const [cursorPos, setCursorPos] = useState({ x: 120, y: 65 });
   const [step, setStep] = useState(0);
 
   const demoSteps = [
-    { target: { x: 95, y: 8 }, text: 'Click "Insert" to add content to your document' },
-    { target: { x: 250, y: 55 }, text: 'Select the text style from the dropdown' },
-    { target: { x: 350, y: 55 }, text: 'Use bold to emphasize important text' },
+    { target: { x: 120, y: 65 }, text: 'Click "Insert" to add content to your document' },
+    { target: { x: 95, y: 105 }, text: 'Select the text style from the dropdown' },
+    { target: { x: 300, y: 105 }, text: 'Use bold to emphasize important text' },
   ];
 
   const handleDemoClick = () => {
@@ -42,9 +42,19 @@ export function ProductDemo() {
         >
           {/* Demo Frame - Google Docs Style */}
           <div
-            className="bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-lg"
+            className="bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-lg relative"
             onClick={handleDemoClick}
           >
+            {/* Cursor - positioned at frame level to move across all sections */}
+            <motion.div
+              className="absolute z-30 pointer-events-none"
+              animate={{ x: cursorPos.x, y: cursorPos.y }}
+              transition={{ type: 'spring', stiffness: 150, damping: 15 }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a1a1a" className="drop-shadow-lg">
+                <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
+              </svg>
+            </motion.div>
             {/* Window Header (macOS style) */}
             <div className="flex items-center justify-between px-4 py-3 bg-[#f9fbfd] border-b border-gray-200">
               <div className="flex items-center gap-2">
@@ -83,12 +93,12 @@ export function ProductDemo() {
               {/* Highlight Target for menu */}
               {step === 0 && (
                 <motion.div
-                  className="absolute left-[95px] top-1/2 -translate-y-1/2"
+                  className="absolute left-[118px] top-1/2 -translate-y-1/2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
                   <motion.div
-                    className="w-14 h-8 rounded border-2 border-primary"
+                    className="w-14 h-7 rounded border-2 border-primary"
                     animate={{ scale: [1, 1.05, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   />
@@ -161,12 +171,12 @@ export function ProductDemo() {
               {/* Highlight Target for toolbar */}
               {step === 1 && (
                 <motion.div
-                  className="absolute left-[250px] top-1/2 -translate-y-1/2"
+                  className="absolute left-[68px] top-1/2 -translate-y-1/2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
                   <motion.div
-                    className="w-24 h-8 rounded border-2 border-primary"
+                    className="w-28 h-8 rounded border-2 border-primary"
                     animate={{ scale: [1, 1.05, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   />
@@ -174,7 +184,7 @@ export function ProductDemo() {
               )}
               {step === 2 && (
                 <motion.div
-                  className="absolute left-[350px] top-1/2 -translate-y-1/2"
+                  className="absolute left-[278px] top-1/2 -translate-y-1/2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
@@ -208,17 +218,6 @@ export function ProductDemo() {
                   <span className="animate-pulse">|</span>
                 </p>
               </div>
-
-              {/* Cursor */}
-              <motion.div
-                className="absolute z-20 pointer-events-none"
-                animate={{ x: cursorPos.x, y: cursorPos.y }}
-                transition={{ type: 'spring', stiffness: 150, damping: 15 }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a1a1a" className="drop-shadow-lg">
-                  <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
-                </svg>
-              </motion.div>
 
               {/* Lectere Tooltip */}
               <motion.div

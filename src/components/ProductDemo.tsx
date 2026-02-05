@@ -7,13 +7,13 @@ import { Play, Check, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRigh
 export function ProductDemo() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [cursorPos, setCursorPos] = useState({ x: 155, y: 65 });
+  const [cursorPos, setCursorPos] = useState({ x: 190, y: 65 });
   const [step, setStep] = useState(0);
 
   const demoSteps = [
-    { target: { x: 155, y: 65 }, text: 'Click "Insert" to add content to your document' },
-    { target: { x: 95, y: 105 }, text: 'Select the text style from the dropdown' },
-    { target: { x: 330, y: 105 }, text: 'Use bold to emphasize important text' },
+    { target: { x: 190, y: 65 }, text: 'Click "Insert" to add content to your document' },
+    { target: { x: 130, y: 105 }, text: 'Select the text style from the dropdown' },
+    { target: { x: 365, y: 105 }, text: 'Use bold to emphasize important text' },
   ];
 
   const handleDemoClick = () => {
@@ -93,7 +93,7 @@ export function ProductDemo() {
               {/* Highlight Target for menu */}
               {step === 0 && (
                 <motion.div
-                  className="absolute left-[152px] top-1/2 -translate-y-1/2"
+                  className="absolute left-[187px] top-1/2 -translate-y-1/2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
@@ -171,7 +171,7 @@ export function ProductDemo() {
               {/* Highlight Target for toolbar */}
               {step === 1 && (
                 <motion.div
-                  className="absolute left-[68px] top-1/2 -translate-y-1/2"
+                  className="absolute left-[103px] top-1/2 -translate-y-1/2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
@@ -184,7 +184,7 @@ export function ProductDemo() {
               )}
               {step === 2 && (
                 <motion.div
-                  className="absolute left-[325px] top-1/2 -translate-y-1/2"
+                  className="absolute left-[360px] top-1/2 -translate-y-1/2"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >

@@ -1,7 +1,7 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Briefcase, Heart, GraduationCap, RefreshCw, Clock, Zap, Shield } from 'lucide-react';
+import { Briefcase, Heart, GraduationCap, RefreshCw } from 'lucide-react';
 
 const impacts = [
   {
@@ -30,11 +30,6 @@ const impacts = [
   },
 ];
 
-const features = [
-  { value: '< 3s', label: 'AI response time', icon: Clock },
-  { value: '< 200ms', label: 'Hotkey activation', icon: Zap },
-  { value: '< 150MB', label: 'Memory footprint', icon: Shield },
-];
 
 export function BusinessUseCases() {
   const ref = useRef(null);
@@ -86,31 +81,6 @@ export function BusinessUseCases() {
             </motion.div>
           ))}
         </div>
-
-        {/* Performance Stats */}
-        <motion.div
-          className="bg-white rounded-2xl p-8 max-w-3xl mx-auto border border-border shadow-sm"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <h3 className="text-center text-sm font-medium text-muted-foreground mb-6 uppercase tracking-wider">
-            Performance Targets
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:divide-x divide-border">
-            {features.map((stat) => (
-              <div key={stat.label} className="text-center px-4 flex flex-col items-center">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <stat.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div className="text-2xl md:text-3xl font-display font-medium text-gradient mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

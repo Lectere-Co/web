@@ -40,6 +40,9 @@ const values = [
   },
 ];
 
+// Set to true to show the Meet the Team section
+const SHOW_TEAM_SECTION = false;
+
 const teamMembers = [
   {
     name: "Eric Xu",
@@ -208,55 +211,57 @@ export default function AboutPageContent() {
       </section>
 
       {/* Meet the Team */}
-      <section className="py-24 bg-secondary/50">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
-              <Users className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-muted-foreground">
-                Leadership
-              </span>
-            </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
-              Meet the team
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Students at Bellaire High School in Houston, Texas, united by
-              a shared vision of making technology accessible to everyone.
-            </p>
-          </motion.div>
+      {SHOW_TEAM_SECTION && (
+        <section className="py-24 bg-secondary/50">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
+                <Users className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium text-muted-foreground">
+                  Leadership
+                </span>
+              </div>
+              <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
+                Meet the team
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Students at Bellaire High School in Houston, Texas, united by
+                a shared vision of making technology accessible to everyone.
+              </p>
+            </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative p-8 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300 text-center"
-              >
-                <div
-                  className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group relative p-8 rounded-2xl bg-white border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300 text-center"
                 >
-                  <span className="text-2xl font-bold text-white">
-                    {member.name.split(" ").map(n => n[0]).join("")}
-                  </span>
-                </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-muted-foreground text-sm">{member.role}</p>
-              </motion.div>
-            ))}
+                  <div
+                    className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br ${member.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <span className="text-2xl font-bold text-white">
+                      {member.name.split(" ").map(n => n[0]).join("")}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                    {member.name}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">{member.role}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Our Values */}
       <section className="py-24">

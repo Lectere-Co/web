@@ -3,6 +3,7 @@ import { isValidEmail } from '../../src/lib/validation';
 interface Env {
   KIT_API_KEY: string;
   KIT_FORM_ID: string;
+  DOUBLE_OPTIN?: string;
 }
 
 const KIT_API_BASE = 'https://api.kit.com/v4';
@@ -74,34 +75,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return jsonResponse({ message }, formRes.status);
     }
 
-    // Check subscriber state to determine if double opt-in confirmation is needed.
-    // If the form has auto-confirm enabled, the subscriber will be "active" immediately.
-    // If double opt-in is enabled, the subscriber will be "inactive" until they confirm.
-    let formData: { subscriber?: { state?: string } } | null;
-    try {
-      formData = await formRes.json<{ subscriber?: { state?: string } }>();
-    } catch {
-      return jsonResponse(
-        {
-          message:
-            'Subscription status could not be verified due to an unexpected response. Please try again.',
-        },
-        502,
-      );
-    }
-
-    if (!formData || !formData.subscriber) {
-      return jsonResponse(
-        {
-          message:
-            'Subscription status is currently unavailable. Please try again.',
-        },
-        502,
-      );
-    }
-
-    const subscriberState = formData.subscriber.state;
-    const confirmed = subscriberState === 'active';
+    // Use the DOUBLE_OPTIN env var to determine whether the user needs to confirm.
+    // Set DOUBLE_OPTIN=true in Cloudflare Pages env vars when your Kit form has
+    // double opt-in enabled. When unset or any other value, assumes auto-confirm.
+    const doubleOptIn = context.env.DOUBLE_OPTIN?.toLowerCase() === 'true';
+    const confirmed = !doubleOptIn;
 
     return jsonResponse({ success: true, confirmed }, 200);
   } catch {

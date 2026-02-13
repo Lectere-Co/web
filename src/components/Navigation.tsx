@@ -33,10 +33,12 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("popstate", updatePathname);
+    document.addEventListener("astro:after-swap", updatePathname);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("popstate", updatePathname);
+      document.removeEventListener("astro:after-swap", updatePathname);
     };
   }, []);
 
@@ -52,7 +54,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
             : "bg-transparent"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 py-4">
+        <nav aria-label="Main navigation" className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href="/" className="group flex items-center gap-2">
@@ -76,7 +78,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
                     <span
                       className={
                         isActive
-                          ? "text-foreground"
+                          ? "text-primary font-semibold"
                           : "text-muted-foreground hover:text-foreground"
                       }
                     >
@@ -85,7 +87,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
                     {isActive && (
                       <motion.div
                         layoutId="nav-indicator"
-                        className="absolute inset-0 bg-secondary rounded-lg -z-10"
+                        className="absolute bottom-0 left-2 right-2 h-0.5 bg-primary rounded-full"
                         transition={{
                           type: "spring",
                           stiffness: 500,
@@ -130,6 +132,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 top-[72px] z-40 bg-white/95 backdrop-blur-xl md:hidden"
+            onPanEnd={(_e, info) => { if (info.offset.y < -50) setIsMobileMenuOpen(false); }}
           >
             <nav className="flex flex-col p-6 gap-2">
               {navLinks.map((link, index) => {
@@ -145,7 +148,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
                       href={link.path}
                       className={`block px-4 py-3 text-lg font-medium rounded-lg transition-all ${
                         isActive
-                          ? "text-foreground bg-secondary"
+                          ? "text-primary font-semibold bg-primary/5 border-l-2 border-primary"
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                       }`}
                     >

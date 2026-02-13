@@ -1,0 +1,45 @@
+---
+---
+
+<section class="py-24 bg-secondary/50">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="reveal reveal-scale relative p-12 rounded-3xl bg-white border border-border text-center overflow-hidden shadow-sm">
+      <div class="relative">
+        <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg>
+        </div>
+
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+          Join us on this mission
+        </h2>
+
+        <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+          Whether you're someone affected by digital displacement, a
+          potential partner, or just want to support our mission—we'd love
+          to connect.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button id="about-cta-waitlist" class="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#eb336e] to-[#9b274c] px-6 py-3 text-base font-medium text-white shadow-lg hover:opacity-90 transition-opacity">
+            Join the Waitlist
+          </button>
+          <a href="/product" class="inline-flex items-center justify-center rounded-lg border border-border bg-secondary px-6 py-3 text-base font-medium text-foreground hover:bg-secondary/80 transition-colors">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('about-cta-waitlist')?.addEventListener('click', () => {
+    const el = document.getElementById('newsletter-signup');
+    if (el) {
+      const header = document.querySelector('header');
+      const offset = header instanceof HTMLElement ? header.offsetHeight : 0;
+      const pos = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: pos, behavior: 'smooth' });
+    }
+  });
+</script>

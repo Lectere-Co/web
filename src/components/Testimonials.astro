@@ -1,0 +1,103 @@
+---
+// Testimonials.astro — Static component with CSS reveal animations + rotated cards
+---
+
+<section class="section-padding relative">
+  <div class="container px-6">
+    <div class="text-center mb-6 reveal reveal-up">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-display mb-4">
+        Voices we're <span class="text-gradient">building for</span>.
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Real struggles from real people—the voices that drive our mission
+        to fight digital displacement.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+      <!-- Voice 1: Older Adult (odd → rotate -1deg) -->
+      <div class="reveal reveal-scale" data-delay="1" style="rotate: -1deg;">
+        <div class="testimonial-card h-full rounded-xl border border-border hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md bg-white hover:rotate-0 hover:scale-[1.02]">
+          <div class="p-8 relative">
+            <div class="absolute -top-3 -left-1 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+              </svg>
+            </div>
+            <p class="text-lg leading-relaxed mb-6 text-foreground/80 italic">
+              "Every time my bank updates their app, I have to call my daughter. I just want to pay my bills without feeling helpless."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
+                <span class="text-white text-lg">OA</span>
+              </div>
+              <div>
+                <div class="font-semibold">Older Adult</div>
+                <div class="text-sm text-muted-foreground">Struggling with digital banking</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Voice 2: Small Business Owner (even → rotate 1deg) -->
+      <div class="reveal reveal-scale" data-delay="2" style="rotate: 1deg;">
+        <div class="testimonial-card h-full rounded-xl border border-border hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md bg-white hover:rotate-0 hover:scale-[1.02]">
+          <div class="p-8 relative">
+            <div class="absolute -top-3 -left-1 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+              </svg>
+            </div>
+            <p class="text-lg leading-relaxed mb-6 text-foreground/80 italic">
+              "I spent three hours trying to figure out how to export a report from Quickbooks. Three hours I could have spent with customers."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#9b274c] to-[#eb336e] flex items-center justify-center">
+                <span class="text-white text-lg">SBO</span>
+              </div>
+              <div>
+                <div class="font-semibold">Small Business Owner</div>
+                <div class="text-sm text-muted-foreground">Lost productivity</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Voice 3: Career Changer (odd → rotate -1deg) -->
+      <div class="reveal reveal-scale" data-delay="3" style="rotate: -1deg;">
+        <div class="testimonial-card h-full rounded-xl border border-border hover:border-primary/30 transition-all duration-300 shadow-sm hover:shadow-md bg-white hover:rotate-0 hover:scale-[1.02]">
+          <div class="p-8 relative">
+            <div class="absolute -top-3 -left-1 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+              </svg>
+            </div>
+            <p class="text-lg leading-relaxed mb-6 text-foreground/80 italic">
+              "Everyone in my new job already knows how to use Salesforce. I feel like I'm always two steps behind."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#c43278] to-[#832558] flex items-center justify-center">
+                <span class="text-white text-lg">CC</span>
+              </div>
+              <div>
+                <div class="font-semibold">Career Changer</div>
+                <div class="text-sm text-muted-foreground">Catching up in a new field</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-card {
+    transition: transform 0.3s ease, rotate 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+const missionCards = [
+  {
+    name: "The Problem",
+    role: "Digital Displacement",
+    description:
+      "When essential services and business operations move online, millions are left struggling without accessible learning support. We call this Digital Displacement—the mandatory software barrier that excludes people from participating in modern society.",
+  },
+  {
+    name: "The Mission",
+    role: "Why We Exist",
+    description:
+      "We're building Lectere to ensure no one gets left behind by digital transformation. Our AI-powered learning assistant provides real-time, contextual guidance through visual overlays—making any software accessible to everyone.",
+  },
+  {
+    name: "The Vision",
+    role: "Where We're Going",
+    description:
+      "A future where learning any software takes minutes, not months. Where age and background don't determine digital capability. Where technology truly serves everyone equally.",
+  },
+];
+---
+
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="reveal reveal-up text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        <span class="text-sm font-medium text-muted-foreground">Our Purpose</span>
+      </div>
+      <h2 class="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
+        The mandatory software barrier
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+        As essential services move online, millions of people are being
+        excluded—not because they lack access, but because they struggle
+        to use complex software without support.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 mb-16 max-w-5xl mx-auto">
+      {missionCards.map((item, index) => (
+        <div class="reveal reveal-up p-8 rounded-2xl bg-white border border-border shadow-sm" data-delay={String(index + 1)}>
+          <div class="text-sm font-medium text-primary mb-2">
+            {item.role}
+          </div>
+          <h3 class="font-display text-2xl font-bold text-foreground mb-4">
+            {item.name}
+          </h3>
+          <p class="text-muted-foreground leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="reveal reveal-scale relative p-8 md:p-12 rounded-3xl bg-primary/5 border border-primary/10" data-delay="4">
+      <div class="max-w-3xl mx-auto text-center">
+        <blockquote class="font-display text-2xl md:text-3xl text-foreground mb-6 leading-relaxed">
+          "We don't believe in a world divided between the tech-savvy and
+          the tech-frustrated. Everyone deserves to harness the power of
+          software."
+        </blockquote>
+        <p class="text-muted-foreground">&mdash; The Lectere Team</p>
+      </div>
+    </div>
+  </div>
+</section>

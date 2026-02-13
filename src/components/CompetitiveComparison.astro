@@ -1,0 +1,105 @@
+---
+/**
+ * CompetitiveComparison — Feature comparison table.
+ * Rows use .reveal for scroll-triggered entrance.
+ * Checkmarks animate with check-pop keyframe (defined in globals.css).
+ */
+
+const features = [
+  "Real-time guidance",
+  "Context-aware",
+  "Auto-updates",
+  "Works everywhere",
+  "AI-powered",
+];
+
+const competitors = [
+  { name: "Docs" },
+  { name: "Tours" },
+  { name: "Videos" },
+];
+---
+
+<section class="section-padding relative">
+  <div class="container px-6">
+    <!-- Heading -->
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16 reveal reveal-up">
+      Why Lectere <span class="italic text-gradient">wins</span>.
+    </h2>
+
+    <!-- Table -->
+    <div class="max-w-4xl mx-auto reveal reveal-up" data-delay="1">
+      <div class="bg-white rounded-2xl overflow-hidden border border-border shadow-sm">
+        <!-- Header -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 p-4 md:p-6 bg-secondary border-b border-border text-sm md:text-base font-medium">
+          <div class="col-span-1">Feature</div>
+          {competitors.map((c) => (
+            <div class="hidden md:block text-center text-muted-foreground">{c.name}</div>
+          ))}
+          <div class="text-right md:text-center text-gradient font-semibold">Lectere</div>
+        </div>
+
+        <!-- Feature Rows -->
+        {features.map((feature, i) => (
+          <div
+            class="comparison-row grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 p-4 md:p-6 border-b border-border last:border-0 items-center reveal reveal-left"
+            data-delay={i + 2}
+          >
+            <div class="col-span-1 text-sm md:text-base">{feature}</div>
+
+            {/* Competitor X marks */}
+            {competitors.map((c) => (
+              <div class="hidden md:flex justify-center">
+                <div class="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                  </svg>
+                </div>
+              </div>
+            ))}
+
+            {/* Lectere checkmark */}
+            <div class="flex justify-end md:justify-center">
+              <div
+                class="check-icon w-8 h-8 rounded-full bg-[#eb336e]/10 flex items-center justify-center"
+                style={`animation-delay: ${0.3 + i * 0.12}s`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#eb336e]" aria-hidden="true">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Subtext -->
+    <p class="text-center text-muted-foreground mt-8 max-w-xl mx-auto reveal reveal-up" data-delay="7">
+      The only solution that delivers real-time, intelligent guidance.
+    </p>
+  </div>
+</section>
+
+<style>
+  /* Check icons start hidden (scale 0) and pop when row becomes visible */
+  .check-icon {
+    transform: scale(0);
+  }
+
+  .comparison-row.visible .check-icon {
+    animation: check-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* animation-delay is set via inline style per row */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .check-icon {
+      transform: scale(1);
+    }
+    .comparison-row.visible .check-icon {
+      animation: none;
+      transform: scale(1);
+    }
+  }
+</style>

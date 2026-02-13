@@ -1,0 +1,124 @@
+---
+/* ProblemSection — Stats with animated counters + frustration flow timeline */
+---
+
+<section class="section-padding relative overflow-hidden">
+  <!-- Background Accent -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+
+  <div class="container px-6">
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16 reveal reveal-left">
+      The world is going digital.
+      <span class="text-gradient">Not everyone can keep up.</span>
+    </h2>
+
+    <!-- Stats — Alternating Layout -->
+    <div class="max-w-4xl mx-auto mb-16 flex flex-col gap-8">
+      <!-- Stat 1: icon left, text right -->
+      <div class="reveal reveal-left flex flex-col md:flex-row items-center gap-6 md:gap-8 rounded-xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-1" data-delay="1">
+        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center shrink-0">
+          <!-- TrendingDown icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+        </div>
+        <div class="text-center md:text-left">
+          <div class="text-4xl md:text-5xl font-display font-medium text-gradient mb-2 counter" data-counter="76" data-counter-suffix="%">0%</div>
+          <div class="text-muted-foreground text-lg">of users give up when stuck in software</div>
+        </div>
+      </div>
+
+      <!-- Stat 2: text left, icon right (alternated) -->
+      <div class="reveal reveal-right flex flex-col md:flex-row-reverse items-center gap-6 md:gap-8 rounded-xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-1" data-delay="2">
+        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#9b274c] to-[#eb336e] flex items-center justify-center shrink-0">
+          <!-- DollarSign icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="text-center md:text-right">
+          <div class="text-4xl md:text-5xl font-display font-medium text-gradient mb-2 counter" data-counter="4.6" data-counter-prefix="$" data-counter-suffix="B" data-counter-decimals="1">$0B</div>
+          <div class="text-muted-foreground text-lg">lost annually to poor digital onboarding</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frustration Flow — Horizontal Timeline -->
+    <div class="frustration-flow flex flex-wrap items-center justify-center gap-3 md:gap-0">
+      <div class="reveal reveal-scale flex items-center" data-delay="1">
+        <span class="px-4 py-2 rounded-full text-sm md:text-base font-medium bg-[#eb336e]/10 text-[#9b274c] border border-[#eb336e]/20">
+          Wrong click
+        </span>
+      </div>
+      <span class="frustration-arrow hidden md:block reveal reveal-scale" data-delay="1" aria-hidden="true"></span>
+
+      <div class="reveal reveal-scale flex items-center" data-delay="2">
+        <span class="px-4 py-2 rounded-full text-sm md:text-base font-medium bg-[#eb336e]/10 text-[#9b274c] border border-[#eb336e]/20">
+          Search help
+        </span>
+      </div>
+      <span class="frustration-arrow hidden md:block reveal reveal-scale" data-delay="2" aria-hidden="true"></span>
+
+      <div class="reveal reveal-scale flex items-center" data-delay="3">
+        <span class="px-4 py-2 rounded-full text-sm md:text-base font-medium bg-[#eb336e]/10 text-[#9b274c] border border-[#eb336e]/20">
+          Outdated video
+        </span>
+      </div>
+      <span class="frustration-arrow hidden md:block reveal reveal-scale" data-delay="3" aria-hidden="true"></span>
+
+      <div class="reveal reveal-scale flex items-center" data-delay="4">
+        <span class="px-4 py-2 rounded-full text-sm md:text-base font-medium bg-[#eb336e]/10 text-[#9b274c] border border-[#eb336e]/20">
+          Still stuck
+        </span>
+      </div>
+      <span class="frustration-arrow hidden md:block reveal reveal-scale" data-delay="4" aria-hidden="true"></span>
+
+      <div class="reveal reveal-scale flex items-center" data-delay="5">
+        <span class="px-4 py-2 rounded-full text-sm md:text-base font-medium bg-primary/20 text-primary border border-primary/30">
+          Give up
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Frustration flow arrow connector */
+  .frustration-arrow {
+    position: relative;
+    width: 2.5rem;
+    height: 2px;
+    background: linear-gradient(to right, hsl(341 82% 56% / 0.3), hsl(341 82% 56% / 0.15));
+    margin: 0 0.25rem;
+  }
+
+  .frustration-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid hsl(341 82% 56% / 0.3);
+  }
+
+  /* Animate arrows with a shimmer */
+  .frustration-arrow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, hsl(341 82% 56% / 0.4), transparent);
+    animation: arrow-shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes arrow-shimmer {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .frustration-arrow::before {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>

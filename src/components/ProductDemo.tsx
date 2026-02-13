@@ -1,14 +1,15 @@
-import { motion, useInView } from 'motion/react';
+import { motion, useInView, useReducedMotion } from 'motion/react';
 import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Play, Check, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, List, ListOrdered, Link, Image, Undo, Redo, Type, ChevronDown, Share, MessageSquare, MoreHorizontal } from 'lucide-react';
+import { Check, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, List, ListOrdered, Link, Image, Undo, Redo, Type, ChevronDown, Share, MessageSquare, MoreHorizontal } from 'lucide-react';
 
 export function ProductDemo() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [cursorPos, setCursorPos] = useState({ x: 190, y: 65 });
   const [step, setStep] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   const demoSteps = [
     { target: { x: 190, y: 65 }, text: 'Click "Insert" to add content to your document' },
@@ -29,20 +30,44 @@ export function ProductDemo() {
           className="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           See it <span className="italic text-gradient">in action</span>.
         </motion.h2>
 
         <motion.div
-          className="max-w-5xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
+          className="max-w-5xl mx-auto relative"
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8, delay: shouldReduceMotion ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Demo Frame - Google Docs Style */}
+          {/* Decorative dot grid */}
+          <div className="absolute -inset-8 dots-pattern rounded-3xl -z-10 hidden md:block" />
+
+          {/* Mobile step cards (shown below md) */}
+          <div className="md:hidden space-y-3 mb-8">
+            {demoSteps.map((s, i) => (
+              <div
+                key={i}
+                className={`p-4 rounded-xl border transition-all ${i === step ? 'border-primary/30 bg-primary/5 shadow-sm' : 'border-border bg-white'}`}
+                onClick={() => { setStep(i); setCursorPos(s.target); }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setStep(i); setCursorPos(s.target); } }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${i === step ? 'bg-gradient-to-br from-[#eb336e] to-[#9b274c] text-white' : 'bg-secondary text-muted-foreground'}`}>
+                    {i + 1}
+                  </div>
+                  <p className={`text-sm ${i === step ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>{s.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Demo Frame - Google Docs Style (hidden on mobile, shown on md+) */}
           <div
-            className="bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-lg relative"
+            className="hidden md:block bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-lg relative"
             onClick={handleDemoClick}
             role="button"
             tabIndex={0}
@@ -277,11 +302,22 @@ export function ProductDemo() {
           className="text-center mt-10"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.4 }}
         >
-          <Button variant="gradient" size="lg">
-            <Play className="w-4 h-4 fill-current" />
-            Try Full Demo
+          <Button
+            variant="gradient"
+            size="lg"
+            onClick={() => {
+              const el = document.getElementById('newsletter-signup');
+              if (el) {
+                const header = document.querySelector('header');
+                const offset = header instanceof HTMLElement ? header.offsetHeight : 0;
+                const pos = el.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top: pos, behavior: 'smooth' });
+              }
+            }}
+          >
+            Join the Waitlist
           </Button>
         </motion.div>
       </div>

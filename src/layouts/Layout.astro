@@ -1,5 +1,5 @@
 ---
-import ScrollProgress from '../components/ScrollProgress';
+import { ViewTransitions, slide } from 'astro:transitions';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
@@ -27,18 +27,166 @@ const {
     <meta name="theme-color" content="#9B274C" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <ViewTransitions />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" /></noscript>
   </head>
   <body>
+    <div class="scroll-progress"></div>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:text-sm focus:font-medium">Skip to content</a>
     <div class="w-full min-h-screen bg-background relative">
-      <ScrollProgress client:load />
-      <Navigation client:load currentPath={Astro.url.pathname} />
-      <main class="pt-[72px]">
+      <Navigation client:load currentPath={Astro.url.pathname} aria-label="Main navigation" transition:persist />
+      <main id="main-content" class="pt-[72px]" transition:animate={slide({ duration: '0.6s' })}>
         <slot />
       </main>
       {showNewsletter && <Newsletter />}
       <Footer />
     </div>
+    <!-- Back to top button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-gradient-to-br from-[#eb336e] to-[#9b274c] text-white shadow-lg opacity-0 translate-y-4 pointer-events-none transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+      aria-label="Scroll to top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" /></svg>
+    </button>
+
+    <script>
+      // Set slide direction based on nav order so transitions feel spatial
+      const NAV_ORDER = ['/', '/product', '/solutions', '/pricing', '/about'];
+
+      function navIndex(pathname: string) {
+        return NAV_ORDER.indexOf(pathname.replace(/\/+$/, '') || '/');
+      }
+
+      document.addEventListener('astro:before-preparation', (e: any) => {
+        // Don't override browser back/forward — only link clicks
+        if (e.navigationType === 'traverse') return;
+
+        const from = navIndex(e.from.pathname);
+        const to = navIndex(e.to.pathname);
+
+        if (from !== -1 && to !== -1) {
+          e.direction = to > from ? 'forward' : 'back';
+        }
+
+        // Smooth scroll to top before the slide transition starts
+        if (window.scrollY > 0) {
+          const originalLoader = e.loader;
+          e.loader = () => new Promise<void>((resolve) => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            let done = false;
+            const finish = () => { if (!done) { done = true; originalLoader().then(resolve); } };
+            const check = () => { window.scrollY <= 1 ? finish() : requestAnimationFrame(check); };
+            requestAnimationFrame(check);
+            setTimeout(finish, 600); // safety cap
+          });
+        }
+      });
+    </script>
+
+    <script>
+      function initRevealObserver() {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        document.querySelectorAll('.reveal:not(.visible)').forEach((el) => revealObserver.observe(el));
+      }
+
+      function initCounterAnimation() {
+        const counterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target as HTMLElement;
+                const target = parseFloat(el.dataset.counter || '0');
+                const suffix = el.dataset.counterSuffix || '';
+                const prefix = el.dataset.counterPrefix || '';
+                const decimals = parseInt(el.dataset.counterDecimals || '0', 10);
+                const duration = 1500;
+                const start = performance.now();
+
+                function update(now: number) {
+                  const elapsed = now - start;
+                  const progress = Math.min(elapsed / duration, 1);
+                  const eased = 1 - Math.pow(1 - progress, 3);
+                  const current = eased * target;
+                  el.textContent = prefix + current.toFixed(decimals) + suffix;
+                  if (progress < 1) requestAnimationFrame(update);
+                }
+
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                  el.textContent = prefix + target.toFixed(decimals) + suffix;
+                } else {
+                  requestAnimationFrame(update);
+                }
+                counterObserver.unobserve(el);
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+        document.querySelectorAll('[data-counter]').forEach((el) => counterObserver.observe(el));
+      }
+
+      function initScrollProgress() {
+        const bar = document.querySelector('.scroll-progress') as HTMLElement | null;
+        if (!bar) return;
+
+        if (CSS.supports('animation-timeline: scroll()')) return;
+
+        function updateProgress() {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+          bar!.style.transform = `scaleX(${progress})`;
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+      }
+
+      function initBackToTop() {
+        const backToTop = document.getElementById('back-to-top');
+        if (backToTop) {
+          window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+              backToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+              backToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            } else {
+              backToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+              backToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            }
+          }, { passive: true });
+          backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+      }
+
+      // Initialize on first load
+      initRevealObserver();
+      initCounterAnimation();
+      initScrollProgress();
+      initBackToTop();
+
+      // Re-initialize after View Transitions swap
+      document.addEventListener('astro:after-swap', () => {
+        initRevealObserver();
+        initCounterAnimation();
+        initScrollProgress();
+        initBackToTop();
+      });
+    </script>
   </body>
 </html>

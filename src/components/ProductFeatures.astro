@@ -1,0 +1,170 @@
+---
+/**
+ * ProductFeatures — Bento grid of 6 feature cards.
+ * Two "featured" cards span 2 columns; four standard cards span 1.
+ * Scroll-reveal via .reveal .reveal-scale + data-delay stagger.
+ */
+
+const features = [
+  {
+    title: "Visual Overlays",
+    description:
+      "Transparent overlays appear right on your screen, highlighting exactly where to click and what to type—step by step.",
+    gradient: "from-[#eb336e] to-[#9b274c]",
+    featured: true,
+    icon: "mouse-pointer",
+  },
+  {
+    title: "AI-Powered Guidance",
+    description:
+      "Just tell Lectere what you want to accomplish. It generates personalized, step-by-step instructions tailored to your task.",
+    gradient: "from-[#c43278] to-[#832558]",
+    featured: false,
+    icon: "bot",
+  },
+  {
+    title: "Lightning Fast",
+    description:
+      "Built with native macOS technologies for instant response times. AI guidance in under 3 seconds, hotkey activation in under 200ms.",
+    gradient: "from-[#e8556b] to-[#c43278]",
+    featured: false,
+    icon: "zap",
+  },
+  {
+    title: "Screen Understanding",
+    description:
+      "Powered by AI vision, Lectere sees what you see and understands the context of any application you're using.",
+    gradient: "from-[#9b274c] to-[#eb336e]",
+    featured: true,
+    icon: "eye",
+  },
+  {
+    title: "Lightweight & Efficient",
+    description:
+      "Uses less than 150MB of memory. Runs quietly in the background without impacting the applications you're learning.",
+    gradient: "from-[#832558] to-[#6e1f3d]",
+    featured: false,
+    icon: "cpu",
+  },
+  {
+    title: "macOS Native",
+    description:
+      "Built specifically for Mac with native Swift/SwiftUI interface and deep system integration for the best possible experience.",
+    gradient: "from-[#eb336e] to-[#c43278]",
+    featured: false,
+    icon: "monitor",
+  },
+];
+---
+
+<section class="py-24 bg-secondary/50">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Heading -->
+    <div class="text-center mb-16 reveal reveal-up">
+      <h2 class="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
+        Built for performance
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Native macOS app with Rust core and Swift interface—designed to run
+        continuously without impacting your workflow
+      </p>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((feature, index) => {
+        const colSpan = feature.featured ? "lg:col-span-2" : "";
+        /* Row-stagger: 0-2 → row 0, 3-5 → row 1, etc. */
+        const delay = index + 1;
+
+        return (
+          <div
+            class:list={[
+              "feature-card group relative rounded-2xl bg-white border border-border p-8 reveal reveal-scale",
+              colSpan,
+            ]}
+            data-delay={delay}
+          >
+            {/* Icon */}
+            <div
+              class={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110`}
+            >
+              {feature.icon === "mouse-pointer" && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m4 4 7.07 17 2.51-7.39L21 11.07z" />
+                </svg>
+              )}
+              {feature.icon === "eye" && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              )}
+              {feature.icon === "bot" && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 8V4H8" />
+                  <rect width="16" height="12" x="4" y="8" rx="2" />
+                  <path d="M2 14h2" />
+                  <path d="M20 14h2" />
+                  <path d="M15 13v2" />
+                  <path d="M9 13v2" />
+                </svg>
+              )}
+              {feature.icon === "zap" && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+                </svg>
+              )}
+              {feature.icon === "cpu" && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="16" height="16" x="4" y="4" rx="2" />
+                  <rect width="6" height="6" x="9" y="9" rx="1" />
+                  <path d="M15 2v2" /><path d="M15 20v2" />
+                  <path d="M2 15h2" /><path d="M2 9h2" />
+                  <path d="M20 15h2" /><path d="M20 9h2" />
+                  <path d="M9 2v2" /><path d="M9 20v2" />
+                </svg>
+              )}
+              {feature.icon === "monitor" && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="3" rx="2" />
+                  <line x1="8" x2="16" y1="21" y2="21" />
+                  <line x1="12" x2="12" y1="17" y2="21" />
+                </svg>
+              )}
+            </div>
+
+            <h3 class="font-display text-xl font-semibold text-foreground mb-3">
+              {feature.title}
+            </h3>
+            <p class="text-muted-foreground leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-card {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
+  }
+  .feature-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px -10px hsl(341 82% 56% / 0.15);
+    border-color: hsl(341 82% 56% / 0.3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-card {
+      transition: none;
+    }
+    .feature-card:hover {
+      transform: none;
+    }
+  }
+</style>

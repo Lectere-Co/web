@@ -1,8 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AboutPageContent from '../components/AboutPageContent';
+import AboutHero from '../components/AboutHero.astro';
+import JASocialBanner from '../components/JASocialBanner.astro';
+import MissionSection from '../components/MissionSection.astro';
+import ValuesSection from '../components/ValuesSection.astro';
+import AboutCTA from '../components/AboutCTA.astro';
 ---
 
 <Layout title="About - Lectere">
-  <AboutPageContent client:load />
+  <AboutHero />
+  <JASocialBanner />
+  <MissionSection />
+  <ValuesSection />
+  <AboutCTA />
 </Layout>

@@ -1,0 +1,119 @@
+---
+/* HowItWorks — 3-step process with connector lines and pulse demo */
+---
+
+<section class="section-padding relative">
+  <div class="container px-6">
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-display text-center mb-16 reveal reveal-up">
+      How it <span class="italic text-gradient">works</span>.
+    </h2>
+
+    <!-- Process Steps -->
+    <div class="how-steps grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto mb-16">
+      <!-- Step 01 -->
+      <div class="how-step-card relative reveal reveal-up" data-delay="1">
+        <div class="h-full rounded-xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md group">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-5xl font-display text-primary/20 font-medium">01</span>
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <!-- Scan icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Detects live context</h3>
+          <p class="text-muted-foreground">AI understands what you're trying to do</p>
+        </div>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="how-step-card relative reveal reveal-up" data-delay="2">
+        <div class="h-full rounded-xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md group">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-5xl font-display text-primary/20 font-medium">02</span>
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <!-- MousePointerClick icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8"/><path d="m6 12-1.9 2"/><path d="M7.2 2.2 8 5.1"/><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"/></svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Guides every click</h3>
+          <p class="text-muted-foreground">Highlights exactly where to interact</p>
+        </div>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="how-step-card relative reveal reveal-up" data-delay="3">
+        <div class="h-full rounded-xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md group">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-5xl font-display text-primary/20 font-medium">03</span>
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <!-- Zap icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Auto-updates</h3>
+          <p class="text-muted-foreground">Adapts to UI changes automatically</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Demo Preview -->
+    <div class="max-w-xl mx-auto reveal reveal-scale" data-delay="4">
+      <div class="bg-white rounded-2xl p-8 flex flex-col items-center border border-border shadow-sm">
+        <div class="relative mb-6">
+          <div class="absolute inset-0 rounded-full bg-primary/20 how-pulse-ring"></div>
+          <div class="relative w-20 h-20 rounded-full bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center glow-primary">
+            <span class="text-white font-semibold">Click Here</span>
+          </div>
+        </div>
+        <p class="text-sm text-muted-foreground uppercase tracking-wider">Live visual guidance in action</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Connector lines between step cards (desktop only) */
+  @media (min-width: 768px) {
+    .how-step-card:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -0.875rem;
+      width: 1.75rem;
+      height: 2px;
+      background: linear-gradient(to right, hsl(341 82% 56% / 0.3), hsl(341 82% 56% / 0.1));
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .how-step-card:not(:last-child)::after {
+      right: -1.125rem;
+      width: 2.25rem;
+    }
+  }
+
+  /* Pulse ring animation for the "Click Here" demo */
+  .how-pulse-ring {
+    animation: how-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes how-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .how-pulse-ring {
+      animation: none;
+      opacity: 0.3;
+    }
+  }
+</style>

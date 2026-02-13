@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { HelpCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "What's the difference between Essential and Plus?",
     answer:
-      "Essential Access ($12/month) supports up to 5 applications—perfect for personal use. Lectere Plus ($29/month) offers unlimited apps and team collaboration features for power users and small businesses.",
+      "Essential Access supports up to 5 applications—perfect for personal use. Lectere Plus offers unlimited apps and team collaboration features for power users and small businesses. Final pricing will be announced at launch.",
   },
   {
     question: "Will there be a free tier?",
@@ -37,14 +37,16 @@ const faqs = [
 
 export default function PricingFAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section className="py-24">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6">
@@ -63,10 +65,10 @@ export default function PricingFAQ() {
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : index * 0.05 }}
               className="rounded-2xl bg-white border border-border overflow-hidden shadow-sm"
             >
               <button
@@ -83,12 +85,13 @@ export default function PricingFAQ() {
                 </motion.div>
               </button>
               <motion.div
+                layout
                 initial={false}
                 animate={{
                   height: openFaq === index ? "auto" : 0,
                   opacity: openFaq === index ? 1 : 0,
                 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="overflow-hidden"
               >
                 <p className="px-6 pb-5 text-muted-foreground leading-relaxed">

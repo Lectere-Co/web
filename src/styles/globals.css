@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap');
+/* Fonts loaded via <link rel="preload"> in Layout.astro for non-blocking loading */
 @import "tailwindcss";
 
 @theme {
@@ -95,6 +95,31 @@
   @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
 }
 
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, #eb336e, #9b274c);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 10000;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress-fill linear;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes scroll-progress-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 /* Gradient Text Utility */
 @layer utilities {
   .text-gradient {
@@ -111,12 +136,62 @@
   }
 
   .section-padding {
-    @apply py-24 md:py-32 lg:py-40;
+    @apply py-16 sm:py-24 md:py-32 lg:py-40;
   }
 
   .fade-in-up {
     animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+
+  .dots-pattern {
+    background-image: radial-gradient(circle, hsl(341 82% 56% / 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .counter {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Scroll-triggered reveals (activated by IntersectionObserver script in Layout) */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-up { transform: translateY(40px); }
+.reveal-left { transform: translateX(-60px); }
+.reveal-right { transform: translateX(60px); }
+.reveal-scale { transform: scale(0.92); }
+.reveal-rotate { transform: translateY(30px) rotate(-3deg); }
+
+/* Stagger delays */
+[data-delay="1"] { transition-delay: 0.1s; }
+[data-delay="2"] { transition-delay: 0.2s; }
+[data-delay="3"] { transition-delay: 0.3s; }
+[data-delay="4"] { transition-delay: 0.4s; }
+[data-delay="5"] { transition-delay: 0.5s; }
+[data-delay="6"] { transition-delay: 0.6s; }
+[data-delay="7"] { transition-delay: 0.7s; }
+[data-delay="8"] { transition-delay: 0.8s; }
+
+/* Horizontal snap scroll */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+.scroll-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 @keyframes fadeInUp {
@@ -128,4 +203,26 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px -5px hsl(341 82% 56% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px -5px hsl(341 82% 56% / 0.5);
+  }
+}
+
+@keyframes check-pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { transition: none; opacity: 1; transform: none; }
+  .fade-in-up { animation: none; opacity: 1; transform: none; }
+  .scroll-progress { animation: none; transform: scaleX(1); }
 }

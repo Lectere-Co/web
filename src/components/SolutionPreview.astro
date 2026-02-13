@@ -1,0 +1,31 @@
+---
+import LectereIllustration from './LectereIllustration.astro';
+---
+
+<section class="section-padding bg-background">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <!-- Text content -->
+      <div class="reveal reveal-left">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-6">
+          Software that teaches itself to <span class="text-gradient">teach you</span>
+        </h2>
+        <p class="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg">
+          Lectere is an AI assistant that lives inside the software you already use. It sees your real screen, understands where you are, and guides you visually — step by step — so you never feel lost.
+        </p>
+        <a
+          href="/product"
+          class="inline-flex items-center gap-1 text-primary font-medium hover:text-accent transition-colors"
+        >
+          See how it works
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Illustration -->
+      <div class="reveal reveal-right">
+        <LectereIllustration />
+      </div>
+    </div>
+  </div>
+</section>

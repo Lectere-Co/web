@@ -1,0 +1,40 @@
+---
+interface Props {
+  variant?: 'wave' | 'arc' | 'slant';
+  flip?: boolean;
+  className?: string;
+}
+
+const { variant = 'wave', flip = false, className = '' } = Astro.props;
+---
+
+<div class:list={['w-full overflow-hidden leading-[0] -my-px', flip && 'rotate-180', className]}>
+  {variant === 'wave' && (
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" class="w-full h-12 md:h-16 lg:h-20">
+      <path
+        d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z"
+        fill="hsl(341 82% 56% / 0.05)"
+      />
+      <path
+        d="M0,50 C320,70 640,20 960,50 C1200,70 1360,45 1440,50 L1440,80 L0,80 Z"
+        fill="hsl(341 60% 38% / 0.03)"
+      />
+    </svg>
+  )}
+  {variant === 'arc' && (
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-10 md:h-14 lg:h-16">
+      <path
+        d="M0,60 Q720,0 1440,60 L1440,60 L0,60 Z"
+        fill="hsl(341 82% 56% / 0.04)"
+      />
+    </svg>
+  )}
+  {variant === 'slant' && (
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-10 md:h-14 lg:h-16">
+      <polygon
+        points="0,60 1440,0 1440,60"
+        fill="hsl(341 82% 56% / 0.04)"
+      />
+    </svg>
+  )}
+</div>

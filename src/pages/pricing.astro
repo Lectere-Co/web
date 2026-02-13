@@ -1,16 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PricingHero from '../components/PricingHero';
-import { PricingSection } from '../components/PricingSection';
-import { Testimonials } from '../components/Testimonials';
+import PricingHero from '../components/PricingHero.astro';
+import PricingSection from '../components/PricingSection.astro';
+import Testimonials from '../components/Testimonials.astro';
 import PricingFAQ from '../components/PricingFAQ';
-import PricingCTA from '../components/PricingCTA';
+import PricingCTA from '../components/PricingCTA.astro';
 ---
 
 <Layout title="Pricing - Lectere">
-  <PricingHero client:load />
-  <PricingSection client:visible />
-  <Testimonials client:visible />
+  <PricingHero />
+  <PricingSection />
+  <Testimonials />
   <PricingFAQ client:visible />
-  <PricingCTA client:visible />
+  <PricingCTA />
 </Layout>

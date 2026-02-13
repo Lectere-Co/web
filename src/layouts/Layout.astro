@@ -30,12 +30,12 @@ const {
     <ViewTransitions />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600;700&display=swap" /></noscript>
   </head>
   <body>
     <div class="scroll-progress"></div>
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:text-sm focus:font-medium">Skip to content</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:text-sm focus:font-medium">Skip to content</a>
     <div class="w-full min-h-screen bg-background relative">
       <Navigation client:load currentPath={Astro.url.pathname} aria-label="Main navigation" transition:persist />
       <main id="main-content" class="pt-[72px]" transition:animate={slide({ duration: '0.6s' })}>
@@ -72,17 +72,9 @@ const {
           e.direction = to > from ? 'forward' : 'back';
         }
 
-        // Smooth scroll to top before the slide transition starts
+        // Instant scroll to top before transition (no animation to avoid jarring two-step effect)
         if (window.scrollY > 0) {
-          const originalLoader = e.loader;
-          e.loader = () => new Promise<void>((resolve) => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            let done = false;
-            const finish = () => { if (!done) { done = true; originalLoader().then(resolve); } };
-            const check = () => { window.scrollY <= 1 ? finish() : requestAnimationFrame(check); };
-            requestAnimationFrame(check);
-            setTimeout(finish, 600); // safety cap
-          });
+          window.scrollTo({ top: 0, behavior: 'instant' });
         }
       });
     </script>
@@ -152,26 +144,50 @@ const {
           bar!.style.transform = `scaleX(${progress})`;
         }
 
-        window.addEventListener('scroll', updateProgress, { passive: true });
+        // Store reference to clean up on next initialization
+        const scrollHandler = updateProgress;
+        
+        // Remove any existing listener before adding new one
+        if ((window as Window & { __scrollProgressHandler?: () => void }).__scrollProgressHandler) {
+          window.removeEventListener('scroll', (window as Window & { __scrollProgressHandler?: () => void }).__scrollProgressHandler);
+        }
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        (window as Window & { __scrollProgressHandler?: () => void }).__scrollProgressHandler = scrollHandler;
         updateProgress();
       }
 
       function initBackToTop() {
         const backToTop = document.getElementById('back-to-top');
-        if (backToTop) {
-          window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-              backToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-              backToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            } else {
-              backToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-              backToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            }
-          }, { passive: true });
-          backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
+        if (!backToTop) return;
+        
+        const handleScroll = () => {
+          if (window.scrollY > 500) {
+            backToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            backToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+          } else {
+            backToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            backToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+          }
+        };
+        
+        const handleClick = () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        
+        // Remove any existing listeners before adding new ones
+        if ((window as Window & { __backToTopScrollHandler?: () => void; __backToTopClickHandler?: () => void }).__backToTopScrollHandler) {
+          window.removeEventListener('scroll', (window as Window & { __backToTopScrollHandler?: () => void }).__backToTopScrollHandler);
         }
+        if ((window as Window & { __backToTopClickHandler?: () => void }).__backToTopClickHandler) {
+          backToTop.removeEventListener('click', (window as Window & { __backToTopClickHandler?: () => void }).__backToTopClickHandler!);
+        }
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        backToTop.addEventListener('click', handleClick);
+        
+        (window as Window & { __backToTopScrollHandler?: () => void; __backToTopClickHandler?: () => void }).__backToTopScrollHandler = handleScroll;
+        (window as Window & { __backToTopClickHandler?: () => void }).__backToTopClickHandler = handleClick;
       }
 
       // Initialize on first load

@@ -132,7 +132,6 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 top-[72px] z-40 bg-white/95 backdrop-blur-xl md:hidden"
-            onPanEnd={(_e, info) => { if (info.offset.y < -50) setIsMobileMenuOpen(false); }}
           >
             <nav className="flex flex-col p-6 gap-2">
               {navLinks.map((link, index) => {

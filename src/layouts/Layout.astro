@@ -148,44 +148,46 @@ const {
         const scrollHandler = updateProgress;
         
         // Remove any existing listener before adding new one
-        if ((window as any).__scrollProgressHandler) {
-          window.removeEventListener('scroll', (window as any).__scrollProgressHandler);
+        if ((window as Window & { __scrollProgressHandler?: () => void }).__scrollProgressHandler) {
+          window.removeEventListener('scroll', (window as Window & { __scrollProgressHandler?: () => void }).__scrollProgressHandler);
         }
         
         window.addEventListener('scroll', scrollHandler, { passive: true });
-        (window as any).__scrollProgressHandler = scrollHandler;
+        (window as Window & { __scrollProgressHandler?: () => void }).__scrollProgressHandler = scrollHandler;
         updateProgress();
       }
 
       function initBackToTop() {
         const backToTop = document.getElementById('back-to-top');
-        if (backToTop) {
-          const handleScroll = () => {
-            if (window.scrollY > 500) {
-              backToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-              backToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            } else {
-              backToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-              backToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            }
-          };
-          
-          // Remove any existing listener before adding new one
-          if ((window as any).__backToTopScrollHandler) {
-            window.removeEventListener('scroll', (window as any).__backToTopScrollHandler);
+        if (!backToTop) return;
+        
+        const handleScroll = () => {
+          if (window.scrollY > 500) {
+            backToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            backToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+          } else {
+            backToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            backToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
           }
-          
-          window.addEventListener('scroll', handleScroll, { passive: true });
-          (window as any).__backToTopScrollHandler = handleScroll;
-          
-          // Remove old click listener and add new one by cloning
-          const newBackToTop = backToTop.cloneNode(true) as HTMLButtonElement;
-          backToTop.parentNode?.replaceChild(newBackToTop, backToTop);
-          
-          newBackToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
+        };
+        
+        const handleClick = () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        
+        // Remove any existing listeners before adding new ones
+        if ((window as Window & { __backToTopScrollHandler?: () => void; __backToTopClickHandler?: () => void }).__backToTopScrollHandler) {
+          window.removeEventListener('scroll', (window as Window & { __backToTopScrollHandler?: () => void }).__backToTopScrollHandler);
         }
+        if ((window as Window & { __backToTopClickHandler?: () => void }).__backToTopClickHandler) {
+          backToTop.removeEventListener('click', (window as Window & { __backToTopClickHandler?: () => void }).__backToTopClickHandler!);
+        }
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        backToTop.addEventListener('click', handleClick);
+        
+        (window as Window & { __backToTopScrollHandler?: () => void; __backToTopClickHandler?: () => void }).__backToTopScrollHandler = handleScroll;
+        (window as Window & { __backToTopClickHandler?: () => void }).__backToTopClickHandler = handleClick;
       }
 
       // Initialize on first load

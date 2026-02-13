@@ -214,12 +214,12 @@
       };
       
       // Remove any existing listener before adding new one
-      if ((window as any).__heroParallaxHandler) {
-        window.removeEventListener('scroll', (window as any).__heroParallaxHandler);
+      if ((window as Window & { __heroParallaxHandler?: () => void }).__heroParallaxHandler) {
+        window.removeEventListener('scroll', (window as Window & { __heroParallaxHandler?: () => void }).__heroParallaxHandler);
       }
       
       window.addEventListener('scroll', handleScroll, { passive: true });
-      (window as any).__heroParallaxHandler = handleScroll;
+      (window as Window & { __heroParallaxHandler?: () => void }).__heroParallaxHandler = handleScroll;
     }
 
     // Waitlist button scrolls to newsletter section

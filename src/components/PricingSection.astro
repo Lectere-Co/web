@@ -108,13 +108,16 @@ const plans = [
 </section>
 
 <script>
+  // Track initialization to prevent duplicate listeners
+  let pricingCTAInitialized = false;
+
   function initPricingCTA() {
-    // Clone and replace to remove old listeners
+    // Only add listeners once
+    if (pricingCTAInitialized) return;
+    pricingCTAInitialized = true;
+
     document.querySelectorAll<HTMLButtonElement>('.pricing-cta').forEach((btn) => {
-      const newBtn = btn.cloneNode(true) as HTMLButtonElement;
-      btn.parentNode?.replaceChild(newBtn, btn);
-      
-      newBtn.addEventListener('click', () => {
+      btn.addEventListener('click', () => {
         const newsletter = document.getElementById('newsletter-signup');
         if (newsletter) {
           newsletter.scrollIntoView({ behavior: 'smooth' });
@@ -126,6 +129,9 @@ const plans = [
   // Initialize on first load
   initPricingCTA();
 
-  // Re-initialize after View Transitions swap
-  document.addEventListener('astro:after-swap', initPricingCTA);
+  // Re-initialize after View Transitions swap (reset flag first)
+  document.addEventListener('astro:after-swap', () => {
+    pricingCTAInitialized = false;
+    initPricingCTA();
+  });
 </script>

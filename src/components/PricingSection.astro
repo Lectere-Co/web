@@ -108,12 +108,24 @@ const plans = [
 </section>
 
 <script>
-  document.querySelectorAll<HTMLButtonElement>('.pricing-cta').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const newsletter = document.getElementById('newsletter');
-      if (newsletter) {
-        newsletter.scrollIntoView({ behavior: 'smooth' });
-      }
+  function initPricingCTA() {
+    // Clone and replace to remove old listeners
+    document.querySelectorAll<HTMLButtonElement>('.pricing-cta').forEach((btn) => {
+      const newBtn = btn.cloneNode(true) as HTMLButtonElement;
+      btn.parentNode?.replaceChild(newBtn, btn);
+      
+      newBtn.addEventListener('click', () => {
+        const newsletter = document.getElementById('newsletter-signup');
+        if (newsletter) {
+          newsletter.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
-  });
+  }
+
+  // Initialize on first load
+  initPricingCTA();
+
+  // Re-initialize after View Transitions swap
+  document.addEventListener('astro:after-swap', initPricingCTA);
 </script>

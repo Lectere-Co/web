@@ -46,13 +46,13 @@
 
       <!-- CTAs -->
       <div class="reveal reveal-up flex flex-col sm:flex-row gap-4" data-delay="5">
-        <button
-          type="button"
+        <a
+          href="/product"
           class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white shadow-lg shadow-[#eb336e]/20 hover:shadow-xl hover:shadow-[#eb336e]/25 hover:-translate-y-0.5 h-14 rounded-xl px-10 text-lg"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
           See How It Works
-        </button>
+        </a>
         <button
           type="button"
           id="hero-waitlist-btn"
@@ -193,29 +193,33 @@
       });
 
       let ticking = false;
-      window.addEventListener(
-        'scroll',
-        () => {
-          if (!ticking) {
-            requestAnimationFrame(() => {
-              const scrollY = window.scrollY;
-              const y1 = Math.max(-30, -(scrollY / 500) * 30);
-              const y2 = Math.max(-50, -(scrollY / 500) * 50);
+      const handleScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const y1 = Math.max(-30, -(scrollY / 500) * 30);
+            const y2 = Math.max(-50, -(scrollY / 500) * 50);
 
-              if (cardLeft) {
-                cardLeft.style.transform = `rotate(-3deg) translateY(${y1}px)`;
-              }
-              if (cardRight) {
-                cardRight.style.transform = `rotate(3deg) translateY(${y2}px)`;
-              }
+            if (cardLeft) {
+              cardLeft.style.transform = `rotate(-3deg) translateY(${y1}px)`;
+            }
+            if (cardRight) {
+              cardRight.style.transform = `rotate(3deg) translateY(${y2}px)`;
+            }
 
-              ticking = false;
-            });
-            ticking = true;
-          }
-        },
-        { passive: true }
-      );
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+      
+      // Remove any existing listener before adding new one
+      if ((window as any).__heroParallaxHandler) {
+        window.removeEventListener('scroll', (window as any).__heroParallaxHandler);
+      }
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      (window as any).__heroParallaxHandler = handleScroll;
     }
 
     // Waitlist button scrolls to newsletter section

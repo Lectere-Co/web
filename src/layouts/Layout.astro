@@ -72,17 +72,9 @@ const {
           e.direction = to > from ? 'forward' : 'back';
         }
 
-        // Smooth scroll to top before the slide transition starts
+        // Instant scroll to top before transition (no animation to avoid jarring two-step effect)
         if (window.scrollY > 0) {
-          const originalLoader = e.loader;
-          e.loader = () => new Promise<void>((resolve) => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            let done = false;
-            const finish = () => { if (!done) { done = true; originalLoader().then(resolve); } };
-            const check = () => { window.scrollY <= 1 ? finish() : requestAnimationFrame(check); };
-            requestAnimationFrame(check);
-            setTimeout(finish, 600); // safety cap
-          });
+          window.scrollTo({ top: 0, behavior: 'instant' });
         }
       });
     </script>

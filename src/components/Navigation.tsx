@@ -31,14 +31,23 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
       setIsScrolled(window.scrollY > 20);
     };
 
+    const closeMobileMenu = () => {
+      setIsMobileMenuOpen(false);
+    };
+
+    const handleAfterSwap = () => {
+      updatePathname();
+      closeMobileMenu();
+    };
+
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("popstate", updatePathname);
-    document.addEventListener("astro:after-swap", updatePathname);
+    document.addEventListener("astro:after-swap", handleAfterSwap);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("popstate", updatePathname);
-      document.removeEventListener("astro:after-swap", updatePathname);
+      document.removeEventListener("astro:after-swap", handleAfterSwap);
     };
   }, []);
 
@@ -145,6 +154,7 @@ export default function Navigation({ currentPath = "/" }: NavigationProps) {
                   >
                     <a
                       href={link.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
                       className={`block px-4 py-3 text-lg font-medium rounded-lg transition-all ${
                         isActive
                           ? "text-primary font-semibold bg-primary/5 border-l-2 border-primary"

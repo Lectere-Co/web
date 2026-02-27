@@ -561,6 +561,7 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
 
       {/* Pricing placeholder + CTA */}
       <motion.div
+        id="newsletter-signup"
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.75 }}
@@ -589,23 +590,24 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
 export default function SegmentSelector() {
   const [activeSegment, setActiveSegment] = useState<SegmentId | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const hasScrolledRef = useRef(false);
 
-  // Scroll to expanded content when a segment is selected
+  // Scroll down to expanded content when a segment is selected
   useEffect(() => {
-    if (activeSegment && contentRef.current && hasScrolledRef.current) {
-      const headerHeight = document.querySelector("header")?.offsetHeight ?? 72;
-      const elementTop =
-        contentRef.current.getBoundingClientRect().top + window.scrollY;
+    if (activeSegment && contentRef.current) {
+      // Small delay so the expand animation has started and height is non-zero
+      const timer = setTimeout(() => {
+        if (!contentRef.current) return;
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight ?? 72;
+        const elementTop =
+          contentRef.current.getBoundingClientRect().top + window.scrollY;
 
-      window.scrollTo({
-        top: elementTop - headerHeight - 24,
-        behavior: "smooth",
-      });
-    }
-    // After the first render, enable scrolling for subsequent selections
-    if (activeSegment) {
-      hasScrolledRef.current = true;
+        window.scrollTo({
+          top: elementTop - headerHeight - 24,
+          behavior: "smooth",
+        });
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [activeSegment]);
 

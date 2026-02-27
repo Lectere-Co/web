@@ -25,6 +25,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import { isValidEmail } from "@/lib/validation";
+import { SegmentDemo, type DemoConfig } from "@/components/SegmentDemo";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -44,6 +45,7 @@ interface SegmentData {
   howItHelps: { icon: React.ElementType; title: string; text: string }[];
   stat: { value: string; label: string };
   cta: string;
+  demo: DemoConfig;
 }
 
 /* ------------------------------------------------------------------ */
@@ -98,6 +100,17 @@ const segments: SegmentData[] = [
       label: "of users give up when trying to learn new software on their own",
     },
     cta: "Join the waitlist",
+    demo: {
+      variant: "portal",
+      windowTitle: "Benefits Portal",
+      steps: [
+        { target: { x: 120, y: 53 }, text: "Click 'Benefits' to view your current coverage and plan details" },
+        { target: { x: 450, y: 195 }, text: "Select 'View Coverage Details' to see what's included in your plan" },
+        { target: { x: 280, y: 175 }, text: "Here you can verify your enrollment status is active" },
+        { target: { x: 450, y: 235 }, text: "Click 'Update Information' if your address or contact details have changed" },
+        { target: { x: 300, y: 330 }, text: "Don't miss this — complete your annual plan review before the deadline" },
+      ],
+    },
   },
   {
     id: "businesses",
@@ -146,6 +159,17 @@ const segments: SegmentData[] = [
       label: "spent per employee on software training annually",
     },
     cta: "Join the waitlist",
+    demo: {
+      variant: "crm",
+      windowTitle: "SalesCloud CRM",
+      steps: [
+        { target: { x: 200, y: 53 }, text: "Navigate to 'Contacts' to manage your customer database" },
+        { target: { x: 150, y: 175 }, text: "Start by entering the contact's first name" },
+        { target: { x: 150, y: 225 }, text: "Link this contact to their company for better organization" },
+        { target: { x: 400, y: 225 }, text: "Add their email so you can reach out directly from the CRM" },
+        { target: { x: 530, y: 310 }, text: "Click 'Save' to add this new contact to your database" },
+      ],
+    },
   },
   {
     id: "government",
@@ -194,6 +218,17 @@ const segments: SegmentData[] = [
       label: "of technology implementations fail to meet expectations",
     },
     cta: "Join the waitlist",
+    demo: {
+      variant: "cases",
+      windowTitle: "CaseTrack — Dept. of Health & Human Services",
+      steps: [
+        { target: { x: 60, y: 110 }, text: "Click 'Cases' in the sidebar to view all active cases" },
+        { target: { x: 400, y: 135 }, text: "Select case #2024-0847 to review the benefits review request" },
+        { target: { x: 530, y: 135 }, text: "Check who is currently assigned — reassign if needed" },
+        { target: { x: 460, y: 135 }, text: "The status shows this case is open and awaiting review" },
+        { target: { x: 620, y: 63 }, text: "Use 'New Case' to create a new case record when needed" },
+      ],
+    },
   },
 ];
 
@@ -558,6 +593,9 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
           })}
         </div>
       </div>
+
+      {/* Interactive demo */}
+      <SegmentDemo config={segment.demo} />
 
       {/* Pricing placeholder + CTA */}
       <motion.div

@@ -1,18 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HeroSection from '../components/HeroSection.astro';
-import LightweightExplainer from '../components/LightweightExplainer.astro';
-import ProblemSection from '../components/ProblemSection.astro';
-import SolutionPreview from '../components/SolutionPreview.astro';
-import SocialProof from '../components/SocialProof.astro';
-import FinalCTA from '../components/FinalCTA.astro';
+import SegmentSelector from '../components/SegmentSelector';
 ---
 
-<Layout>
-  <HeroSection />
-  <LightweightExplainer />
-  <ProblemSection />
-  <SolutionPreview />
-  <SocialProof />
-  <FinalCTA />
+<Layout showNewsletter={false}>
+  <SegmentSelector client:load />
 </Layout>

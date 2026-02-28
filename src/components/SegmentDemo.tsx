@@ -1,5 +1,5 @@
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { useState, useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Check,
@@ -13,6 +13,7 @@ import {
   Settings,
   Plus,
   AlertTriangle,
+  Monitor,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -20,7 +21,6 @@ import {
 /* ------------------------------------------------------------------ */
 
 export interface DemoStep {
-  target: { x: number; y: number };
   text: string;
 }
 
@@ -30,6 +30,50 @@ export interface DemoConfig {
   variant: DemoVariant;
   windowTitle: string;
   steps: DemoStep[];
+}
+
+/* ------------------------------------------------------------------ */
+/*  Cursor position hook                                               */
+/* ------------------------------------------------------------------ */
+
+function useCursorPosition(
+  containerRef: React.RefObject<HTMLDivElement | null>,
+  step: number
+) {
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const compute = () => {
+      const target = container.querySelector<HTMLElement>(
+        `[data-demo-step="${step}"]`
+      );
+      if (!target) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+
+      // Cursor SVG tip is at ~(6px, 3px) from the div origin.
+      // Position so the tip points at the element's center.
+      setPos({
+        x: targetRect.left - containerRect.left + targetRect.width / 2 - 6,
+        y: targetRect.top - containerRect.top + targetRect.height / 2 - 3,
+      });
+    };
+
+    requestAnimationFrame(compute);
+
+    const observer = new ResizeObserver(() => {
+      requestAnimationFrame(compute);
+    });
+    observer.observe(container);
+
+    return () => observer.disconnect();
+  }, [step, containerRef]);
+
+  return pos;
 }
 
 /* ------------------------------------------------------------------ */
@@ -150,8 +194,12 @@ function BenefitsPortalApp({ step }: { step: number }) {
     <div className="flex flex-col">
       {/* Top nav */}
       <div className="flex items-center gap-1 px-4 py-2 bg-[#1a3a5c] text-white text-sm relative">
-        {navItems.map((item, i) => (
-          <div key={item} className={`relative px-3 py-1.5 rounded ${item === "Benefits" ? "bg-white/15" : "hover:bg-white/10"}`}>
+        {navItems.map((item) => (
+          <div
+            key={item}
+            data-demo-step={item === "Benefits" ? 0 : undefined}
+            className={`relative px-3 py-1.5 rounded ${item === "Benefits" ? "bg-white/15" : "hover:bg-white/10"}`}
+          >
             <span className="text-white/90 text-xs font-medium">{item}</span>
             {item === "Benefits" && <Highlight active={step === 0} />}
           </div>
@@ -186,10 +234,15 @@ function BenefitsPortalApp({ step }: { step: number }) {
                   Standard Coverage
                 </span>
               </div>
-              <div className="relative flex justify-between text-xs">
+              <div className="flex justify-between text-xs">
                 <span className="text-gray-500">Status</span>
-                <span className="text-green-600 font-medium">Active</span>
-                <Highlight active={step === 2} />
+                <span
+                  className="relative text-green-600 font-medium"
+                  data-demo-step={2}
+                >
+                  Active
+                  <Highlight active={step === 2} />
+                </span>
               </div>
               <div className="flex justify-between text-xs">
                 <span className="text-gray-500">Member ID</span>
@@ -208,14 +261,14 @@ function BenefitsPortalApp({ step }: { step: number }) {
               Quick Actions
             </h3>
             <div className="space-y-2">
-              <div className="relative">
+              <div className="relative" data-demo-step={1}>
                 <button className="w-full text-left px-3 py-2 rounded border border-gray-200 text-xs text-[#1a3a5c] font-medium hover:bg-gray-50 flex items-center gap-2">
                   <FileText className="w-3.5 h-3.5" />
                   View Coverage Details
                 </button>
                 <Highlight active={step === 1} />
               </div>
-              <div className="relative">
+              <div className="relative" data-demo-step={3}>
                 <button className="w-full text-left px-3 py-2 rounded border border-gray-200 text-xs text-[#1a3a5c] font-medium hover:bg-gray-50 flex items-center gap-2">
                   <Settings className="w-3.5 h-3.5" />
                   Update Information
@@ -231,7 +284,7 @@ function BenefitsPortalApp({ step }: { step: number }) {
         </div>
 
         {/* Alert banner */}
-        <div className="relative">
+        <div className="relative" data-demo-step={4}>
           <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-50 border border-amber-200">
             <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />
             <div>
@@ -263,7 +316,11 @@ function CRMDashboardApp({ step }: { step: number }) {
       {/* Top nav */}
       <div className="flex items-center gap-1 px-4 py-2 bg-[#032d60] text-white text-sm relative">
         {navItems.map((item) => (
-          <div key={item} className={`relative px-3 py-1.5 rounded ${item === "Contacts" ? "bg-white/15" : "hover:bg-white/10"}`}>
+          <div
+            key={item}
+            data-demo-step={item === "Contacts" ? 0 : undefined}
+            className={`relative px-3 py-1.5 rounded ${item === "Contacts" ? "bg-white/15" : "hover:bg-white/10"}`}
+          >
             <span className="text-white/90 text-xs font-medium">{item}</span>
             {item === "Contacts" && <Highlight active={step === 0} />}
           </div>
@@ -293,7 +350,7 @@ function CRMDashboardApp({ step }: { step: number }) {
           </h3>
           <div className="grid grid-cols-2 gap-x-5 gap-y-3">
             {/* First Name */}
-            <div className="relative">
+            <div className="relative" data-demo-step={1}>
               <label className="block text-[10px] font-medium text-gray-500 mb-1">
                 First Name
               </label>
@@ -314,7 +371,7 @@ function CRMDashboardApp({ step }: { step: number }) {
             </div>
 
             {/* Company */}
-            <div className="relative">
+            <div className="relative" data-demo-step={2}>
               <label className="block text-[10px] font-medium text-gray-500 mb-1">
                 Company
               </label>
@@ -325,7 +382,7 @@ function CRMDashboardApp({ step }: { step: number }) {
             </div>
 
             {/* Email */}
-            <div className="relative">
+            <div className="relative" data-demo-step={3}>
               <label className="block text-[10px] font-medium text-gray-500 mb-1">
                 Email
               </label>
@@ -362,7 +419,7 @@ function CRMDashboardApp({ step }: { step: number }) {
             <button className="px-4 py-1.5 text-xs text-gray-500 border border-gray-200 rounded hover:bg-gray-50">
               Cancel
             </button>
-            <div className="relative">
+            <div className="relative" data-demo-step={4}>
               <button className="px-4 py-1.5 text-xs text-white bg-[#0176d3] rounded font-medium">
                 Save
               </button>
@@ -433,6 +490,7 @@ function CaseManagementApp({ step }: { step: number }) {
             return (
               <div
                 key={item.label}
+                data-demo-step={item.label === "Cases" ? 0 : undefined}
                 className={`relative flex items-center gap-2 px-3 py-2 mx-2 rounded text-xs ${
                   item.active
                     ? "bg-white/10 text-white"
@@ -456,7 +514,7 @@ function CaseManagementApp({ step }: { step: number }) {
               <ChevronRight className="w-3 h-3" />
               <span className="text-gray-600">Active Cases</span>
             </div>
-            <div className="relative">
+            <div className="relative" data-demo-step={4}>
               <button className="flex items-center gap-1 px-3 py-1.5 rounded bg-[#2d3748] text-white text-xs font-medium">
                 <Plus className="w-3 h-3" />
                 New Case
@@ -480,13 +538,22 @@ function CaseManagementApp({ step }: { step: number }) {
             {cases.map((c, i) => (
               <div
                 key={c.id}
-                className={`relative grid grid-cols-[100px_1fr_90px_100px_80px] gap-2 px-4 py-2.5 text-xs items-center ${
+                className={`grid grid-cols-[100px_1fr_90px_100px_80px] gap-2 px-4 py-2.5 text-xs items-center ${
                   i < cases.length - 1 ? "border-b border-gray-100" : ""
                 } hover:bg-gray-50`}
               >
                 <span className="font-mono text-gray-600">{c.id}</span>
-                <span className="text-gray-800">{c.subject}</span>
-                <div className="relative">
+                <span
+                  className={i === 0 ? "relative text-gray-800" : "text-gray-800"}
+                  data-demo-step={i === 0 ? 1 : undefined}
+                >
+                  {c.subject}
+                  {i === 0 && <Highlight active={step === 1} />}
+                </span>
+                <div
+                  className={i === 0 ? "relative" : undefined}
+                  data-demo-step={i === 0 ? 3 : undefined}
+                >
                   <span
                     className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-medium ${c.statusColor}`}
                   >
@@ -494,7 +561,10 @@ function CaseManagementApp({ step }: { step: number }) {
                   </span>
                   {i === 0 && <Highlight active={step === 3} />}
                 </div>
-                <div className="relative">
+                <div
+                  className={i === 0 ? "relative" : undefined}
+                  data-demo-step={i === 0 ? 2 : undefined}
+                >
                   <span className="text-gray-600">{c.assigned}</span>
                   {i === 0 && <Highlight active={step === 2} />}
                 </div>
@@ -503,7 +573,6 @@ function CaseManagementApp({ step }: { step: number }) {
                 >
                   {c.priority}
                 </span>
-                {i === 0 && <Highlight active={step === 1} />}
               </div>
             ))}
           </div>
@@ -559,13 +628,12 @@ function WindowIcon({ variant }: { variant: DemoVariant }) {
 
 export function SegmentDemo({ config }: { config: DemoConfig }) {
   const [step, setStep] = useState(0);
-  const [cursorPos, setCursorPos] = useState(config.steps[0].target);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cursorPos = useCursorPosition(containerRef, step);
   const shouldReduceMotion = useReducedMotion();
 
   const handleClick = () => {
-    const nextStep = (step + 1) % config.steps.length;
-    setStep(nextStep);
-    setCursorPos(config.steps[nextStep].target);
+    setStep((prev) => (prev + 1) % config.steps.length);
   };
 
   return (
@@ -574,56 +642,29 @@ export function SegmentDemo({ config }: { config: DemoConfig }) {
         See it in action
       </h3>
 
-      {/* Mobile step cards (below md) */}
-      <div className="md:hidden space-y-3 mb-4">
-        {config.steps.map((s, i) => (
-          <div
-            key={i}
-            className={`p-4 rounded-xl border transition-all ${
-              i === step
-                ? "border-primary/30 bg-primary/5 shadow-sm"
-                : "border-border bg-white"
-            }`}
-            onClick={() => {
-              setStep(i);
-              setCursorPos(s.target);
-            }}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setStep(i);
-                setCursorPos(s.target);
-              }
-            }}
-          >
-            <div className="flex items-center gap-3">
-              <div
-                className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${
-                  i === step
-                    ? "bg-gradient-to-br from-[#eb336e] to-[#9b274c] text-white"
-                    : "bg-secondary text-muted-foreground"
-                }`}
-              >
-                {i + 1}
-              </div>
-              <p
-                className={`text-sm ${
-                  i === step
-                    ? "text-foreground font-medium"
-                    : "text-muted-foreground"
-                }`}
-              >
-                {s.text}
-              </p>
+      {/* Mobile: compact static preview with note */}
+      <div className="md:hidden">
+        <div className="rounded-2xl overflow-hidden border border-border shadow-lg">
+          <WindowChrome
+            title={config.windowTitle}
+            icon={<WindowIcon variant={config.variant} />}
+          />
+          <div className="relative max-h-52 overflow-hidden">
+            <AppContent variant={config.variant} step={-1} />
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent" />
+          </div>
+          <div className="px-4 py-4 text-center bg-white border-t border-gray-100">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <Monitor className="w-4 h-4" />
+              <span>Interactive demo available on larger screens</span>
             </div>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* Desktop interactive frame (md+) */}
       <div
+        ref={containerRef}
         className="hidden md:block bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-lg relative"
         onClick={handleClick}
         role="button"
@@ -636,17 +677,19 @@ export function SegmentDemo({ config }: { config: DemoConfig }) {
         }}
       >
         {/* Animated cursor */}
-        <motion.div
-          className="absolute z-30 pointer-events-none"
-          animate={{ x: cursorPos.x, y: cursorPos.y }}
-          transition={
-            shouldReduceMotion
-              ? { duration: 0 }
-              : { type: "spring", stiffness: 150, damping: 15 }
-          }
-        >
-          <CursorSVG />
-        </motion.div>
+        {cursorPos && (
+          <motion.div
+            className="absolute z-30 pointer-events-none"
+            animate={{ x: cursorPos.x, y: cursorPos.y }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : { type: "spring", stiffness: 150, damping: 15 }
+            }
+          >
+            <CursorSVG />
+          </motion.div>
+        )}
 
         {/* Window chrome */}
         <WindowChrome

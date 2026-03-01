@@ -1,5 +1,5 @@
 import { motion, useInView, useReducedMotion } from 'motion/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, List, ListOrdered, Link, Image, Undo, Redo, Type, ChevronDown, Share, MessageSquare, MoreHorizontal } from 'lucide-react';
@@ -8,6 +8,7 @@ export function ProductDemo() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [cursorPos, setCursorPos] = useState({ x: 190, y: 65 });
+  const [userCursorPos, setUserCursorPos] = useState({ x: 204, y: 77 });
   const [step, setStep] = useState(0);
   const shouldReduceMotion = useReducedMotion();
 
@@ -16,6 +17,14 @@ export function ProductDemo() {
     { target: { x: 130, y: 105 }, text: 'Select the text style from the dropdown' },
     { target: { x: 365, y: 105 }, text: 'Use bold to emphasize important text' },
   ];
+
+  useEffect(() => {
+    const target = demoSteps[step].target;
+    const timer = setTimeout(() => {
+      setUserCursorPos({ x: target.x + 14, y: target.y + 12 });
+    }, shouldReduceMotion ? 0 : 120);
+    return () => clearTimeout(timer);
+  }, [step, shouldReduceMotion]);
 
   const handleDemoClick = () => {
     const nextStep = (step + 1) % demoSteps.length;
@@ -88,6 +97,15 @@ export function ProductDemo() {
                 <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
               </svg>
             </motion.div>
+            <motion.div
+              className="absolute z-20 pointer-events-none"
+              animate={{ x: userCursorPos.x, y: userCursorPos.y }}
+              transition={{ type: 'spring', stiffness: 140, damping: 16, delay: shouldReduceMotion ? 0 : 0.12 }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#2563eb" className="drop-shadow-lg">
+                <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
+              </svg>
+            </motion.div>
             {/* Window Header (macOS style) */}
             <div className="flex items-center justify-between px-4 py-3 bg-[#f9fbfd] border-b border-gray-200">
               <div className="flex items-center gap-2">
@@ -102,6 +120,10 @@ export function ProductDemo() {
                 <span className="font-medium text-gray-700">Untitled document</span>
               </div>
               <div className="flex items-center gap-2">
+                <Badge variant="success" className="hidden lg:inline-flex">
+                  <Check className="w-3 h-3 mr-1" />
+                  Interactive Demo
+                </Badge>
                 <button className="p-1.5 hover:bg-gray-100 rounded" aria-label="Comments">
                   <MessageSquare className="w-4 h-4 text-gray-500" />
                 </button>
@@ -284,11 +306,6 @@ export function ProductDemo() {
                 </div>
               </motion.div>
 
-              {/* Badge */}
-              <Badge variant="success" className="absolute top-4 right-4">
-                <Check className="w-3 h-3 mr-1" />
-                Interactive Demo
-              </Badge>
             </div>
 
             {/* Click Prompt */}

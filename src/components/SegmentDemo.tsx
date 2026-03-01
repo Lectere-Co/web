@@ -83,9 +83,11 @@ function useCursorPosition(
 function WindowChrome({
   title,
   icon,
+  showBadge = false,
 }: {
   title: string;
   icon: React.ReactNode;
+  showBadge?: boolean;
 }) {
   return (
     <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
@@ -98,7 +100,16 @@ function WindowChrome({
         {icon}
         <span className="font-medium text-gray-700">{title}</span>
       </div>
-      <div className="w-[52px]" />
+      <div className="flex items-center justify-end gap-2 min-w-[120px]">
+        {showBadge ? (
+          <Badge variant="success" className="px-2 py-1 text-[11px]">
+            <Check className="w-3 h-3 mr-1" />
+            Interactive Demo
+          </Badge>
+        ) : (
+          <div className="w-[52px]" />
+        )}
+      </div>
     </div>
   );
 }
@@ -131,7 +142,7 @@ function LectereTooltip({
 }) {
   return (
     <motion.div
-      className="absolute bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:w-80 bg-white rounded-xl p-4 border border-primary/20 shadow-lg z-20"
+      className="absolute bottom-4 left-4 right-4 md:left-6 md:right-auto md:bottom-6 md:w-80 bg-white rounded-xl p-4 border border-primary/20 shadow-lg z-20"
       key={step}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
@@ -169,13 +180,13 @@ function LectereTooltip({
   );
 }
 
-function CursorSVG() {
+function CursorSVG({ color = "#1a1a1a" }: { color?: string }) {
   return (
     <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="#1a1a1a"
+      fill={color}
       className="drop-shadow-lg"
     >
       <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.87a.5.5 0 0 0-.85.34Z" />
@@ -355,7 +366,15 @@ function CRMDashboardApp({ step }: { step: number }) {
                 First Name
               </label>
               <div className="h-8 rounded border border-gray-200 bg-gray-50 px-2 flex items-center">
-                <span className="text-xs text-gray-400">Enter first name</span>
+                <motion.span
+                  key={step >= 1 ? "firstNameFilled" : "firstNamePlaceholder"}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`text-xs ${step >= 1 ? "text-gray-800" : "text-gray-400"}`}
+                >
+                  {step >= 1 ? "Alex" : "Enter first name"}
+                </motion.span>
               </div>
               <Highlight active={step === 1} />
             </div>
@@ -376,7 +395,15 @@ function CRMDashboardApp({ step }: { step: number }) {
                 Company
               </label>
               <div className="h-8 rounded border border-gray-200 bg-gray-50 px-2 flex items-center">
-                <span className="text-xs text-gray-400">Enter company</span>
+                <motion.span
+                  key={step >= 2 ? "companyFilled" : "companyPlaceholder"}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`text-xs ${step >= 2 ? "text-gray-800" : "text-gray-400"}`}
+                >
+                  {step >= 2 ? "Riverbend Solar" : "Enter company"}
+                </motion.span>
               </div>
               <Highlight active={step === 2} />
             </div>
@@ -387,7 +414,15 @@ function CRMDashboardApp({ step }: { step: number }) {
                 Email
               </label>
               <div className="h-8 rounded border border-gray-200 bg-gray-50 px-2 flex items-center">
-                <span className="text-xs text-gray-400">Enter email</span>
+                <motion.span
+                  key={step >= 3 ? "emailFilled" : "emailPlaceholder"}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`text-xs ${step >= 3 ? "text-gray-800" : "text-gray-400"}`}
+                >
+                  {step >= 3 ? "alex@riverbend.com" : "Enter email"}
+                </motion.span>
               </div>
               <Highlight active={step === 3} />
             </div>
@@ -631,6 +666,9 @@ export function SegmentDemo({ config }: { config: DemoConfig }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cursorPos = useCursorPosition(containerRef, step);
   const shouldReduceMotion = useReducedMotion();
+  const userCursorPos = cursorPos
+    ? { x: cursorPos.x + 14, y: cursorPos.y + 12 }
+    : null;
 
   const handleClick = () => {
     setStep((prev) => (prev + 1) % config.steps.length);
@@ -690,11 +728,25 @@ export function SegmentDemo({ config }: { config: DemoConfig }) {
             <CursorSVG />
           </motion.div>
         )}
+        {userCursorPos && (
+          <motion.div
+            className="absolute z-20 pointer-events-none"
+            animate={{ x: userCursorPos.x, y: userCursorPos.y }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : { type: "spring", stiffness: 140, damping: 16, delay: 0.12 }
+            }
+          >
+            <CursorSVG color="#2563eb" />
+          </motion.div>
+        )}
 
         {/* Window chrome */}
         <WindowChrome
           title={config.windowTitle}
           icon={<WindowIcon variant={config.variant} />}
+          showBadge
         />
 
         {/* App content with tooltip overlay */}
@@ -707,12 +759,6 @@ export function SegmentDemo({ config }: { config: DemoConfig }) {
             totalSteps={config.steps.length}
             text={config.steps[step].text}
           />
-
-          {/* Interactive demo badge */}
-          <Badge variant="success" className="absolute top-4 right-4 z-20">
-            <Check className="w-3 h-3 mr-1" />
-            Interactive Demo
-          </Badge>
         </div>
 
         {/* Click prompt footer */}

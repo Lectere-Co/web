@@ -9,7 +9,10 @@
     
     <!-- Animated Blobs -->
     <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse-slow"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[100px] animate-pulse-slow delay-1000"></div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[100px] animate-pulse-slow"
+      style="animation-delay: 1.5s;"
+    ></div>
   </div>
 
   <div class="container relative z-10 px-6">
@@ -46,7 +49,7 @@
 
       <!-- CTA Buttons -->
       <div class="reveal reveal-up flex flex-col sm:flex-row gap-4 mb-20" data-delay="4">
-        <a href="#how-it-works" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300">
+        <a href="/product#how-it-works" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
           See How It Works
         </a>
@@ -167,5 +170,12 @@
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse-slow,
+    .animate-float {
+      animation: none !important;
+    }
   }
 </style>

@@ -790,7 +790,6 @@ export default function SegmentSelector() {
               exit={{ opacity: 0, y: -10, height: 0, marginBottom: 0 }}
               transition={{ duration: 0.4 }}
               className="text-center mb-8"
-              id="newsletter-signup"
             >
               <p className="text-sm text-muted-foreground mb-4">
                 Sign up for early access and development updates.

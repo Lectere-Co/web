@@ -696,7 +696,16 @@ export function SegmentDemo({ config }: { config: DemoConfig }) {
           <motion.div
             ref={containerRef}
             className="bg-white/80 backdrop-blur-xl rounded-2xl overflow-hidden cursor-none border border-white/40 shadow-2xl shadow-black/10 ring-1 ring-black/5"
+            role="button"
+            tabIndex={0}
+            aria-label="Interactive demo window. Click or press Enter or Space to progress through the steps."
             onClick={handleClick}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleClick();
+              }
+            }}
             whileHover={{ scale: 1.005 }}
             transition={{ duration: 0.4 }}
           >

@@ -1,251 +1,171 @@
 ---
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-  <!-- Subtle accent blobs -->
-  <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#eb336e]/5 blur-[120px] -translate-y-1/2 translate-x-1/4"></div>
-  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-[#9b274c]/5 blur-[100px] translate-y-1/3 -translate-x-1/4"></div>
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background pt-20">
+  <!-- Dynamic Background Pattern -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
+    
+    <!-- Animated Blobs -->
+    <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse-slow"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[100px] animate-pulse-slow delay-1000"></div>
+  </div>
 
-  <div class="container relative z-10 px-6 pt-12 pb-32 md:pt-16 md:pb-40">
-    <div class="flex flex-col items-center text-center max-w-4xl mx-auto">
-      <!-- Badge -->
-      <div class="reveal reveal-up" data-delay="1">
-        <div class="inline-flex items-center rounded-full border border-[#eb336e]/20 bg-[#eb336e]/10 text-[#eb336e] shadow-sm shadow-[#eb336e]/10 font-semibold mb-8 py-1.5 px-4 text-sm gap-2">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#eb336e] opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#9b274c]"></span>
+  <div class="container relative z-10 px-6">
+    <div class="flex flex-col items-center text-center max-w-5xl mx-auto">
+      
+      <!-- Announcement Badge -->
+      <div class="reveal reveal-up mb-8" data-delay="1">
+        <a href="#newsletter-signup" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 border border-primary/20 backdrop-blur-sm shadow-sm hover:bg-white/80 transition-colors group">
+          <span class="flex h-2 w-2 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          Coming Soon for macOS
-        </div>
+          <span class="text-sm font-medium text-foreground">Coming Soon for macOS</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary w-4 h-4 transition-transform group-hover:translate-x-0.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
       </div>
 
-      <!-- Logo -->
-      <div class="reveal reveal-scale" data-delay="2">
-        <img src="/lecterelogonotext.svg" alt="" class="h-16 mb-8" />
-      </div>
-
-      <!-- Headline -->
-      <h1
-        class="reveal reveal-up text-5xl md:text-6xl lg:text-7xl font-display font-medium leading-[1.1] tracking-tight mb-8 text-foreground"
-        data-delay="3"
-      >
-        Software that
-        <span class="italic text-gradient">teaches you</span>
+      <!-- Main Headline -->
+      <h1 class="reveal reveal-up text-5xl md:text-7xl lg:text-8xl font-display font-medium leading-[1.1] tracking-tight mb-8 text-foreground" data-delay="2">
+        Software that <br class="hidden md:block" />
+        <span class="text-gradient italic relative inline-block">
+          teaches you
+          <svg class="absolute w-full h-3 -bottom-1 left-0 text-primary/30" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="3" fill="none" />
+          </svg>
+        </span>
         while you use it.
       </h1>
 
-      <!-- Subtext -->
-      <p
-        class="reveal reveal-up text-lg md:text-xl text-muted-foreground max-w-2xl mb-12 leading-relaxed"
-        data-delay="4"
-      >
-        Lectere is an AI-powered learning assistant that provides real-time,
-        contextual guidance through visual overlays&mdash;showing you exactly what
-        to click, step by step.
+      <!-- Subheadline -->
+      <p class="reveal reveal-up text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed" data-delay="3">
+        Lectere lives inside your apps and shows you exactly what to click. No more tutorials, no more searching—just instant, on-screen guidance.
       </p>
 
-      <!-- CTAs -->
-      <div class="reveal reveal-up flex flex-col sm:flex-row gap-4" data-delay="5">
-        <a
-          href="/product"
-          class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-gradient-to-r from-[#eb336e] to-[#9b274c] text-white shadow-lg shadow-[#eb336e]/20 hover:shadow-xl hover:shadow-[#eb336e]/25 hover:-translate-y-0.5 h-14 rounded-xl px-10 text-lg"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+      <!-- CTA Buttons -->
+      <div class="reveal reveal-up flex flex-col sm:flex-row gap-4 mb-20" data-delay="4">
+        <a href="#how-it-works" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
           See How It Works
         </a>
-        <button
-          type="button"
-          id="hero-waitlist-btn"
-          class="group inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-border bg-background text-foreground hover:bg-secondary hover:text-foreground h-14 rounded-xl px-10 text-lg"
-        >
+        <a href="#newsletter-signup" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white border border-border text-foreground font-medium shadow-sm hover:bg-secondary/50 hover:border-primary/20 transition-all duration-300">
           Join the Waitlist
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-        </button>
+        </a>
       </div>
 
-      <!-- Floating Cards -->
-      <div class="relative w-full max-w-3xl mt-20">
-        <div
-          id="hero-card-left"
-          class="hero-float-card absolute -left-4 md:left-0 top-0 bg-white rounded-xl p-4 flex items-center gap-3 shadow-lg border border-border"
-        >
-          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="m4 4 7.07 17 2.51-7.39L21 11.07z"></path></svg>
+      <!-- Hero Visual: The "App Interface" -->
+      <div class="reveal reveal-scale w-full max-w-5xl relative" data-delay="5">
+        <!-- Main Window Container -->
+        <div class="relative bg-white rounded-2xl border border-border/50 shadow-2xl overflow-hidden aspect-[16/10] md:aspect-[21/9]">
+          
+          <!-- Window Controls -->
+          <div class="absolute top-0 left-0 right-0 h-10 bg-secondary/50 border-b border-border/50 flex items-center px-4 gap-2 z-20">
+            <div class="w-3 h-3 rounded-full bg-red-400/80"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-400/80"></div>
+            <div class="w-3 h-3 rounded-full bg-green-400/80"></div>
           </div>
-          <span class="text-sm font-medium text-foreground">Click &ldquo;File&rdquo; to continue</span>
-        </div>
 
-        <div
-          id="hero-card-right"
-          class="hero-float-card absolute -right-4 md:right-0 top-12 bg-white rounded-xl p-4 flex items-center gap-3 shadow-lg border border-border"
-        >
-          <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#c43278] to-[#832558] flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <!-- App Mockup Content (Abstract Dashboard) -->
+          <div class="absolute inset-0 pt-10 bg-secondary/20 p-6 flex gap-6">
+            <!-- Sidebar -->
+            <div class="w-64 hidden md:flex flex-col gap-4">
+              <div class="h-8 w-32 bg-white rounded-lg shadow-sm"></div>
+              <div class="h-4 w-24 bg-border/40 rounded mt-4"></div>
+              <div class="h-4 w-20 bg-border/40 rounded"></div>
+              <div class="h-4 w-28 bg-border/40 rounded"></div>
+              
+              <div class="h-4 w-24 bg-border/40 rounded mt-8"></div>
+              <div class="h-4 w-20 bg-border/40 rounded"></div>
+              <div class="h-4 w-28 bg-border/40 rounded"></div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 flex flex-col gap-6">
+              <!-- Header -->
+              <div class="h-16 bg-white rounded-xl border border-border/40 shadow-sm flex items-center justify-between px-6">
+                <div class="h-6 w-48 bg-border/40 rounded"></div>
+                <div class="h-8 w-8 rounded-full bg-border/40"></div>
+              </div>
+
+              <!-- Grid Content -->
+              <div class="grid grid-cols-3 gap-6 h-full">
+                <div class="col-span-2 bg-white rounded-xl border border-border/40 shadow-sm p-4 relative overflow-hidden group">
+                  <!-- Abstract Chart -->
+                  <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary/5 to-transparent"></div>
+                  <div class="flex items-end justify-between h-full px-4 pb-4 gap-2">
+                    <div class="w-full bg-primary/10 h-[40%] rounded-t-sm"></div>
+                    <div class="w-full bg-primary/20 h-[70%] rounded-t-sm"></div>
+                    <div class="w-full bg-primary/10 h-[50%] rounded-t-sm"></div>
+                    <div class="w-full bg-primary/30 h-[85%] rounded-t-sm"></div>
+                    <div class="w-full bg-primary/10 h-[60%] rounded-t-sm"></div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl border border-border/40 shadow-sm p-4">
+                   <div class="h-full w-full bg-border/10 rounded-lg"></div>
+                </div>
+              </div>
+            </div>
           </div>
-          <span class="text-sm font-medium text-foreground">Great job! Next step...</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Scroll Indicator -->
-    <div class="reveal absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-muted-foreground" data-delay="8">
-      <div class="hero-scroll-pill w-6 h-10 rounded-full border-2 border-border flex justify-center pt-2">
-        <div class="hero-scroll-dot w-1.5 h-1.5 rounded-full bg-muted-foreground"></div>
+          <!-- LECTERE OVERLAYS (The Magic) -->
+          
+          <!-- Overlay 1: Cursor Guidance -->
+          <div class="absolute top-[40%] left-[60%] z-30 flex items-center gap-3 animate-float">
+            <!-- Cursor -->
+            <svg class="w-8 h-8 text-primary drop-shadow-xl" viewBox="0 0 24 24" fill="currentColor" stroke="white" stroke-width="2">
+              <path d="M5.5 3.21l10.8 5.4a.5.5 0 0 1 .15.82l-3.5 2.8a.5.5 0 0 0-.17.38l.4 4.4a.5.5 0 0 1-.92.35l-2.8-4.8a.5.5 0 0 0-.8-.12l-3.2 2.6a.5.5 0 0 1-.82-.38V3.7a.5.5 0 0 1 .86-.49z"/>
+            </svg>
+            
+            <!-- Tooltip -->
+            <div class="bg-foreground text-background px-4 py-2 rounded-lg shadow-xl text-sm font-medium border border-white/10 flex items-center gap-2">
+              <span>Click to generate report</span>
+              <kbd class="hidden md:inline-flex h-5 items-center gap-1 rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[10px] font-medium opacity-100">
+                <span class="text-xs">⌘</span>K
+              </kbd>
+            </div>
+          </div>
+
+          <!-- Overlay 2: Success Message -->
+          <div class="absolute bottom-12 right-12 z-30 animate-float" style="animation-delay: 2s;">
+            <div class="bg-white text-foreground px-4 py-3 rounded-xl shadow-xl border border-border flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xs text-muted-foreground font-medium uppercase tracking-wider">Lectere</span>
+                <span class="text-sm font-semibold">Report exported successfully!</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- Glow Effect behind the window -->
+        <div class="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-[2rem] blur-2xl -z-10 opacity-50"></div>
       </div>
-      <span class="text-xs uppercase tracking-widest">Scroll to explore</span>
+
     </div>
   </div>
 </section>
 
 <style>
-  /* Floating cards — entrance animation */
-  .hero-float-card {
-    opacity: 0;
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 
-  #hero-card-left {
-    transform: translateX(-50px) rotate(-5deg);
-    transition-delay: 0.5s;
-  }
-  #hero-card-left.visible {
-    opacity: 1;
-    transform: rotate(-3deg);
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
   }
 
-  #hero-card-right {
-    transform: translateX(50px) rotate(5deg);
-    transition-delay: 0.6s;
-  }
-  #hero-card-right.visible {
-    opacity: 1;
-    transform: rotate(3deg);
-  }
-
-  /* Scroll indicator bounce */
-  .hero-scroll-pill {
-    animation: hero-pill-bounce 1.5s ease-in-out infinite;
-  }
-  .hero-scroll-dot {
-    animation: hero-dot-bounce 1.5s ease-in-out infinite;
-  }
-
-  @keyframes hero-pill-bounce {
+  @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); }
-  }
-  @keyframes hero-dot-bounce {
-    0%, 100% { transform: translateY(0); opacity: 1; }
-    50% { transform: translateY(12px); opacity: 0.3; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-float-card {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-    .hero-scroll-pill,
-    .hero-scroll-dot {
-      animation: none;
-    }
+    50% { transform: translateY(-10px); }
   }
 </style>
-
-<script>
-  function initHero() {
-    const cardLeft = document.getElementById('hero-card-left');
-    const cardRight = document.getElementById('hero-card-right');
-    const waitlistBtn = document.getElementById('hero-waitlist-btn');
-
-    // Observe floating cards for reveal (they use custom classes, not .reveal)
-    const cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            cardObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    if (cardLeft) cardObserver.observe(cardLeft);
-    if (cardRight) cardObserver.observe(cardRight);
-
-    // Scroll-based parallax for floating cards
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!prefersReducedMotion) {
-      // After entrance transition completes, disable transform transitions for smooth parallax
-      [cardLeft, cardRight].forEach((card) => {
-        if (!card) return;
-        card.addEventListener(
-          'transitionend',
-          (e: Event) => {
-            if ((e as TransitionEvent).propertyName === 'transform') {
-              card.style.transitionProperty = 'opacity';
-            }
-          },
-          { once: true }
-        );
-      });
-
-      let ticking = false;
-      const handleScroll = () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-            const y1 = Math.max(-30, -(scrollY / 500) * 30);
-            const y2 = Math.max(-50, -(scrollY / 500) * 50);
-
-            if (cardLeft) {
-              cardLeft.style.transform = `rotate(-3deg) translateY(${y1}px)`;
-            }
-            if (cardRight) {
-              cardRight.style.transform = `rotate(3deg) translateY(${y2}px)`;
-            }
-
-            ticking = false;
-          });
-          ticking = true;
-        }
-      };
-      
-      // Remove any existing listener before adding new one
-      if ((window as Window & { __heroParallaxHandler?: () => void }).__heroParallaxHandler) {
-        window.removeEventListener('scroll', (window as Window & { __heroParallaxHandler?: () => void }).__heroParallaxHandler);
-      }
-      
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      (window as Window & { __heroParallaxHandler?: () => void }).__heroParallaxHandler = handleScroll;
-    }
-
-    // Waitlist button scrolls to newsletter section
-    if (waitlistBtn) {
-      waitlistBtn.addEventListener('click', () => {
-        const el = document.getElementById('newsletter-signup');
-        if (!el) return;
-
-        const header = document.querySelector('header');
-        const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
-        const elementPosition = el.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - headerHeight;
-
-        const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-        if (reduced) {
-          window.scrollTo(0, offsetPosition);
-        } else {
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        }
-      });
-    }
-  }
-
-  // Initialize on first load
-  initHero();
-
-  // Re-initialize after View Transitions swap
-  document.addEventListener('astro:after-swap', initHero);
-</script>

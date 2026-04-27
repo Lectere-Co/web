@@ -212,7 +212,7 @@ const audience = [
               <li>Limited usage</li>
               <li>Basic integrations</li>
             </ul>
-            <a class="btn" href="#newsletter">try_free <span style="font-size:14px">→</span></a>
+            <a class="btn" href="#newsletter">join_waitlist <span style="font-size:14px">→</span></a>
           </div>
           <div class="pri__c pri__c--feat">
             <span class="pri__tag">most picked</span>
@@ -225,15 +225,17 @@ const audience = [
               <li>External integrations</li>
               <li>Email support</li>
             </ul>
-            <a class="btn btn--acc" href="#newsletter">get_started <span style="font-size:14px">→</span></a>
+            <a class="btn btn--acc" href="#newsletter">join_waitlist <span style="font-size:14px">→</span></a>
           </div>
         </div>
         <div class="pri__teams-wrap">
           <div class="pri__c pri__teams">
-            <span class="pri__pill">plan_03 / teams</span>
-            <h3>Teams</h3>
-            <div class="pri__price"><b>$45</b><small>/mo per user · or $475/yr</small></div>
-            <ul>
+            <div class="pri__teams-info">
+              <span class="pri__pill">plan_03 / teams</span>
+              <h3>Teams</h3>
+              <div class="pri__price"><b>$45</b><small>/mo per user · or $475/yr</small></div>
+            </div>
+            <ul class="pri__teams-list">
               <li>Admin dashboard</li>
               <li>Team analytics</li>
               <li>Custom documentation tools</li>
@@ -799,11 +801,39 @@ const audience = [
       border: 1.5px solid var(--line); border-top: none;
     }
     .pri__teams {
-      width: min(100%, 480px);
+      width: 100%;
       border-right: none;
-      padding: 28px;
+      padding: 24px 36px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: nowrap;
     }
-    .pri__teams .pri__price b { font-size: 48px; }
+    .pri__teams-info {
+      display: flex; flex-direction: column; gap: 6px;
+      flex: 0 1 auto; min-width: 200px;
+    }
+    .pri__teams .pri__price { gap: 8px; }
+    .pri__teams .pri__price b { font-size: 36px; }
+    .pri__teams .pri__price small { font-size: 12px; }
+    .pri__teams h3 { font-size: 22px; }
+    .pri__teams-feats {
+      font-size: 12px; color: var(--ink-soft); margin-top: 4px;
+    }
+    .pri__teams-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 6px;
+      flex: 0 1 auto; min-width: 0;
+    }
+    .pri__teams-list li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 13px; color: var(--ink-soft);
+    }
+    .pri__teams-list li::before {
+      content: "✓"; color: var(--acc); font-weight: 800; flex: 0 0 14px;
+    }
+    .pri__teams .btn { flex: 0 0 auto; }
 
     /* NEWSLETTER */
     .news {

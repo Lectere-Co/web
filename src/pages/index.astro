@@ -1,8 +1,966 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SegmentSelector from '../components/SegmentSelector';
+import TerminalDemo from '../components/TerminalDemo.tsx';
+import TerminalNewsletter from '../components/TerminalNewsletter.tsx';
+
+const title = 'Lectere — /usr/bin/guidance';
+const description = 'Forced adoption, solved. Lectere is the AI assistant that shows you the next click — inside the software you were already told to use.';
+
+const apps = ['quickbooks', 'medicare.gov', 'salesforce', 'dmv portal', 'mychart', 'sap', 'adp', 'workday', 'concur'];
+const tickerRow = [...apps, ...apps];
+
+const audience = [
+  { k: 'b2c · students',    h1: 'students &',  h2: 'early careers',     p: 'Canva, PowerPoint, Excel, Notion. Step-by-step help for assignments and first jobs — without leaving the tab.', n: '01' },
+  { k: 'b2b · smb',         h1: 'small',       h2: 'businesses',        p: 'Owners and teams adopting CRMs, dashboards, and design tools. Cut support tickets. Close more days.', n: '02' },
+  { k: 'b2b · schools',     h1: 'schools &',   h2: 'educators',         p: 'Google Workspace, Canvas, and digital literacy programs. Guidance for every student, including ESL learners.', n: '03' },
+  { k: 'b2c · pros',        h1: 'non-technical', h2: 'professionals',   p: 'Healthcare workers, teachers, and small business owners — the people every other product forgot.', n: '04' },
+];
 ---
 
-<Layout showNewsletter={false}>
-  <SegmentSelector client:load />
-</Layout>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#120618" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" />
+  <script is:inline>
+    (function () {
+      try {
+        var stored = localStorage.getItem('lectere-theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (_) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="crt"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__brand glow-text">
+        <img src="/lecterelogonotext.svg" alt="" aria-hidden="true" class="nav__logo" />
+        Lectere
+      </a>
+      <div class="nav__center">
+        <a href="#features">features</a>
+        <a href="#demo">demo</a>
+        <a href="#solutions">who it's for</a>
+        <a href="#pricing">pricing</a>
+      </div>
+      <div class="nav__right">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme">
+          <span class="theme-toggle__sun" aria-hidden="true">☼</span>
+          <span class="theme-toggle__moon" aria-hidden="true">☾</span>
+        </button>
+        <a class="btn btn--acc btn--sm" href="#newsletter">join_waitlist <span style="font-size:14px">→</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero__title">
+          <span class="dim">$</span> forced<br />
+          adoption,<br />
+          <span class="acc">solved.</span><span class="hero__cursor"></span>
+        </h1>
+        <div class="hero__row">
+          <div>
+            <p class="hero__sub">
+              Lectere is the AI assistant that <b>shows you the next click</b> — inside the software you were already told to use. Medicare. Salesforce. SAP. The DMV portal. Press <span class="key">?</span> for help; we draw the rest.
+            </p>
+            <div class="hero__cta">
+              <a class="btn btn--acc btn--lg" href="#newsletter">get_early_access <span style="font-size:14px">→</span></a>
+              <a class="btn btn--lg" href="#demo">./run --demo</a>
+            </div>
+          </div>
+          <div class="hero__counter">
+            <span class="lbl">/launch</span>
+            <span class="num glow-text">'26</span>
+            <span class="sub">June · waitlist open</span>
+          </div>
+        </div>
+
+        <div class="specs">
+          <div class="spec">
+            <span class="spec__lbl">// 01 · refocus tax</span>
+            <div class="spec__big">23<small>min</small></div>
+            <p>to regain focus every time a user leaves their app to search for help.</p>
+            <span class="spec__cite">— UC Irvine</span>
+          </div>
+          <div class="spec">
+            <span class="spec__lbl">// 02 · context churn</span>
+            <div class="spec__big">1,200<small>×</small></div>
+            <p>app and tab switches the average knowledge worker makes in a single day.</p>
+            <span class="spec__cite">— Harvard Business Review</span>
+          </div>
+          <div class="spec">
+            <span class="spec__lbl">// 03 · training gap</span>
+            <div class="spec__big">59<small>%</small></div>
+            <p>of employees receive no formal software training. 9 in 10 want it in the moment.</p>
+            <span class="spec__cite">— industry surveys</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="tag">man lectere</div>
+            <h2>three principles. <span class="acc">that's it.</span></h2>
+          </div>
+          <p>Detect, overlay, adapt. No SDK install. No screen-recording. No retraining when the UI moves.</p>
+        </div>
+        <div class="feat">
+          <article class="feat__c">
+            <span class="feat__num">01 / principle</span>
+            <h3>contextual <span class="acc">detection</span></h3>
+            <p>Lectere identifies the software you're using and recognizes exactly where you are within it — live, no screen-recording, no SDK install.</p>
+          </article>
+          <article class="feat__c">
+            <span class="feat__num">02 / principle</span>
+            <h3>on-screen <span class="acc">guidance</span></h3>
+            <p>A visual cursor shows exactly where to click, with plain-language explanations. No tab switching. No outdated tutorials.</p>
+          </article>
+          <article class="feat__c">
+            <span class="feat__num">03 / principle</span>
+            <h3>continuous <span class="acc">adaptation</span></h3>
+            <p>When software updates, Lectere's guidance updates with it. Never outdated, never broken.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section id="demo" class="section">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="tag">./run --demo</div>
+            <h2>watch it <span class="acc">do the thing.</span></h2>
+          </div>
+          <p>Tiny doc editor. Click the window to step through Lectere's overlay — same cursor, every app.</p>
+        </div>
+        <TerminalDemo client:visible />
+      </div>
+    </section>
+
+    <!-- AUDIENCE -->
+    <section id="solutions" class="section">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="tag">whoami</div>
+            <h2>built for the <span class="acc">forced</span> adopter.</h2>
+          </div>
+          <p>Anyone who didn't choose the software but has to use it anyway — especially the people every other product forgot.</p>
+        </div>
+        <div class="aud">
+          {audience.map((c) => (
+            <article class="aud__c">
+              <span class="aud__pill">{c.k}</span>
+              <h4>{c.h1} <span class="acc">{c.h2}</span></h4>
+              <p>{c.p}</p>
+              <span class="aud__num">{c.n}</span>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <div class="sec-head">
+          <div>
+            <div class="tag">cat pricing.txt</div>
+            <h2>plain <span class="acc">prices.</span></h2>
+          </div>
+          <p>Two plans. No upsells, no "talk to sales." Cancel from the same screen you signed up on.</p>
+        </div>
+        <div class="pri">
+          <div class="pri__c">
+            <span class="pri__pill">plan_01 / free</span>
+            <h3>Free</h3>
+            <div class="pri__price"><b>$0</b><small>14-day trial</small></div>
+            <ul>
+              <li>Core app features</li>
+              <li>Limited usage</li>
+              <li>Basic integrations</li>
+            </ul>
+            <a class="btn" href="#newsletter">try_free <span style="font-size:14px">→</span></a>
+          </div>
+          <div class="pri__c pri__c--feat">
+            <span class="pri__tag">most picked</span>
+            <span class="pri__pill">plan_02 / essential</span>
+            <h3>Essential</h3>
+            <div class="pri__price"><b>$20</b><small>/mo · or $220/yr</small></div>
+            <ul>
+              <li>Core app features</li>
+              <li>Unlimited usage</li>
+              <li>External integrations</li>
+              <li>Email support</li>
+            </ul>
+            <a class="btn btn--acc" href="#newsletter">get_started <span style="font-size:14px">→</span></a>
+          </div>
+        </div>
+        <div class="pri__teams-wrap">
+          <div class="pri__c pri__teams">
+            <span class="pri__pill">plan_03 / teams</span>
+            <h3>Teams</h3>
+            <div class="pri__price"><b>$45</b><small>/mo per user · or $475/yr</small></div>
+            <ul>
+              <li>Admin dashboard</li>
+              <li>Team analytics</li>
+              <li>Custom documentation tools</li>
+              <li>Collaboration features</li>
+            </ul>
+            <a class="btn" href="#newsletter">join_waitlist <span style="font-size:14px">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter" class="container" style="padding:40px 24px 60px">
+      <div class="news">
+        <div>
+          <h2>stay in the <span class="acc">loop.</span></h2>
+          <p>One email a month. Lectere news, early-access drops, the occasional hot take on accessibility. Unsubscribe whenever.</p>
+        </div>
+        <div>
+          <TerminalNewsletter client:visible />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="container">
+      <div class="foot__mark">lect<span class="acc">ere</span><span class="blink"></span></div>
+      <div class="foot__row">
+        <div class="foot__col">
+          <h5>product</h5>
+          <a href="#features">how it works</a>
+          <a href="#demo">demo</a>
+          <a href="#pricing">pricing</a>
+          <a href="#">changelog</a>
+        </div>
+        <div class="foot__col">
+          <h5>solutions</h5>
+          <a href="#solutions">families</a>
+          <a href="#solutions">small business</a>
+          <a href="#solutions">public sector</a>
+        </div>
+        <div class="foot__col">
+          <h5>company</h5>
+          <a href="#">about</a>
+          <a href="#">founders</a>
+          <a href="mailto:info@lectere.com">contact</a>
+        </div>
+        <div class="foot__col">
+          <h5>legal</h5>
+          <a href="#">privacy</a>
+          <a href="#">terms</a>
+          <a href="#">accessibility</a>
+        </div>
+      </div>
+      <div class="foot__base">
+        <span>© 2026 lectere co · houston tx</span>
+        <span>./forced_adoption_solved<span class="blink"></span></span>
+      </div>
+    </div>
+  </footer>
+
+  <style is:global>
+    /* ============================================================
+       LECTERE TERMINAL — pink phosphor (Razzmatazz #eb336e)
+       ============================================================ */
+    :root {
+      --bg: #120618;
+      --bg-2: #1d0a26;
+      --bg-3: #2a0e34;
+      --ink: #ffa8e3;
+      --ink-dim: rgba(255, 168, 227, 0.55);
+      --ink-soft: rgba(255, 168, 227, 0.78);
+      --line: rgba(255, 168, 227, 0.2);
+      --line-strong: rgba(255, 168, 227, 0.34);
+      --acc: #eb336e;
+      --acc-2: #ff8aaf;
+      --warn: #ffd24a;
+      --err: #ff5e5e;
+      --on-acc: #fff;
+      --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --sans: "Open Sans", system-ui, sans-serif;
+      --glow: 0 0 4px currentColor, 0 0 14px color-mix(in oklab, currentColor 60%, transparent);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--ink);
+      font-family: var(--mono); font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Smooth color-scheme transitions (enabled after first paint to avoid flash) */
+    html.theme-ready body,
+    html.theme-ready body *:not(.demo__cur):not(.demo__cur-pulse):not(.hero__cursor):not(.blink) {
+      transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        text-shadow 0.35s ease,
+        fill 0.35s ease,
+        stroke 0.35s ease,
+        opacity 0.35s ease,
+        filter 0.35s ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html.theme-ready body,
+      html.theme-ready body *:not(.demo__cur):not(.demo__cur-pulse):not(.hero__cursor):not(.blink) {
+        transition: none;
+      }
+    }
+    button, input { font-family: inherit; color: inherit; }
+    img { display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { margin: 0; font-weight: 700; letter-spacing: -0.01em; line-height: 1.05; }
+    p { margin: 0; }
+    ::selection { background: var(--acc); color: var(--on-acc); }
+
+    /* SCANLINES */
+    .crt {
+      position: fixed; inset: 0; pointer-events: none;
+      z-index: 60; mix-blend-mode: overlay; opacity: 0.55;
+    }
+    .crt::before {
+      content: ""; position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg,
+        rgba(0, 0, 0, 0.45) 0,
+        rgba(0, 0, 0, 0.45) 1px,
+        transparent 1px,
+        transparent 3px);
+    }
+    .crt::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
+    }
+
+    /* PHOSPHOR GLOW BACKGROUND */
+    .bg-glow {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .bg-glow::before, .bg-glow::after {
+      content: ""; position: absolute; border-radius: 50%; filter: blur(140px);
+    }
+    .bg-glow::before {
+      width: 680px; height: 680px;
+      left: -180px; top: -180px;
+      background: var(--acc); opacity: 0.18;
+    }
+    .bg-glow::after {
+      width: 560px; height: 560px;
+      right: -180px; top: 300px;
+      background: var(--acc-2); opacity: 0.14;
+    }
+
+    .glow-text { text-shadow: var(--glow); }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    .section { padding: 80px 0; position: relative; z-index: 2; }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: linear-gradient(180deg, var(--bg) 70%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__inner {
+      max-width: 1280px; margin: 0 auto; padding: 14px 24px;
+      display: flex; align-items: center; gap: 24px; font-size: 13px;
+    }
+    .nav__brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 18px; letter-spacing: -0.01em; color: var(--ink);
+    }
+    .nav__brand .nav__logo {
+      width: 24px; height: 24px;
+      filter: drop-shadow(0 0 6px var(--acc));
+    }
+    .nav__path { color: var(--ink-dim); white-space: nowrap; }
+    .nav__path b { color: var(--ink); font-weight: 700; }
+    .nav__center { display: flex; gap: 18px; margin-left: auto; }
+    .nav__center a { color: var(--ink-soft); transition: color 0.15s; position: relative; padding: 4px 0; }
+    .nav__center a::before { content: "["; color: var(--ink-dim); margin-right: 2px; opacity: 0; transition: opacity 0.15s; }
+    .nav__center a::after  { content: "]"; color: var(--ink-dim); margin-left: 2px;  opacity: 0; transition: opacity 0.15s; }
+    .nav__center a:hover { color: var(--acc); text-shadow: var(--glow); }
+    .nav__center a:hover::before, .nav__center a:hover::after { opacity: 1; }
+    .nav__right { display: flex; gap: 8px; align-items: center; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0 18px; height: 40px;
+      font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--line-strong);
+      cursor: pointer; transition: all 0.15s;
+      text-transform: lowercase;
+    }
+    .btn:hover {
+      border-color: var(--acc); color: var(--acc);
+      text-shadow: var(--glow);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--acc) 18%, transparent);
+    }
+    .btn--acc { background: var(--acc); color: var(--on-acc); border-color: var(--acc); }
+    .btn--acc:hover {
+      background: var(--acc-2); border-color: var(--acc-2); color: var(--on-acc);
+      text-shadow: none;
+      box-shadow: 0 0 24px color-mix(in oklab, var(--acc) 50%, transparent);
+    }
+    .btn--ghost { border-color: transparent; }
+    .btn--ghost:hover { border-color: var(--line-strong); }
+    .btn--sm { height: 32px; padding: 0 12px; font-size: 12px; }
+    .btn--lg { height: 52px; padding: 0 24px; font-size: 14px; }
+
+    /* HERO */
+    .hero { padding: 60px 0 30px; }
+    .hero__prompt {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--ink-soft); margin-bottom: 24px;
+    }
+    .hero__prompt::before { content: "$"; color: var(--acc); font-weight: 800; }
+    .hero__prompt code { color: var(--ink); }
+    .hero__prompt .blink {
+      display: inline-block; width: 9px; height: 16px;
+      background: var(--ink); animation: blink 1.05s steps(2, start) infinite;
+      vertical-align: -3px; margin-left: 2px;
+    }
+    @keyframes blink { to { visibility: hidden; } }
+
+    .hero__title {
+      font-family: var(--mono);
+      font-size: clamp(56px, 9vw, 132px);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 0.95;
+      margin: 0 0 24px;
+      text-shadow: var(--glow);
+    }
+    .hero__title .acc { color: var(--acc); }
+    .hero__title .dim { color: var(--ink-dim); text-shadow: none; }
+    .hero__cursor {
+      display: inline-block;
+      width: 0.5em; height: 0.85em;
+      background: var(--acc);
+      animation: blink 1.05s steps(2, start) infinite;
+      vertical-align: -2%;
+      margin-left: 8px;
+      box-shadow: var(--glow);
+    }
+
+    .hero__row {
+      display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px;
+      align-items: end; margin-top: 24px;
+    }
+    .hero__sub { font-size: 16px; line-height: 1.65; color: var(--ink-soft); max-width: 560px; }
+    .hero__sub b { color: var(--ink); }
+    .hero__sub .key {
+      background: var(--bg-2); border: 1px solid var(--line);
+      padding: 1px 8px; color: var(--acc); font-weight: 700;
+    }
+    .hero__cta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 24px; }
+
+    .hero__counter {
+      background: var(--bg-2); border: 1.5px solid var(--line);
+      padding: 18px 22px; font-family: var(--mono);
+    }
+    .hero__counter .lbl {
+      font-size: 11px; color: var(--ink-dim);
+      letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+    }
+    .hero__counter .num {
+      font-size: 64px; font-weight: 800; color: var(--acc);
+      text-shadow: var(--glow); line-height: 1; margin: 8px 0 4px; letter-spacing: -0.02em;
+    }
+    .hero__counter .sub { font-size: 11px; color: var(--ink-dim); }
+
+    /* STATS */
+    .specs {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+      margin-top: 48px; border: 1.5px solid var(--line);
+    }
+    .spec { padding: 28px; border-right: 1.5px solid var(--line); position: relative; }
+    .spec:last-child { border-right: none; }
+    .spec__lbl {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-dim); font-weight: 700;
+    }
+    .spec__big {
+      font-size: 72px; font-weight: 800; line-height: 1;
+      margin: 16px 0 12px; color: var(--acc);
+      text-shadow: var(--glow); letter-spacing: -0.02em;
+    }
+    .spec__big small { font-size: 36px; }
+    .spec p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+    .spec__cite { display: block; margin-top: 10px; font-size: 11px; color: var(--ink-dim); }
+
+    /* TICKER */
+    .ticker {
+      margin-top: 48px; padding: 14px 0;
+      border-top: 1px dashed var(--line-strong);
+      border-bottom: 1px dashed var(--line-strong);
+      overflow: hidden;
+    }
+    .ticker__t { display: flex; gap: 42px; white-space: nowrap; animation: slide 30s linear infinite; }
+    .ticker__t:hover { animation-play-state: paused; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+    .ticker__i { font-size: 13px; color: var(--ink-soft); }
+    .ticker__i b { color: var(--acc); font-weight: 700; }
+    .ticker__i::before { content: "▸ "; color: var(--ink-dim); }
+
+    /* SECTION HEADS */
+    .sec-head {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      align-items: end; margin-bottom: 40px;
+    }
+    .sec-head .tag {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-dim); font-weight: 700; margin-bottom: 14px;
+    }
+    .sec-head .tag::before { content: "// "; color: var(--acc); }
+    .sec-head h2 {
+      font-family: var(--mono);
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 1;
+      text-shadow: var(--glow);
+    }
+    .sec-head h2 .acc { color: var(--acc); }
+    .sec-head p { color: var(--ink-soft); font-size: 14px; line-height: 1.7; max-width: 420px; }
+
+    /* FEATURES */
+    .feat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1.5px solid var(--line); }
+    .feat__c {
+      padding: 28px; border-right: 1.5px solid var(--line);
+      display: flex; flex-direction: column; gap: 14px;
+      min-height: 380px; transition: background 0.2s;
+    }
+    .feat__c:last-child { border-right: none; }
+    .feat__c:hover { background: var(--bg-2); }
+    .feat__num {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-dim); font-weight: 700;
+    }
+    .feat__num::before { content: "#"; color: var(--acc); }
+    .feat__c h3 {
+      font-family: var(--mono); font-size: 24px;
+      letter-spacing: -0.01em; line-height: 1.15; color: var(--ink);
+    }
+    .feat__c h3 .acc { color: var(--acc); }
+    .feat__c p { font-size: 13px; line-height: 1.65; color: var(--ink-soft); }
+    .feat__viz {
+      margin-top: auto; padding: 14px;
+      background: var(--bg-2); border: 1px solid var(--line);
+      font-size: 12px; line-height: 1.5;
+    }
+    .feat__viz .out  { color: var(--ink-soft); }
+    .feat__viz .ok   { color: var(--acc); font-weight: 700; }
+    .feat__viz .warn { color: var(--warn); }
+    .feat__viz .err  { color: var(--err); }
+    .feat__viz .arrow { color: var(--acc); }
+    .feat__viz pre { margin: 0; font-family: var(--mono); white-space: pre; overflow-x: auto; }
+
+    /* DEMO */
+    .demo {
+      border: 1.5px solid var(--line);
+      background: var(--bg-2);
+      display: grid; grid-template-columns: 1.6fr 1fr;
+    }
+    .demo__win { position: relative; border-right: 1.5px solid var(--line); user-select: none; cursor: pointer; overflow: hidden; }
+    .demo__chrome {
+      display: flex; align-items: center; padding: 12px 16px;
+      background: var(--bg-3); border-bottom: 1px solid var(--line);
+      font-size: 12px; color: var(--ink-dim);
+    }
+    .demo__dots { display: flex; gap: 6px; margin-right: 14px; }
+    .demo__dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .demo__dots span:nth-child(1) { background: #ff5e5e; }
+    .demo__dots span:nth-child(2) { background: var(--warn); }
+    .demo__dots span:nth-child(3) { background: var(--acc); }
+    .demo__file { flex: 1; text-align: center; font-family: var(--mono); }
+    .demo__share {
+      background: var(--acc); color: var(--on-acc);
+      padding: 5px 12px; font-size: 11px; font-weight: 700;
+      border: none; cursor: pointer; font-family: var(--mono); text-transform: lowercase;
+    }
+    .demo__share.hl {
+      animation: pulse 1.4s infinite;
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--acc) 40%, transparent);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    .demo__menu { display: flex; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); }
+    .demo__menu button {
+      background: transparent; border: none;
+      padding: 8px 14px; font-size: 12px; cursor: pointer;
+      font-family: var(--mono); color: var(--ink-soft);
+    }
+    .demo__menu button.hl { background: var(--acc); color: var(--on-acc); animation: pulse 1.4s infinite; }
+    .demo__tools {
+      display: flex; gap: 2px; padding: 6px 12px;
+      background: var(--bg-3); border-bottom: 1px solid var(--line); align-items: center;
+    }
+    .demo__tools button {
+      background: transparent; border: 1px solid transparent;
+      padding: 4px 10px; font-size: 12px; color: var(--ink-soft);
+      cursor: pointer; font-family: var(--mono); min-width: 32px;
+    }
+    .demo__tools button.hl { background: var(--acc); color: var(--on-acc); animation: pulse 1.4s infinite; }
+    .demo__tools button:hover:not(.hl) { background: var(--bg); }
+    .demo__sep { width: 1px; height: 16px; background: var(--line-strong); margin: 0 4px; }
+    .demo__doc-area {
+      position: relative; padding: 24px; height: 420px;
+      background: var(--bg); display: flex; justify-content: center; overflow: hidden;
+    }
+    .demo__doc {
+      width: 100%; max-width: 540px;
+      background: #fff; color: #0f0a14;
+      padding: 28px 36px; align-self: flex-start;
+      box-shadow: 0 0 0 1px var(--line-strong), 0 18px 40px -20px rgba(0, 0, 0, 0.6);
+      font-family: var(--sans);
+    }
+    .demo__doc h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; color: #0f0a14; }
+    .demo__doc p, .demo__doc ul { font-size: 13px; line-height: 1.65; color: #444; margin-bottom: 8px; }
+    .demo__doc strong { color: #000; }
+    .demo__cur {
+      position: absolute; top: 0; left: 0;
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+      pointer-events: none; z-index: 30;
+      color: var(--acc);
+      filter: drop-shadow(0 0 6px color-mix(in oklab, var(--acc) 70%, transparent));
+      will-change: transform;
+    }
+    .demo__cur svg { display: block; transform: translate(-2px, -2px); }
+    .demo__cur-pulse {
+      position: absolute; left: -12px; top: -12px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: color-mix(in oklab, var(--acc) 40%, transparent);
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--acc) 60%, transparent);
+      animation: cur-pulse 1.6s ease-out infinite;
+    }
+    @keyframes cur-pulse {
+      0%   { transform: scale(0.6); opacity: 0.9; box-shadow: 0 0 0 0 color-mix(in oklab, var(--acc) 60%, transparent); }
+      80%  { transform: scale(1.6); opacity: 0;   box-shadow: 0 0 0 14px color-mix(in oklab, var(--acc) 0%, transparent); }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .demo__cur-label {
+      position: absolute; left: 18px; top: 16px;
+      font-family: var(--mono); font-size: 10px; line-height: 1;
+      letter-spacing: 0.06em; text-transform: lowercase;
+      color: var(--on-acc); background: var(--acc);
+      padding: 4px 6px; border-radius: 3px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px -4px color-mix(in oklab, var(--acc) 70%, transparent);
+    }
+    .demo__side { padding: 20px; display: flex; flex-direction: column; gap: 14px; min-height: 480px; }
+    .demo__sidehead {
+      font-size: 11px; color: var(--ink-dim);
+      letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+      padding-bottom: 10px; border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between;
+    }
+    .demo__sidehead b { color: var(--acc); font-weight: 700; }
+    .demo__transcript {
+      display: flex; flex-direction: column; gap: 8px;
+      flex: 1; overflow-y: auto; max-height: 320px;
+      padding-right: 4px; font-size: 12px; line-height: 1.55;
+    }
+    .demo__step {
+      display: flex; gap: 10px; padding: 10px 12px;
+      background: var(--bg-3); border-left: 2px solid var(--line);
+      color: var(--ink-soft); opacity: 0.5; transition: all 0.25s;
+    }
+    .demo__step.cur {
+      background: var(--bg); border-left-color: var(--acc);
+      opacity: 1; color: var(--ink);
+      box-shadow: inset 0 0 30px color-mix(in oklab, var(--acc) 8%, transparent);
+    }
+    .demo__step.done { opacity: 0.75; border-left-color: var(--acc-2); }
+    .demo__step .num { flex: 0 0 26px; font-weight: 700; color: var(--ink-dim); }
+    .demo__step.cur .num { color: var(--acc); }
+    .demo__step.done .num { color: var(--acc-2); }
+    .demo__progress { display: flex; gap: 3px; margin-top: auto; }
+    .demo__progress span { flex: 1; height: 3px; background: var(--bg-3); }
+    .demo__progress span.on { background: var(--acc); box-shadow: var(--glow); }
+    .demo__hint { font-size: 11px; color: var(--ink-dim); }
+    .demo__hint::before { content: "# "; color: var(--acc); }
+
+    /* AUDIENCE */
+    .aud { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1.5px solid var(--line); }
+    .aud__c {
+      padding: 28px;
+      border-right: 1.5px solid var(--line);
+      border-bottom: 1.5px solid var(--line);
+      display: flex; flex-direction: column; gap: 12px;
+      min-height: 220px; cursor: pointer;
+      transition: background 0.2s; position: relative;
+    }
+    .aud__c:nth-child(2n) { border-right: none; }
+    .aud__c:nth-last-child(-n + 2) { border-bottom: none; }
+    .aud__c:hover { background: var(--bg-2); }
+    .aud__pill {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-dim); font-weight: 700;
+    }
+    .aud__pill::before { content: "["; color: var(--acc); }
+    .aud__pill::after  { content: "]"; color: var(--acc); }
+    .aud__c h4 {
+      font-family: var(--mono); font-size: 24px;
+      letter-spacing: -0.01em; line-height: 1.15; color: var(--ink);
+    }
+    .aud__c h4 .acc { color: var(--acc); }
+    .aud__c p { font-size: 13px; color: var(--ink-soft); line-height: 1.65; max-width: 420px; }
+    .aud__num {
+      position: absolute; right: 24px; bottom: 14px;
+      font-size: 54px; font-weight: 800;
+      color: var(--line-strong); line-height: 1; font-family: var(--mono);
+    }
+
+    /* PRICING */
+    .pri { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1.5px solid var(--line); }
+    .pri__c {
+      padding: 32px; border-right: 1.5px solid var(--line);
+      display: flex; flex-direction: column; gap: 14px; position: relative;
+    }
+    .pri__c:last-child { border-right: none; }
+    .pri__c--feat { background: var(--bg-2); }
+    .pri__pill {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-dim); font-weight: 700;
+    }
+    .pri__pill::before { content: "// "; color: var(--acc); }
+    .pri__tag {
+      position: absolute; top: 14px; right: 14px;
+      padding: 4px 10px; background: var(--acc); color: var(--on-acc);
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+    }
+    .pri__c h3 { font-family: var(--mono); font-size: 26px; letter-spacing: -0.01em; }
+    .pri__price { display: flex; align-items: baseline; gap: 6px; }
+    .pri__price b {
+      font-size: 64px; font-weight: 800; line-height: 1;
+      color: var(--acc); text-shadow: var(--glow); letter-spacing: -0.02em;
+    }
+    .pri__price small { font-size: 13px; color: var(--ink-soft); }
+    .pri__c ul {
+      list-style: none; padding: 0; margin: 8px 0;
+      display: flex; flex-direction: column; gap: 8px; flex: 1;
+    }
+    .pri__c li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 13px; color: var(--ink-soft);
+    }
+    .pri__c li::before { content: "✓"; color: var(--acc); font-weight: 800; flex: 0 0 14px; }
+    .pri__teams-wrap {
+      display: flex; justify-content: center;
+      border: 1.5px solid var(--line); border-top: none;
+    }
+    .pri__teams {
+      width: min(100%, 480px);
+      border-right: none;
+      padding: 28px;
+    }
+    .pri__teams .pri__price b { font-size: 48px; }
+
+    /* NEWSLETTER */
+    .news {
+      border: 1.5px solid var(--line); background: var(--bg-2);
+      padding: 48px clamp(28px, 5vw, 60px);
+      display: grid; grid-template-columns: 1.2fr 1fr;
+      gap: 40px; align-items: center;
+    }
+    .news h2 {
+      font-family: var(--mono);
+      font-size: clamp(36px, 5vw, 60px);
+      letter-spacing: -0.02em; line-height: 1.05;
+      color: var(--ink); text-shadow: var(--glow);
+    }
+    .news h2 .acc { color: var(--acc); }
+    .news p { margin-top: 14px; max-width: 420px; color: var(--ink-soft); font-size: 14px; }
+    .news__form { display: flex; flex-direction: column; gap: 10px; }
+    .news__form .row { display: flex; gap: 10px; align-items: stretch; }
+    .news__form input {
+      flex: 1; height: 48px; padding: 0 16px;
+      background: var(--bg); border: 1.5px solid var(--line-strong);
+      font-family: var(--mono); font-size: 14px; color: var(--ink); outline: none;
+    }
+    .news__form input:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--acc) 18%, transparent);
+    }
+    .news__success { background: var(--bg); border: 1.5px solid var(--acc); padding: 20px; }
+    .news__success b {
+      font-family: var(--mono); font-size: 18px; color: var(--acc);
+      display: block; margin-bottom: 6px;
+    }
+
+    /* FOOTER */
+    .foot {
+      padding: 56px 0 32px;
+      border-top: 1.5px solid var(--line);
+      margin-top: 60px;
+    }
+    .foot__mark {
+      font-family: var(--mono);
+      font-size: clamp(64px, 12vw, 160px);
+      font-weight: 800; letter-spacing: -0.02em; line-height: 0.9;
+      padding-bottom: 24px; margin-bottom: 30px;
+      border-bottom: 1px dashed var(--line);
+      color: var(--ink); text-shadow: var(--glow);
+    }
+    .foot__mark .acc { color: var(--acc); }
+    .foot__mark .blink {
+      display: inline-block;
+      width: 0.45em; height: 0.85em;
+      background: var(--ink);
+      animation: blink 1.05s steps(2, start) infinite;
+      vertical-align: -8%; margin-left: 6px;
+    }
+    .foot__row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .foot__col h5 {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-dim); margin-bottom: 12px; font-weight: 800;
+    }
+    .foot__col h5::before { content: "// "; color: var(--acc); }
+    .foot__col a {
+      display: block; padding: 4px 0;
+      font-size: 13px; color: var(--ink-soft); transition: color 0.15s;
+    }
+    .foot__col a:hover { color: var(--acc); text-shadow: var(--glow); }
+    .foot__base {
+      margin-top: 32px; padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--ink-dim);
+    }
+    .foot__base .blink {
+      display: inline-block;
+      width: 8px; height: 13px; background: var(--acc);
+      animation: blink 1.05s steps(2, start) infinite;
+      vertical-align: -1px; margin-left: 4px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero__row, .specs, .feat, .demo, .aud, .pri, .news, .sec-head, .foot__row {
+        grid-template-columns: 1fr;
+      }
+      .nav__path { display: none; }
+      .nav__center { display: none; }
+      .spec, .feat__c, .aud__c, .pri__c {
+        border-right: none !important;
+        border-bottom: 1.5px solid var(--line);
+      }
+      .demo__win { border-right: none; border-bottom: 1.5px solid var(--line); }
+    }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+      width: 32px; height: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; color: var(--ink-soft);
+      border: 1.5px solid var(--line-strong);
+      cursor: pointer; font-family: var(--mono); font-size: 14px;
+      transition: color 0.15s, border-color 0.15s, box-shadow 0.15s;
+      position: relative;
+    }
+    .theme-toggle:hover { color: var(--acc); border-color: var(--acc); box-shadow: 0 0 0 3px color-mix(in oklab, var(--acc) 18%, transparent); }
+    .theme-toggle__sun, .theme-toggle__moon { line-height: 1; }
+    [data-theme="dark"] .theme-toggle__sun { display: inline; }
+    [data-theme="dark"] .theme-toggle__moon { display: none; }
+    [data-theme="light"] .theme-toggle__sun { display: none; }
+    [data-theme="light"] .theme-toggle__moon { display: inline; }
+
+    /* LIGHT THEME */
+    [data-theme="light"] {
+      --bg: #fdf4f7;
+      --bg-2: #ffe6ee;
+      --bg-3: #ffd2e0;
+      --ink: #2b0418;
+      --ink-soft: rgba(43, 4, 24, 0.78);
+      --ink-dim: rgba(43, 4, 24, 0.5);
+      --line: rgba(43, 4, 24, 0.16);
+      --line-strong: rgba(43, 4, 24, 0.3);
+      --acc: #d62660;
+      --acc-2: #ff5d8c;
+      --warn: #c98c00;
+      --err: #d33636;
+      --on-acc: #fff;
+      --glow: 0 0 1px currentColor;
+    }
+    [data-theme="light"] .crt { display: none; }
+    [data-theme="light"] .bg-glow::before { opacity: 0.12; }
+    [data-theme="light"] .bg-glow::after  { opacity: 0.08; }
+    [data-theme="light"] .glow-text,
+    [data-theme="light"] .hero__title,
+    [data-theme="light"] .sec-head h2,
+    [data-theme="light"] .spec__big,
+    [data-theme="light"] .hero__counter .num { text-shadow: none; }
+    [data-theme="light"] .nav { background: linear-gradient(180deg, var(--bg) 78%, color-mix(in oklab, var(--bg) 60%, transparent)); }
+    [data-theme="light"] .nav__brand .nav__logo { filter: none; }
+    [data-theme="light"] .demo__doc {
+      background: #fff;
+      box-shadow: 0 0 0 1px var(--line-strong), 0 18px 40px -22px rgba(43, 4, 24, 0.25);
+    }
+    [data-theme="light"] .demo__cur { filter: drop-shadow(0 1px 4px color-mix(in oklab, var(--acc) 50%, transparent)); }
+  </style>
+
+  <script is:inline>
+    (function () {
+      function setTheme(t) {
+        document.documentElement.dataset.theme = t;
+        try { localStorage.setItem('lectere-theme', t); } catch (_) {}
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', t === 'light' ? '#fdf4f7' : '#120618');
+      }
+      // Enable transitions only after the first paint so the initial theme doesn't fade in.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          document.documentElement.classList.add('theme-ready');
+        });
+      });
+      document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+          setTheme(next);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

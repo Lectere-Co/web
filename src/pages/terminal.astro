@@ -2,7 +2,7 @@
 import TerminalDemo from '../components/TerminalDemo.tsx';
 import TerminalNewsletter from '../components/TerminalNewsletter.tsx';
 
-const title = 'Lectere';
+const title = 'Lectere — /usr/bin/guidance';
 const description = 'Forced adoption, solved. Lectere is the AI assistant that shows you the next click — inside the software you were already told to use.';
 
 const apps = ['quickbooks', 'medicare.gov', 'salesforce', 'dmv portal', 'mychart', 'sap', 'adp', 'workday', 'concur'];
@@ -29,20 +29,12 @@ const audience = [
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" />
-  <style>
-    /* Critical theme tokens — applied before the main stylesheet to prevent FOUC. */
-    :root { color-scheme: dark; --bg: #120618; --ink: #ffa8e3; }
-    html[data-theme="light"] { color-scheme: light; --bg: #fdf4f7; --ink: #2b0418; }
-    html, body { background: var(--bg); color: var(--ink); margin: 0; }
-  </style>
   <script is:inline>
     (function () {
       try {
         var stored = localStorage.getItem('lectere-theme');
         var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         document.documentElement.dataset.theme = theme;
-        var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', theme === 'light' ? '#fdf4f7' : '#120618');
       } catch (_) {
         document.documentElement.dataset.theme = 'dark';
       }
@@ -56,7 +48,7 @@ const audience = [
   <!-- NAV -->
   <nav class="nav">
     <div class="nav__inner">
-      <a href="/" class="nav__brand glow-text">
+      <a href="/terminal" class="nav__brand glow-text">
         <img src="/lecterelogonotext.svg" alt="" aria-hidden="true" class="nav__logo" />
         Lectere
       </a>

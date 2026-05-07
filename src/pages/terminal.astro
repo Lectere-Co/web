@@ -953,6 +953,46 @@ const audience = [
       box-shadow: 0 0 0 1px var(--line-strong), 0 18px 40px -22px rgba(43, 4, 24, 0.25);
     }
     [data-theme="light"] .demo__cur { filter: drop-shadow(0 1px 4px color-mix(in oklab, var(--acc) 50%, transparent)); }
+
+    /* When the system prefers light and the user hasn't explicitly opted into
+       dark, apply the same overrides as [data-theme="light"]. This way the
+       page paints in light theme on the very first frame from this stylesheet,
+       even before the inline theme script gets a chance to set data-theme.
+       Higher specificity (:root:not(...)) ensures it wins over the dark :root. */
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        color-scheme: light;
+        --bg: #fdf4f7;
+        --bg-2: #ffe6ee;
+        --bg-3: #ffd2e0;
+        --ink: #2b0418;
+        --ink-soft: rgba(43, 4, 24, 0.78);
+        --ink-dim: rgba(43, 4, 24, 0.5);
+        --line: rgba(43, 4, 24, 0.16);
+        --line-strong: rgba(43, 4, 24, 0.3);
+        --acc: #d62660;
+        --acc-2: #ff5d8c;
+        --warn: #c98c00;
+        --err: #d33636;
+        --on-acc: #fff;
+        --glow: 0 0 1px currentColor;
+      }
+      :root:not([data-theme="dark"]) .crt { display: none; }
+      :root:not([data-theme="dark"]) .bg-glow::before { opacity: 0.12; }
+      :root:not([data-theme="dark"]) .bg-glow::after  { opacity: 0.08; }
+      :root:not([data-theme="dark"]) .glow-text,
+      :root:not([data-theme="dark"]) .hero__title,
+      :root:not([data-theme="dark"]) .sec-head h2,
+      :root:not([data-theme="dark"]) .spec__big,
+      :root:not([data-theme="dark"]) .hero__counter .num { text-shadow: none; }
+      :root:not([data-theme="dark"]) .nav { background: linear-gradient(180deg, var(--bg) 78%, color-mix(in oklab, var(--bg) 60%, transparent)); }
+      :root:not([data-theme="dark"]) .nav__brand .nav__logo { filter: none; }
+      :root:not([data-theme="dark"]) .demo__doc {
+        background: #fff;
+        box-shadow: 0 0 0 1px var(--line-strong), 0 18px 40px -22px rgba(43, 4, 24, 0.25);
+      }
+      :root:not([data-theme="dark"]) .demo__cur { filter: drop-shadow(0 1px 4px color-mix(in oklab, var(--acc) 50%, transparent)); }
+    }
   </style>
 
   <script is:inline>

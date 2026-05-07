@@ -23,28 +23,35 @@ const audience = [
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="theme-color" content="#120618" />
+  <meta name="theme-color" content="#fdf4f7" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" />
-  <style>
-    /* Critical theme tokens — applied before the main stylesheet to prevent FOUC. */
-    :root { color-scheme: dark; --bg: #120618; --ink: #ffa8e3; }
+  <style is:inline>
+    /* Critical theme tokens — applied before the main stylesheet to prevent FOUC.
+       Light is the default; the browser picks dark via @media when the system prefers
+       dark, so the very first paint already matches the final theme (no flash). */
+    :root { color-scheme: light; --bg: #fdf4f7; --ink: #2b0418; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { color-scheme: dark; --bg: #120618; --ink: #ffa8e3; }
+    }
     html[data-theme="light"] { color-scheme: light; --bg: #fdf4f7; --ink: #2b0418; }
+    html[data-theme="dark"]  { color-scheme: dark;  --bg: #120618; --ink: #ffa8e3; }
     html, body { background: var(--bg); color: var(--ink); margin: 0; }
   </style>
   <script is:inline>
     (function () {
       try {
         var stored = localStorage.getItem('lectere-theme');
-        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        // Default = light. Match the system only when it explicitly prefers dark.
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', theme === 'light' ? '#fdf4f7' : '#120618');
       } catch (_) {
-        document.documentElement.dataset.theme = 'dark';
+        document.documentElement.dataset.theme = 'light';
       }
     })();
   </script>

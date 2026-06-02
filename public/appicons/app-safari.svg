@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs><radialGradient id="sf" cx="50%" cy="36%" r="72%">
+    <stop offset="0" stop-color="#4cb8f5"/><stop offset="0.55" stop-color="#2a98ef"/><stop offset="1" stop-color="#1574df"/>
+  </radialGradient></defs>
+  <rect x="6" y="6" width="108" height="108" rx="26.8" fill="url(#sf)"/>
+  <circle cx="60" cy="60" r="45" fill="none" stroke="#fff" stroke-opacity="0.22" stroke-width="2"/>
+  <circle cx="60" cy="60" r="39" fill="none" stroke="#fff" stroke-opacity="0.9" stroke-width="5" stroke-dasharray="1.1 4.45" stroke-linecap="round"/>
+  <rect x="58.6" y="13" width="2.8" height="9" rx="1.4" fill="#fff" transform="rotate(0 60 60)"/><rect x="58.6" y="13" width="2.8" height="9" rx="1.4" fill="#fff" transform="rotate(90 60 60)"/><rect x="58.6" y="13" width="2.8" height="9" rx="1.4" fill="#fff" transform="rotate(180 60 60)"/><rect x="58.6" y="13" width="2.8" height="9" rx="1.4" fill="#fff" transform="rotate(270 60 60)"/>
+  <polygon points="84,36 64,64 56,56" fill="#f5453b"/>
+  <polygon points="36,84 64,64 56,56" fill="#fbfbfd"/>
+  <circle cx="60" cy="60" r="3" fill="#e9e9ec"/>
+</svg>

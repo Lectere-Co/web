@@ -20,12 +20,12 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@astrojs/react": "^4.2.0",
+    "@astrojs/react": "5.0.0",
     "@cloudflare/workers-types": "^4.20260203.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "astro": "^5.8.0",
+    "astro": "6.0.1",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.8.3"
   }

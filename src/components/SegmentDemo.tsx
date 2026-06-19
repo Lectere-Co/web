@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion, AnimatePresence } from "motion/react";
 import { useState, useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -88,15 +88,15 @@ function WindowChrome({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
+    <div className="flex items-center justify-between px-4 py-3 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
       <div className="flex items-center gap-2">
-        <div className="w-3 h-3 rounded-full bg-[#ff5f57]" aria-hidden />
-        <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" aria-hidden />
-        <div className="w-3 h-3 rounded-full bg-[#28ca41]" aria-hidden />
+        <div className="w-3 h-3 rounded-full bg-[#ff5f57] border border-[#e0443e]" aria-hidden />
+        <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]" aria-hidden />
+        <div className="w-3 h-3 rounded-full bg-[#28ca41] border border-[#1aab29]" aria-hidden />
       </div>
-      <div className="flex items-center gap-2 text-sm text-gray-500">
-        {icon}
-        <span className="font-medium text-gray-700">{title}</span>
+      <div className="flex items-center gap-2 text-sm text-gray-500/80 font-medium">
+        <span className="opacity-75">{icon}</span>
+        <span className="text-gray-700">{title}</span>
       </div>
       <div className="w-[52px]" />
     </div>
@@ -107,14 +107,16 @@ function Highlight({ active }: { active: boolean }) {
   if (!active) return null;
   return (
     <motion.div
-      className="absolute inset-0 rounded border-2 border-primary pointer-events-none z-10"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      className="absolute inset-0 rounded-md border-[3px] border-[#eb336e] pointer-events-none z-10 shadow-[0_0_0_4px_rgba(235,51,110,0.2)]"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <motion.div
-        className="absolute inset-0 rounded border-2 border-primary"
-        animate={{ scale: [1, 1.05, 1], opacity: [1, 0.7, 1] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
+        className="absolute inset-0 rounded-md bg-[#eb336e]/5"
+        animate={{ opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
     </motion.div>
   );
@@ -131,34 +133,40 @@ function LectereTooltip({
 }) {
   return (
     <motion.div
-      className="absolute bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:w-80 bg-white rounded-xl p-4 border border-primary/20 shadow-lg z-20"
+      className="absolute bottom-6 left-6 right-6 md:left-auto md:right-8 md:bottom-8 md:w-80 bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)] z-20 ring-1 ring-black/5"
       key={step}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
-      <div className="flex items-start gap-3">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center shrink-0">
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center shrink-0 shadow-md shadow-[#eb336e]/20">
           <svg
             viewBox="0 0 24 24"
             className="w-5 h-5 text-white"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
         </div>
         <div className="flex-1">
-          <p className="text-sm text-gray-800 mb-2">{text}</p>
+          <p className="text-[15px] leading-relaxed text-gray-800 font-medium mb-3">{text}</p>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-muted-foreground">
-              Step {step + 1} of {totalSteps}
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Step {step + 1} / {totalSteps}
             </span>
-            <div className="flex gap-1">
+            <div className="flex gap-1.5">
               {Array.from({ length: totalSteps }).map((_, i) => (
                 <div
                   key={i}
-                  className={`w-1.5 h-1.5 rounded-full ${i === step ? "bg-primary" : "bg-gray-300"}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === step ? "w-6 bg-[#eb336e]" : "w-1.5 bg-gray-200"
+                  }`}
                 />
               ))}
             </div>
@@ -191,113 +199,143 @@ function BenefitsPortalApp({ step }: { step: number }) {
   const navItems = ["Dashboard", "Benefits", "Claims", "Messages", "Profile"];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-full bg-gray-50/50">
       {/* Top nav */}
-      <div className="flex items-center gap-1 px-4 py-2 bg-[#1a3a5c] text-white text-sm relative">
-        {navItems.map((item) => (
-          <div
-            key={item}
-            data-demo-step={item === "Benefits" ? 0 : undefined}
-            className={`relative px-3 py-1.5 rounded ${item === "Benefits" ? "bg-white/15" : "hover:bg-white/10"}`}
-          >
-            <span className="text-white/90 text-xs font-medium">{item}</span>
-            {item === "Benefits" && <Highlight active={step === 0} />}
-          </div>
-        ))}
-        <div className="ml-auto flex items-center gap-2">
-          <Bell className="w-4 h-4 text-white/60" />
-          <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+      <div className="flex items-center gap-6 px-5 py-3 bg-white border-b border-gray-100">
+        <div className="font-bold text-[#1a3a5c] tracking-tight">Portal</div>
+        <div className="flex items-center gap-1">
+          {navItems.map((item) => (
+            <div
+              key={item}
+              data-demo-step={item === "Benefits" ? 0 : undefined}
+              className={`relative px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                item === "Benefits" 
+                  ? "bg-[#1a3a5c]/10 text-[#1a3a5c]" 
+                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+              }`}
+            >
+              <span>{item}</span>
+              {item === "Benefits" && <Highlight active={step === 0} />}
+            </div>
+          ))}
+        </div>
+        <div className="ml-auto flex items-center gap-3">
+          <Bell className="w-4 h-4 text-gray-400" />
+          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#1a3a5c] to-[#2a5a8c] flex items-center justify-center shadow-sm">
             <span className="text-[10px] text-white font-bold">JD</span>
           </div>
         </div>
       </div>
 
       {/* Content area */}
-      <div className="p-5 bg-gray-50 min-h-[340px] relative">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-1 text-xs text-gray-400 mb-4">
-          <span>Home</span>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-gray-600">Benefits Overview</span>
+      <div className="p-6">
+        <div className="mb-6">
+          <h2 className="text-xl font-display font-semibold text-gray-900">Welcome back, John</h2>
+          <p className="text-sm text-gray-500">Here's what's happening with your benefits today.</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          {/* Benefits summary card */}
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <h3 className="text-sm font-semibold text-gray-800 mb-3">
-              Your Benefits Summary
-            </h3>
-            <div className="space-y-2.5">
-              <div className="flex justify-between text-xs">
-                <span className="text-gray-500">Plan</span>
-                <span className="text-gray-700 font-medium">
-                  Standard Coverage
-                </span>
+        <div className="grid grid-cols-12 gap-6">
+          {/* Main Card */}
+          <div className="col-span-8 bg-white rounded-xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] border border-gray-100 p-5">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+                <Shield className="w-4 h-4 text-[#eb336e]" />
+                Current Coverage
+              </h3>
+              <Badge variant="outline" className="text-xs font-normal bg-green-50 text-green-700 border-green-200">
+                Active Plan
+              </Badge>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mb-1">Plan Type</div>
+                  <div className="text-sm font-medium text-gray-900">Premium PPO Plus</div>
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mb-1">Member ID</div>
+                  <div className="font-mono text-sm text-gray-600 bg-gray-50 inline-block px-2 py-0.5 rounded">BEN-8839-X</div>
+                </div>
               </div>
-              <div className="flex justify-between text-xs">
-                <span className="text-gray-500">Status</span>
-                <span
-                  className="relative text-green-600 font-medium"
-                  data-demo-step={2}
-                >
-                  Active
-                  <Highlight active={step === 2} />
-                </span>
-              </div>
-              <div className="flex justify-between text-xs">
-                <span className="text-gray-500">Member ID</span>
-                <span className="text-gray-700 font-medium">BEN-4829173</span>
-              </div>
-              <div className="flex justify-between text-xs">
-                <span className="text-gray-500">Next Payment</span>
-                <span className="text-gray-700 font-medium">Mar 1, 2026</span>
+              <div className="space-y-4">
+                 <div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mb-1">Status</div>
+                  <div className="relative inline-block" data-demo-step={2}>
+                    <span className="flex items-center gap-1.5 text-sm font-medium text-green-600">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                      Coverage Active
+                    </span>
+                    <Highlight active={step === 2} />
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mb-1">Renewal</div>
+                  <div className="text-sm text-gray-600">Dec 31, 2024</div>
+                </div>
               </div>
             </div>
+
+             <div className="mt-6 pt-4 border-t border-gray-50 flex gap-3">
+               <div className="relative flex-1" data-demo-step={1}>
+                  <button className="w-full py-2 px-3 rounded-lg bg-gray-50 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors text-center border border-gray-200/50">
+                    View Details
+                  </button>
+                  <Highlight active={step === 1} />
+               </div>
+               <div className="relative flex-1" data-demo-step={3}>
+                  <button className="w-full py-2 px-3 rounded-lg bg-gray-50 text-xs font-medium text-gray-700 hover:bg-gray-100 transition-colors text-center border border-gray-200/50">
+                    Edit Info
+                  </button>
+                  <Highlight active={step === 3} />
+               </div>
+             </div>
           </div>
 
-          {/* Quick actions card */}
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <h3 className="text-sm font-semibold text-gray-800 mb-3">
-              Quick Actions
-            </h3>
-            <div className="space-y-2">
-              <div className="relative" data-demo-step={1}>
-                <button className="w-full text-left px-3 py-2 rounded border border-gray-200 text-xs text-[#1a3a5c] font-medium hover:bg-gray-50 flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5" />
-                  View Coverage Details
-                </button>
-                <Highlight active={step === 1} />
-              </div>
-              <div className="relative" data-demo-step={3}>
-                <button className="w-full text-left px-3 py-2 rounded border border-gray-200 text-xs text-[#1a3a5c] font-medium hover:bg-gray-50 flex items-center gap-2">
-                  <Settings className="w-3.5 h-3.5" />
-                  Update Information
-                </button>
-                <Highlight active={step === 3} />
-              </div>
-              <button className="w-full text-left px-3 py-2 rounded border border-gray-200 text-xs text-gray-500 font-medium hover:bg-gray-50 flex items-center gap-2">
-                <FileText className="w-3.5 h-3.5" />
-                Download ID Card
-              </button>
+          {/* Side Card */}
+          <div className="col-span-4 space-y-4">
+            <div className="bg-gradient-to-br from-[#eb336e] to-[#9b274c] rounded-xl p-5 text-white shadow-lg shadow-pink-500/20 relative overflow-hidden group">
+               <div className="relative z-10">
+                 <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center mb-3 text-white">
+                   <AlertTriangle className="w-4 h-4" />
+                 </div>
+                 <h4 className="text-sm font-bold mb-1">Action Needed</h4>
+                 <p className="text-[11px] text-white/80 leading-relaxed mb-3">
+                   Please review your beneficiary information before year-end.
+                 </p>
+                 <div className="relative" data-demo-step={4}>
+                   <button className="w-full py-1.5 rounded bg-white text-[#eb336e] text-[10px] font-bold uppercase tracking-wide shadow-sm hover:bg-gray-50 transition-colors">
+                     Review Now
+                   </button>
+                   <Highlight active={step === 4} />
+                 </div>
+               </div>
+               {/* Decorative circles */}
+               <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors" />
+               <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-t from-black/20 to-transparent opacity-50" />
             </div>
+            
+             <div className="bg-white rounded-xl border border-gray-100 p-4">
+                <div className="flex items-center justify-between mb-3">
+                   <h4 className="text-xs font-semibold text-gray-900">Recent Claims</h4>
+                   <ChevronRight className="w-3 h-3 text-gray-400" />
+                </div>
+                <div className="space-y-3">
+                   {[1, 2].map(i => (
+                     <div key={i} className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0">
+                           <FileText className="w-3.5 h-3.5 text-gray-400" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                           <div className="text-xs font-medium text-gray-700 truncate">Vision Checkup</div>
+                           <div className="text-[10px] text-gray-400">Oct 24 • Processed</div>
+                        </div>
+                        <div className="text-xs font-semibold text-gray-900">$45</div>
+                     </div>
+                   ))}
+                </div>
+             </div>
           </div>
-        </div>
-
-        {/* Alert banner */}
-        <div className="relative" data-demo-step={4}>
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-50 border border-amber-200">
-            <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />
-            <div>
-              <p className="text-xs font-semibold text-amber-800">
-                Action Required
-              </p>
-              <p className="text-xs text-amber-600">
-                Annual plan review due by April 30. Review your coverage to
-                ensure it still meets your needs.
-              </p>
-            </div>
-          </div>
-          <Highlight active={step === 4} />
         </div>
       </div>
     </div>
@@ -632,94 +670,100 @@ export function SegmentDemo({ config }: { config: DemoConfig }) {
   const cursorPos = useCursorPosition(containerRef, step);
   const shouldReduceMotion = useReducedMotion();
 
+  useEffect(() => {
+    // Reset step when variant changes
+    setStep(0);
+  }, [config.variant]);
+
   const handleClick = () => {
     setStep((prev) => (prev + 1) % config.steps.length);
   };
 
   return (
-    <div className="mb-20">
-      <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground text-center mb-10">
-        See it in action
-      </h3>
+    <div className="w-full max-w-5xl mx-auto perspective-[2000px] mb-20">
+      <motion.div 
+        className="relative group"
+        initial={{ opacity: 0, rotateX: 10, y: 40 }}
+        whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        {/* Ambient glow behind the window */}
+        <div className="absolute -inset-4 bg-gradient-to-r from-[#eb336e]/20 via-[#9b274c]/10 to-[#eb336e]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-      {/* Mobile: compact static preview with note */}
-      <div className="md:hidden">
-        <div className="rounded-2xl overflow-hidden border border-border shadow-lg">
+        {/* Desktop interactive frame (md+) */}
+        <div className="hidden md:block relative z-10">
+          <motion.div
+            ref={containerRef}
+            className="bg-white/80 backdrop-blur-xl rounded-2xl overflow-hidden cursor-none border border-white/40 shadow-2xl shadow-black/10 ring-1 ring-black/5"
+            onClick={handleClick}
+            whileHover={{ scale: 1.005 }}
+            transition={{ duration: 0.4 }}
+          >
+            <WindowChrome
+              title={config.windowTitle}
+              icon={<WindowIcon variant={config.variant} />}
+            />
+            
+            {/* App Content Container */}
+            <div className="relative h-[600px] bg-gray-50/50">
+              <AppContent variant={config.variant} step={step} />
+            </div>
+
+            {/* Tooltip */}
+            <AnimatePresence mode="wait">
+              <LectereTooltip
+                key={step}
+                step={step}
+                totalSteps={config.steps.length}
+                text={config.steps[step].text}
+              />
+            </AnimatePresence>
+
+            {/* Cursor */}
+            {!shouldReduceMotion && cursorPos && (
+              <motion.div
+                className="absolute top-0 left-0 z-50 pointer-events-none drop-shadow-xl"
+                animate={{
+                  x: cursorPos.x,
+                  y: cursorPos.y,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 20,
+                  mass: 0.8,
+                }}
+              >
+                <CursorSVG />
+              </motion.div>
+            )}
+          </motion.div>
+          
+          {/* Reflection/Sheen effect */}
+          <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/20 pointer-events-none z-20" />
+        </div>
+
+        {/* Mobile: compact static preview */}
+        <div className="md:hidden rounded-2xl overflow-hidden border border-white/20 shadow-xl bg-white/90 backdrop-blur-lg relative z-10">
           <WindowChrome
             title={config.windowTitle}
             icon={<WindowIcon variant={config.variant} />}
           />
-          <div className="relative max-h-52 overflow-hidden">
-            <AppContent variant={config.variant} step={-1} />
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/70 to-transparent" />
+          <div className="relative max-h-64 overflow-hidden bg-gray-50">
+            <div className="scale-75 origin-top">
+             <AppContent variant={config.variant} step={-1} />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent" />
           </div>
-          <div className="px-4 py-4 text-center bg-white border-t border-gray-100">
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <div className="px-6 py-6 text-center bg-white/50 backdrop-blur-sm border-t border-gray-100">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100/80 text-sm font-medium text-gray-600">
               <Monitor className="w-4 h-4" />
-              <span>Interactive demo available on larger screens</span>
+              <span>Interactive demo best viewed on desktop</span>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Desktop interactive frame (md+) */}
-      <div
-        ref={containerRef}
-        className="hidden md:block bg-white rounded-2xl overflow-hidden cursor-pointer border border-border shadow-lg relative"
-        onClick={handleClick}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            handleClick();
-          }
-        }}
-      >
-        {/* Animated cursor */}
-        {cursorPos && (
-          <motion.div
-            className="absolute z-30 pointer-events-none"
-            animate={{ x: cursorPos.x, y: cursorPos.y }}
-            transition={
-              shouldReduceMotion
-                ? { duration: 0 }
-                : { type: "spring", stiffness: 150, damping: 15 }
-            }
-          >
-            <CursorSVG />
-          </motion.div>
-        )}
-
-        {/* Window chrome */}
-        <WindowChrome
-          title={config.windowTitle}
-          icon={<WindowIcon variant={config.variant} />}
-        />
-
-        {/* App content with tooltip overlay */}
-        <div className="relative">
-          <AppContent variant={config.variant} step={step} />
-
-          {/* Lectere tooltip */}
-          <LectereTooltip
-            step={step}
-            totalSteps={config.steps.length}
-            text={config.steps[step].text}
-          />
-
-          {/* Interactive demo badge */}
-          <Badge variant="success" className="absolute top-4 right-4 z-20">
-            <Check className="w-3 h-3 mr-1" />
-            Interactive Demo
-          </Badge>
-        </div>
-
-        {/* Click prompt footer */}
-        <div className="text-center py-3 text-sm text-muted-foreground bg-gray-50 border-t border-gray-200">
-          Click anywhere to see next step
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -488,12 +488,12 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
       className="max-w-5xl mx-auto"
     >
       {/* Headline + stat */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-20 px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground mb-6 max-w-3xl mx-auto"
+          className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-8 max-w-4xl mx-auto leading-tight"
         >
           {segment.headline}
         </motion.h2>
@@ -501,7 +501,7 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-lg text-muted-foreground max-w-2xl mx-auto"
+          className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed"
         >
           {segment.description}
         </motion.p>
@@ -512,27 +512,33 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="flex items-center justify-center gap-4 mb-16 p-6 rounded-2xl bg-gradient-to-r from-[#eb336e]/5 to-[#9b274c]/5 border border-[#eb336e]/10 max-w-lg mx-auto"
+        className="relative flex flex-col sm:flex-row items-center justify-center gap-6 mb-32 p-8 rounded-[2rem] bg-white/80 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.04)] max-w-2xl mx-auto overflow-hidden group hover:shadow-[0_20px_40px_rgba(235,51,110,0.08)] transition-all duration-500"
       >
-        <span className="text-4xl sm:text-5xl font-display font-bold text-gradient">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#eb336e]/10 via-transparent to-[#9b274c]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        <span className="relative text-6xl sm:text-7xl font-display font-bold text-[#eb336e] tracking-tight leading-none">
           {segment.stat.value}
         </span>
-        <span className="text-sm sm:text-base text-muted-foreground text-left leading-snug">
+        <div className="h-12 w-px bg-gray-200 hidden sm:block" />
+        <span className="relative text-lg sm:text-xl text-gray-600 text-center sm:text-left leading-relaxed max-w-[280px]">
           {segment.stat.label}
         </span>
       </motion.div>
 
       {/* Pain points */}
-      <div className="mb-20">
-        <motion.h3
+      <div className="mb-32 px-6">
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="font-display text-xl sm:text-2xl font-semibold text-foreground text-center mb-10"
+          className="text-center mb-16"
         >
-          The challenge
-        </motion.h3>
-        <div className="grid sm:grid-cols-3 gap-6">
+          <span className="text-[#eb336e] font-semibold tracking-wider uppercase text-xs mb-3 block">The Problem</span>
+          <h3 className="font-display text-3xl sm:text-4xl font-semibold text-gray-900">
+            Why it's harder than it should be
+          </h3>
+        </motion.div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
           {segment.painPoints.map((point, i) => {
             const Icon = point.icon;
             return (
@@ -541,15 +547,15 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                className="p-6 rounded-2xl border border-border bg-white hover:border-[#eb336e]/20 hover:shadow-sm transition-all"
+                className="group relative p-8 rounded-3xl bg-gray-50/50 border border-gray-100 hover:bg-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-gray-200 transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#eb336e]/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-[#eb336e]" />
+                <div className="w-12 h-12 rounded-2xl bg-white border border-gray-100 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                  <Icon className="w-6 h-6 text-gray-400 group-hover:text-[#eb336e] transition-colors" />
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">
+                <h4 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-[#eb336e] transition-colors">
                   {point.title}
                 </h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-gray-500 leading-relaxed">
                   {point.text}
                 </p>
               </motion.div>
@@ -559,16 +565,20 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
       </div>
 
       {/* How Lectere helps */}
-      <div className="mb-20">
-        <motion.h3
+      <div className="mb-24 px-6">
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.55 }}
-          className="font-display text-xl sm:text-2xl font-semibold text-foreground text-center mb-10"
+          className="text-center mb-16"
         >
-          How Lectere helps
-        </motion.h3>
-        <div className="grid sm:grid-cols-3 gap-6">
+          <span className="text-[#9b274c] font-semibold tracking-wider uppercase text-xs mb-3 block">The Solution</span>
+          <h3 className="font-display text-3xl sm:text-4xl font-semibold text-gray-900">
+            How Lectere changes the game
+          </h3>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-8">
           {segment.howItHelps.map((point, i) => {
             const Icon = point.icon;
             return (
@@ -577,15 +587,17 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
-                className="p-6 rounded-2xl border border-border bg-gradient-to-br from-white to-[#eb336e]/[0.02] hover:border-[#eb336e]/20 hover:shadow-sm transition-all"
+                className="relative p-8 rounded-3xl bg-white border border-gray-100 shadow-sm overflow-hidden group hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(235,51,110,0.1)] transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#eb336e]/10 to-[#9b274c]/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-[#9b274c]" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#eb336e]/5 to-[#9b274c]/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-700" />
+                
+                <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-[#eb336e] to-[#9b274c] flex items-center justify-center mb-6 text-white shadow-lg shadow-[#eb336e]/20 group-hover:rotate-3 transition-transform duration-300">
+                  <Icon className="w-6 h-6" />
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">
+                <h4 className="relative text-xl font-semibold text-gray-900 mb-3">
                   {point.title}
                 </h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="relative text-gray-500 leading-relaxed">
                   {point.text}
                 </p>
               </motion.div>
@@ -603,8 +615,10 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.75 }}
-        className="text-center p-10 rounded-2xl bg-gradient-to-br from-[#eb336e]/5 to-[#9b274c]/5 border border-[#eb336e]/10"
+        className="text-center p-10 rounded-2xl bg-white/60 backdrop-blur-md border border-[#eb336e]/10 shadow-lg shadow-[#eb336e]/5 relative overflow-hidden"
       >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#eb336e]/5 to-[#9b274c]/5 pointer-events-none" />
+        <div className="relative z-10">
         <h3 className="font-display text-2xl sm:text-3xl font-semibold text-foreground mb-3">
           Pricing to be announced
         </h3>
@@ -616,6 +630,7 @@ function SegmentContent({ segment }: { segment: SegmentData }) {
         <p className="text-xs text-muted-foreground mt-4">
           No spam, ever. Unsubscribe anytime.
         </p>
+        </div>
       </motion.div>
     </motion.div>
   );
@@ -652,10 +667,16 @@ export default function SegmentSelector() {
   const activeData = segments.find((s) => s.id === activeSegment) ?? null;
 
   return (
-    <div className="min-h-[calc(100dvh-72px)] flex flex-col">
+    <div className="min-h-[calc(100dvh-72px)] flex flex-col relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#eb336e]/5 blur-[120px] -translate-y-1/2 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-[#9b274c]/5 blur-[100px] translate-y-1/3 -translate-x-1/4" />
+      </div>
+
       {/* ---- Hero area: centered, minimal ---- */}
       <div
-        className={`flex-1 flex flex-col items-center justify-center px-6 transition-all duration-700 ${
+        className={`relative z-10 flex-1 flex flex-col items-center justify-center px-6 transition-all duration-700 ${
           activeSegment ? "pt-16 sm:pt-20 flex-none" : "pt-0"
         }`}
       >
@@ -666,13 +687,33 @@ export default function SegmentSelector() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-10"
         >
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground mb-4 tracking-tight">
-            Guidance that{" "}
-            <span className="text-gradient">adapts to you</span>
+          {/* Animated Badge */}
+          {!activeSegment && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center rounded-full border border-[#eb336e]/20 bg-[#eb336e]/5 px-3 py-1 mb-6"
+            >
+              <span className="flex h-2 w-2 relative mr-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#eb336e] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#eb336e]"></span>
+              </span>
+              <span className="text-xs font-medium text-[#eb336e] uppercase tracking-wide">
+                Coming Soon for macOS
+              </span>
+            </motion.div>
+          )}
+
+          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-medium text-foreground mb-6 tracking-tight leading-[1.1]">
+            Software that{" "}
+            <span className="text-gradient italic">teaches you</span>
+            <br />
+            while you use it.
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto">
-            AI-powered software guidance that shows you exactly what to do,
-            step&nbsp;by&nbsp;step, directly on your screen.
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Lectere lives inside your apps and shows you exactly what to click.
+            <br className="hidden sm:block" /> No more tutorials, no more searching—just instant guidance.
           </p>
         </motion.div>
 
@@ -681,9 +722,9 @@ export default function SegmentSelector() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6"
+          className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-8"
         >
-          I am...
+          Tell us who you are
         </motion.p>
 
         {/* Segment cards */}
@@ -691,7 +732,7 @@ export default function SegmentSelector() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl mb-12"
+          className="flex flex-col sm:flex-row gap-4 w-full max-w-3xl mb-12"
         >
           {segments.map((seg) => {
             const Icon = seg.icon;
@@ -699,40 +740,38 @@ export default function SegmentSelector() {
             return (
               <button
                 key={seg.id}
-                onClick={() =>
-                  setActiveSegment(isActive ? null : seg.id)
-                }
-                className={`group relative flex-1 flex flex-col items-center gap-3 p-6 rounded-2xl border-2 transition-all duration-300 cursor-pointer ${
+                onClick={() => setActiveSegment(isActive ? null : seg.id)}
+                className={`group relative flex-1 flex flex-col items-center gap-4 p-6 rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden text-left sm:text-center ${
                   isActive
-                    ? "border-[#eb336e] bg-gradient-to-br from-[#eb336e]/5 to-[#9b274c]/5 shadow-lg shadow-[#eb336e]/10"
-                    : "border-border bg-white hover:border-[#eb336e]/40 hover:shadow-md"
+                    ? "border-[#eb336e] bg-white shadow-xl shadow-[#eb336e]/10 ring-1 ring-[#eb336e]/20 scale-[1.02]"
+                    : "border-border bg-white/60 hover:bg-white hover:border-[#eb336e]/30 hover:shadow-lg hover:shadow-[#eb336e]/5 hover:-translate-y-1"
                 }`}
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300 ${
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                     isActive
-                      ? "bg-gradient-to-br from-[#eb336e] to-[#9b274c] text-white"
+                      ? "bg-gradient-to-br from-[#eb336e] to-[#9b274c] text-white shadow-md"
                       : "bg-secondary text-muted-foreground group-hover:bg-[#eb336e]/10 group-hover:text-[#eb336e]"
                   }`}
                 >
                   <Icon className="w-6 h-6" />
                 </div>
-                <div className="text-center">
+                <div className="w-full">
                   <p
-                    className={`font-semibold transition-colors duration-300 ${
+                    className={`font-display text-lg font-semibold transition-colors duration-300 ${
                       isActive ? "text-foreground" : "text-foreground"
                     }`}
                   >
                     {seg.label}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
                     {seg.subtitle}
                   </p>
                 </div>
                 {isActive && (
                   <motion.div
                     layoutId="segment-indicator"
-                    className="absolute -bottom-px left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-gradient-to-r from-[#eb336e] to-[#9b274c]"
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#eb336e] to-[#9b274c]"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
